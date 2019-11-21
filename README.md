@@ -20,7 +20,7 @@ tags$script(type="text/javascript", src="index.js")
 
 **2. Load the `js_handlers.R` file**
 
-Anywhere outside of the shiny server and ui, load the R file.
+Anywhere outside of or inside of the shiny server, load the R file.
 
 ```r
 source("js_handlers.R")
@@ -29,7 +29,13 @@ source("js_handlers.R")
 As all functions are stored in the list object `js`, you can call functions like:
 
 ```r
-js$function_name(...)
+js$addCSS(elem, css)
+```
+
+Until I figure out a better solution, all functions require `session=session`. 
+
+```r
+js$innerHTML("#element", "hello, world", session=session)
 ```
 
 ## Functions
@@ -44,12 +50,7 @@ The following functions are available. Make sure all function calls start with `
 | `innerHTML`           | `elem`, `string` | write values to an element
 | `refreshPage`         |  --- | trigger a page refresh (`history.go(0)`)
 | `removeCSS`           | `elem`, `css` | remove a css class from an element
+| `scrollToTop`         | --- | scroll to top of page
 | `showElem`            | `id` | show an element
 | `setElementAttribute` | `elem`, `attr`, `value` | send values to a named attribute of an element
 | `toggleCSS`           | `elem`, `css` | toggle a css class
-
-For now, all functions require `session=session`. 
-
-```r
-js$innerHTML("#message", "hello, world", session=session)
-```

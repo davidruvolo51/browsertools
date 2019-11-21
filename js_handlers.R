@@ -2,9 +2,9 @@
 #' FILE: function_02_handlers.R
 #' AUTHOR: David Ruvolo
 #' CREATED: 2019-11-10
-#' MODIFIED: 2019-11-12
+#' MODIFIED: 2019-11-21
 #' PURPOSE: shiny handlers
-#' STATUS: in.progress
+#' STATUS: working
 #' PACKAGES: shiny
 #' COMMENTS: NA
 #'//////////////////////////////////////////////////////////////////////////////
@@ -39,6 +39,11 @@ js$refreshPage <- function(session){
 # build wrapper for handler: removeCSS
 js$removeCSS <- function(elem, css, session){
     session$sendCustomMessage("removeCSS", list(elem, css))
+}
+
+# build wrapper for handler: scrollToTop
+js$scrollToTop <- function(session){
+    session$sendCustomMessage("scrollToTop", "")
 }
 
 # build wrapper for handler: toggleElem

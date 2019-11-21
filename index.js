@@ -2,10 +2,10 @@
 // FILE: index.js
 // AUTHOR: David Ruvolo
 // CREATED: 2019-11-11
-// MODIFIED: 2019-11-11
+// MODIFIED: 2019-11-21
 // PURPOSE: main js file for app
 // DEPENDENCIES: NA
-// STATUS: in.progress
+// STATUS: working
 // COMMENTS: NA
 ////////////////////////////////////////////////////////////////////////////////
 // DEFINE FUNCTIONS
@@ -47,7 +47,6 @@
 
     // REFRESH PAGE
     function refreshPage() {
-        scrollToTop();
         history.go(0);
     }
 
@@ -58,7 +57,6 @@
 
     // SHOW ELEM (SHOW / HIDE)
     function showElem(id) {
-        scrollToTop();
         const el = document.getElementById(id);
         el.classList.remove("hidden");
         el.removeAttribute("hidden");
@@ -66,7 +64,6 @@
 
     // HIDE ELEM
     function hideElem(id){
-        scrollToTop();
         const el = document.getElementById(id);
         el.classList.add("hidden");
         el.setAttribute("hidden", true);
@@ -109,4 +106,8 @@
     Shiny.addCustomMessageHandler("showElem", function (value) {
         showElem(value[0], value[1]);
     });
+
+    Shiny.addCustomMessageHandler("scrollToTop", function(value){
+        scrollToTop();
+    })
 })();
