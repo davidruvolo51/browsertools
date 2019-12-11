@@ -20,10 +20,10 @@ tags$script(type="text/javascript", src="index.js")
 
 **2. Load the `js_handlers.R` file**
 
-Anywhere outside of or inside of the shiny server, load the R file.
+Load the R file. Make sure you use `local=TRUE` to use the session object automatically.
 
 ```r
-source("js_handlers.R")
+source("js_handlers.R", local = TRUE)
 ```
 
 As all functions are stored in the list object `js`, you can call functions like:
@@ -32,11 +32,6 @@ As all functions are stored in the list object `js`, you can call functions like
 js$addCSS(elem, css)
 ```
 
-Until I figure out a better solution, all functions require `session=session`. 
-
-```r
-js$innerHTML("#element", "hello, world", session=session)
-```
 
 ## Functions
 
@@ -45,6 +40,7 @@ The following functions are available. Make sure all function calls start with `
 | function              | arguments | description | 
 | :-------              | :-------- | :---------- |
 | `addCSS`              | `elem`, `css` | add a css class to an element
+| `clearInputs`         | `elems` | set input values to `value = ""`. elems is an array or single item
 | `consoleLog`          | `value`, `asDir=TRUE` | log values to the browser console
 | `hideElem`            | `id`| hide an element
 | `innerHTML`           | `elem`, `string` | write values to an element

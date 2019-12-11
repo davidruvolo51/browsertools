@@ -2,7 +2,7 @@
 // FILE: index.js
 // AUTHOR: David Ruvolo
 // CREATED: 2019-11-11
-// MODIFIED: 2019-11-21
+// MODIFIED: 2019-12-11
 // PURPOSE: main js file for app
 // DEPENDENCIES: NA
 // STATUS: working
@@ -14,6 +14,12 @@
     // ADD CSS CLASS
     function addCSS(elem, css) {
         document.querySelector(elem).classList.add(css);
+    }
+
+    // CLEAR INPUTS
+    function clearInputs(elems){
+        const inputs = document.querySelectorAll(elems);
+        inputs.forEach( input => input.value = "");
     }
 
     // LOG SOMETHING TO THE CONSOLE
@@ -74,6 +80,10 @@
     Shiny.addCustomMessageHandler("addCSS", function (value) {
         addCSS(value[0], value[1]);
     });
+
+    Shiny.addCustomMessageHandler("clearInputs", function(value){
+        clearInputs(value)
+    })
 
     Shiny.addCustomMessageHandler("consoleLog", function (value) {
         consoleLog(value[0], value[1]);
