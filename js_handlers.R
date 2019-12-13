@@ -24,8 +24,8 @@ js$addCSS <- function(elem, css){
 }
 
 # build wrapper for handler: clear inputs
-js$clearInputs <- function(elem){
-    session$sendCustomMessage("clearInputs", list(elem))
+js$clearInput <- function(elem){
+    session$sendCustomMessage("clearInput", list(elem))
 }
 
 # build wrapper for handler: consoleLog
@@ -39,8 +39,8 @@ js$hideElem <- function(id){
 }
 
 # build wrapper for handler: innerHTML
-js$innerHTML <- function(elem, string){
-    session$sendCustomMessage("innerHTML", list(elem, string))
+js$innerHTML <- function(elem, string, delay = NULL){
+    session$sendCustomMessage("innerHTML", list(elem, string, delay))
 }
     
 # build wrapper for handler: refreshPage

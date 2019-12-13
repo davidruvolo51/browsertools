@@ -2,7 +2,7 @@
 // FILE: index.js
 // AUTHOR: David Ruvolo
 // CREATED: 2019-11-11
-// MODIFIED: 2019-12-11
+// MODIFIED: 2019-12-13
 // PURPOSE: main js file for app
 // DEPENDENCIES: NA
 // STATUS: working
@@ -10,16 +10,16 @@
 ////////////////////////////////////////////////////////////////////////////////
 // DEFINE FUNCTIONS
 (function () {
-    
+
     // ADD CSS CLASS
     function addCSS(elem, css) {
         document.querySelector(elem).classList.add(css);
     }
 
     // CLEAR INPUTS
-    function clearInputs(elems){
+    function clearInput(elems) {
         const inputs = document.querySelectorAll(elems);
-        inputs.forEach( input => input.value = "");
+        inputs.forEach(input => input.value = "");
     }
 
     // LOG SOMETHING TO THE CONSOLE
@@ -42,8 +42,14 @@
     }
 
     // SET INNERHTML
-    function innerHTML(elem, string) {
-        document.querySelector(elem).innerHTML = string;
+    function innerHTML(elem, string, delay) {
+        if (delay) {
+            setTimeout(function () {
+                document.querySelector(elem).innerHTML = string;
+            }, delay)
+        } else {
+            document.querySelector(elem).innerHTML = string;
+        }
     }
 
     // SET ELEMENT ATTRIBUTES
@@ -57,20 +63,23 @@
     }
 
     // SCROLL TO TOP OF PAGE
-    function scrollToTop(){
-        window.scrollTo(0,0);
+    function scrollToTop() {
+        window.scrollTo(0, 0);
     }
 
+    ////////////////////////////////////////
+    
+
     // SHOW ELEM (SHOW / HIDE)
-    function showElem(id) {
-        const el = document.getElementById(id);
+    function showElem(elem) {
+        const el = document.querySelector(elem);
         el.classList.remove("hidden");
         el.removeAttribute("hidden");
     }
 
     // HIDE ELEM
-    function hideElem(id){
-        const el = document.getElementById(id);
+    function hideElem(elem) {
+        const el = document.querySelector(elem);
         el.classList.add("hidden");
         el.setAttribute("hidden", true);
     }
@@ -81,14 +90,17 @@
         addCSS(value[0], value[1]);
     });
 
-    Shiny.addCustomMessageHandler("clearInputs", function(value){
-        clearInputs(value)
+    Shiny.addCustomMessageHandler("clearInput", function (value) {
+        clearInput(value)
     })
 
     Shiny.addCustomMessageHandler("consoleLog", function (value) {
         consoleLog(value[0], value[1]);
     });
 
+    Shiny.addCustomMessageHandler("hideElem", function (value) {
+        hideElem(value[0], value[1]);
+    });
     Shiny.addCustomMessageHandler("innerHTML", function (value) {
         innerHTML(value[0], value[1])
     });
@@ -105,19 +117,16 @@
         setElementAttribute(value[0], value[1], value[2]);
     });
 
-    Shiny.addCustomMessageHandler("toggleCSS", function (value) {
-        toggleCSS(value[0], value[1]);
-    });
+    Shiny.addCustomMessageHandler("scrollToTop", function (value) {
+        scrollToTop();
+    })
 
-    Shiny.addCustomMessageHandler("hideElem", function (value) {
-        hideElem(value[0], value[1]);
-    });
-    
     Shiny.addCustomMessageHandler("showElem", function (value) {
         showElem(value[0], value[1]);
     });
 
-    Shiny.addCustomMessageHandler("scrollToTop", function(value){
-        scrollToTop();
-    })
+    Shiny.addCustomMessageHandler("toggleCSS", function (value) {
+        toggleCSS(value[0], value[1]);
+    });
+
 })();
