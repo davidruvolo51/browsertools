@@ -1,0 +1,6 @@
+inst/assets/node_modules/
+inst/assets/src/
+inst/assets/.babelrc
+inst/assets/package.json
+inst/assets/package-lock.json
+components/
