@@ -118,7 +118,7 @@
         hide_elem(value[0], value[1]);
     });
     Shiny.addCustomMessageHandler("inner_html", function (value) {
-        inner_html(value[0], value[1])
+        inner_html(value[0], value[1], value[2])
     });
 
     Shiny.addCustomMessageHandler("refresh_page", function (value) {
