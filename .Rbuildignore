@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 inst/assets/src/
 node_modules/
 .babelrc
@@ -5,3 +6,11 @@ package.json
 package-lock.json
 yark.lock
 browsertools.code-workspace
+=======
+inst/assets/node_modules/
+inst/assets/src/
+inst/assets/.babelrc
+inst/assets/package.json
+inst/assets/package-lock.json
+components/
+>>>>>>> 5f69e18daaa5420ad6dc962163d244c3ba0600fb
