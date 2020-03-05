@@ -1,0 +1,13 @@
+Package: browsertools
+Type: Package
+Title: a collection of js handlers and console tools
+Version: 0.1.0
+Author: dcruvolo
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: This package provides a series of vanilla js handlers for 
+    use in shiny applications. 
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports: htmltools (>= 0.4.0), shiny (>= 1.4.0)
+RoxygenNote: 7.0.2
