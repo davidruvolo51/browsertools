@@ -14,5 +14,8 @@ Function that loads all assets into your shiny app
 \code{use_browsertools}
 Function that loads all assets into your shiny app
 }
+\examples{
+browsertools::use_browsertools()
+}
 \keyword{browsertools,}
 \keyword{use}

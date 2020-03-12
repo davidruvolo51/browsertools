@@ -15,6 +15,9 @@ Outputs an object to the browser's console
 \description{
 Outputs an object to the browser's console
 }
+\examples{
+console_log(x = "Hello, world!")
+}
 \keyword{browsertools,}
 \keyword{console}
 \keyword{debugging,}

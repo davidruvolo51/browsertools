@@ -18,6 +18,9 @@ Adds a css class(es) to an element using id or classname.
 \description{
 Adds a css class(es) to an element using id or classname.
 }
+\examples{
+add_css(elem = "#mydiv", css = "some-css-class")
+}
 \keyword{add}
 \keyword{browsertools,}
 \keyword{css,}

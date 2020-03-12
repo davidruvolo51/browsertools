@@ -22,6 +22,9 @@ Update the content of an element by id or class name
 \description{
 Update the content of an element by id or class name
 }
+\examples{
+inner_html(elem = "#mydiv", string = "hello, world", delay = 500)
+}
 \keyword{browsertools,}
 \keyword{html}
 \keyword{inner,}

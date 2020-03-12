@@ -15,6 +15,9 @@ Outputs an object to the browser's console
 \description{
 Outputs an data object to the browser's console in table format
 }
+\examples{
+console_table(x = iris)
+}
 \keyword{browsertools,}
 \keyword{console}
 \keyword{debugging,}

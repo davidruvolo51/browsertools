@@ -1,11 +1,11 @@
 {
   "name": "browsertools",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "a collection of tools for use in shiny",
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf inst/assets/js",
-    "build": "babel inst/assets/src -d inst/assets/js --presets minify --no-comments",
+    "build": "babel inst/assets/src --out-file inst/assets/js/browsertools.min.js --presets minify --no-comments",
     "document" : "Rscript -e \"devtools::document()\"",
     "package": "cd .. && R CMD build browsertools && R CMD install browsertools_*.tar.gz"
   },
@@ -13,11 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/davidruvolo51/browsertools.git"
   },
-  "keywords": [
-    "shiny",
-    "js",
-    "css"
-  ],
+  "keywords": ["shiny", "js"],
   "author": "dcruvolo",
   "license": "ISC",
   "bugs": {

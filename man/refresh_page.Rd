@@ -12,6 +12,9 @@ Trigger a page refres
 \description{
 Trigger a page refresh
 }
+\examples{
+refresh_page()
+}
 \keyword{browsertools,}
 \keyword{page,}
 \keyword{refresh}

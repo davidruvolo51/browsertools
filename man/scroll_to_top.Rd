@@ -4,7 +4,7 @@
 \alias{scroll_to_top}
 \title{\code{scroll_to_top}}
 \usage{
-scroll_to_top(...)
+scroll_to_top()
 }
 \value{
 Adds a css class(es) to an element using id or classname.

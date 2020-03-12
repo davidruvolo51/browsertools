@@ -2,7 +2,7 @@
 // FILE: index.js
 // AUTHOR: David Ruvolo
 // CREATED: 2019-11-11
-// MODIFIED: 2020-01-25
+// MODIFIED: 2020-03-12
 // PURPOSE: main js file for app
 // DEPENDENCIES: NA
 // STATUS: working
@@ -13,8 +13,7 @@
 
     // ADD CSS CLASS
     function add_css(elem, css) {
-        const elems = document.querySelectorAll(elem);
-        elems.forEach(e => e.classList.add(css))
+        document.querySelectorAll(elem).classList.add(css);
     }
 
     // CLEAR INPUTS
@@ -68,62 +67,19 @@
 
     // REMOVE CSS CLASS
     function remove_css(elem, css) {
-        const elems = document.querySelectorAll(elem);
-        elems.forEach(e => e.classList.remove(css))
+        document.querySelectorAll(elem).classList.remove(css);
     }
 
     // REMOVE ELEMENT
     function remove_element(elem) {
-        const el = document.querySelectorAll(elem);
-        el.forEach(e => e.parentNode.removeChild(e))
+        const el = document.querySelector(elem);
+        el.parentNode.removeChild(el);
     }
 
     // REMOVE ELEMENT ATTRIBUTE
     function remove_element_attribute(elem, attr) {
         document.querySelector(elem).removeAttribute(attr);
     }
-
-    // RESET INPUT GROUPS
-    function reset_input_groups(elem, type, def) {
-        // validate input type
-        const types = ["all", "radio", "checkbox"]
-        let selector;
-        if (types.indexOf(type) == -1) {
-            console.error("Error in 'reset_input_groups':", "type is not valid")
-        }
-
-        // build selector based on input type value
-        if (types.indexOf(type) > -1) {
-            if (types === "all") {
-                selector = "input[type='radio'], input[type='checkbox']"
-            }
-            if (types === "radio") {
-                selector = "input[type='radio']"
-            }
-            if (types === "checkbox") {
-                selector = "input[type='checkbox']"
-            }
-        }
-
-        // select elements
-        const parent = document.querySelector(elem)
-        const children = parent.querySelector(selector);
-
-        // reset elelents
-        parent.value = '';
-        children.forEach(child => {
-            child.checked = false;
-            if (def.length > 0) {
-                if (def === "true" || def === "false") {
-                    child.checked = def
-                }
-                if (el.getAttribute(def, "value") === true) {
-                    child.checked = true;
-                }
-            }
-        });
-    }
-
     
     // SET ELEMENT ATTRIBUTES
     function set_element_attribute(elem, attr, value) {
@@ -159,7 +115,7 @@
     });
 
     Shiny.addCustomMessageHandler("clear_input", function (value) {
-        clear_input(value)
+        clear_input(value[0], value[1])
     })
 
     Shiny.addCustomMessageHandler("console_log", function (value) {
@@ -191,10 +147,6 @@
 
     Shiny.addCustomMessageHandler("remove_element_attribute", function(value) {
         remove_element_attribute(value[0], value[1])
-    })
-
-    Shiny.addCustomMessageHandler("reset_input_groups", function(value) {
-        reset_input_groups(value[0], value[1], value[3])
     })
 
     Shiny.addCustomMessageHandler("set_element_attribute", function (value) {

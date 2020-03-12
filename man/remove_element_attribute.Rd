@@ -17,6 +17,9 @@ Remove an attribute from an html element
 \description{
 Removes an html attribute from an element
 }
+\examples{
+remove_element_attribute(elem = "#mydiv", attr = "class")
+}
 \keyword{attribute}
 \keyword{browsertools,}
 \keyword{remove,}

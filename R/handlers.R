@@ -9,7 +9,7 @@ get_shiny_session <- function(...) {
 #' Function that loads all assets into your shiny app
 #' @return Function that loads all assets into your shiny app
 #' @keywords browsertools, use
-#' @example
+#' @examples
 #' browsertools::use_browsertools()
 #' @export
 use_browsertools <- function() {
@@ -18,7 +18,7 @@ use_browsertools <- function() {
         version = "0.1.0",
         src = "assets/js/",
         package = "browsertools",
-        script = "index.js",
+        script = "browsertools.min.js",
         all_files = FALSE
     )
 }
@@ -31,7 +31,7 @@ use_browsertools <- function() {
 #'            an html element
 #' @return Adds a css class(es) to an element using id or classname.
 #' @keywords browsertools, css, add
-#' @example
+#' @examples
 #' add_css(elem = "#mydiv", css = "some-css-class")
 #' @export
 add_css <- function(elem, css) {
@@ -45,7 +45,7 @@ add_css <- function(elem, css) {
 #' @param elem the id or class name of an html element
 #' @return Resets an html inputs value
 #' @keywords browsertools, input, clear
-#' @example
+#' @examples
 #' clear_input(elem = "#mydiv")
 #' @export
 clear_input <- function(elem, value = NULL) {
@@ -59,7 +59,7 @@ clear_input <- function(elem, value = NULL) {
 #' @param x an object to display in the browser
 #' @return Outputs an object to the browser's console
 #' @keywords browsertools, debugging, console
-#' @example
+#' @examples
 #' console_log(x = "Hello, world!")
 #' @export
 console_log <- function(x) {
@@ -73,7 +73,7 @@ console_log <- function(x) {
 #' @param x an object to display in the browser (data.frame, etc.)
 #' @return Outputs an object to the browser's console
 #' @keywords browsertools, debugging, console
-#' @example
+#' @examples
 #' console_table(x = iris)
 #' @export
 console_table <- function(x) {
@@ -113,7 +113,7 @@ hide_elem <- function(elem, css = NULL) {
 #'              Ideal for content that is rendered by the server.
 #'              Input is time in milliseconds.
 #' @keywords browsertools, inner, html
-#' @example
+#' @examples
 #' inner_html(elem = "#mydiv", string = "hello, world", delay = 500)
 #' @export
 inner_html <- function(elem, string, delay = NULL) {
@@ -126,7 +126,7 @@ inner_html <- function(elem, string, delay = NULL) {
 #' Trigger a page refresh
 #' @return Trigger a page refres
 #' @keywords browsertools, page, refresh
-#' @example
+#' @examples
 #' refresh_page()
 #' @export
 refresh_page <- function() {
@@ -156,7 +156,7 @@ remove_css <- function(elem, css) {
 #' @param elem an ID of the element to remove
 #' @return Removes an html element from the DOM
 #' @keywords browsertools, remove, element
-#' @example
+#' @examples
 #' remove_element(elem = "#mydiv")
 #' @export
 remove_element <- function(elem) {
@@ -171,50 +171,13 @@ remove_element <- function(elem) {
 #' @param attr the name of the attribute to remove
 #' @return Remove an attribute from an html element
 #' @keywords browsertools, remove, attribute
-#' @example
+#' @examples
 #' remove_element_attribute(elem = "#mydiv", attr = "class")
 #' @export
 remove_element_attribute <- function(elem, attr) {
     session <- get_shiny_session()
     session$sendCustomMessage("remove_element_attribute", list(elem, attr))
 }
-
-#' \code{reset_input_groups}
-#' 
-#' Resets the values of all input groups by ID or type
-#' @param elem an ID of an input group to be reset (optional)
-#' @param type the name of input type ("all", "radio", "checkbox") (optional)
-#' @param default_val a logical value to use as the default or a name
-#'                  of an html attribute to use a the default value.
-#'                  This is used in \code{elem.checked = ...}
-#'                  (optional)
-#' @return Reset input group values to default
-#' @keywords browsertools, reset, inputs, input groups
-#' @example
-#' reset_input_groups(elem = "myinput")
-#' reset_input_groups(elem = "myinput", default_val = "true")
-#' reset_input_groups(type = "radio", default_val = "data-default-vals")
-#' @export
-reset_input_groups <- function(elem, type = "all", default_val = FALSE) {
-    types <- c("all", "radio", "checkbox")
-    if (isTRUE(type)) {
-        if (type %in% types) {
-            stop("Error in 'reset_input_groups': type not found, use ", types)
-        }
-        if (length(type) > 1) {
-            stop("Name only one input type. Use \"type = 'all'\" to select all inputs")
-        }
-    }
-    session <- get_shiny_session()
-    session$sendCustomMessage(
-        "reset_input_groups",
-        list(
-            elem,
-            tolower(type),
-            tolower(default_val)
-        )
-    )
-} 
 
 #' \code{scroll_to_top}
 #'
@@ -224,7 +187,7 @@ reset_input_groups <- function(elem, type = "all", default_val = FALSE) {
 #' @examples
 #' scroll_to_top()
 #' @export
-scroll_to_top <- function(...) {
+scroll_to_top <- function() {
     session <- get_shiny_session()
     session$sendCustomMessage("scroll_to_top", "")
 }

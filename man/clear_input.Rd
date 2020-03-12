@@ -15,6 +15,9 @@ Resets an html inputs value
 \description{
 Resets an html inputs value
 }
+\examples{
+clear_input(elem = "#mydiv")
+}
 \keyword{browsertools,}
 \keyword{clear}
 \keyword{input,}

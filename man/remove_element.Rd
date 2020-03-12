@@ -15,6 +15,9 @@ Removes an html element from the DOM
 \description{
 Removes an html element from the DOM
 }
+\examples{
+remove_element(elem = "#mydiv")
+}
 \keyword{browsertools,}
 \keyword{element}
 \keyword{remove,}
