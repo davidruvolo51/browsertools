@@ -1,7 +1,6 @@
 export("use_browsertools")
 export("add_css")
 export("as_js_object")
-export("clear_input")
 export("console_log")
 export("console_table")
 export("hide_elem")

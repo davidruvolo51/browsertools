@@ -4,14 +4,12 @@
         prefix = "assets",
         directoryPath = system.file(
             "assets",
-            package = "shinytools"
+            package = "browsertools"
         )
     )
 }
 
 # on unload
 .onUnload <- function(libname, pkgname) {
-    shiny::removeResourcePath(
-        prefix = "assets"
-    )
+    shiny::removeResourcePath("assets")
 }

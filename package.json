@@ -1,29 +1,56 @@
 {
-  "name": "browsertools",
-  "version": "0.0.2",
-  "description": "a collection of tools for use in shiny",
-  "main": "index.js",
-  "scripts": {
-    "clean": "rm -rf inst/assets/js",
-    "build": "babel inst/assets/src --out-file inst/assets/js/browsertools.min.js --presets minify --no-comments",
-    "document" : "Rscript -e \"devtools::document()\"",
-    "package": "cd .. && R CMD build browsertools && R CMD install browsertools_*.tar.gz"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/davidruvolo51/browsertools.git"
-  },
-  "keywords": ["shiny", "js"],
-  "author": "dcruvolo",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/davidruvolo51/browsertools/issues"
-  },
-  "homepage": "https://github.com/davidruvolo51/browsertools#readme",
-  "devDependencies": {
-    "@babel/cli": "^7.8.3",
-    "@babel/core": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
-    "babel-preset-minify": "^0.5.1"
-  }
+    "name": "browsertools",
+    "version": "0.0.2",
+    "author": "dcruvolo",
+    "license": "ISC",
+    "description": "a collection of tools for use in shiny",
+    "keywords": ["shiny", "js"],
+    "main": "index.js",
+    "scripts": {
+        "clean": "rm -r inst/assets/js/browsertools.min.js inst/assets/css/browsertools.min.css",
+        "babel": "babel inst/assets/js --out-file inst/assets/js/browsertools.min.js --presets minify --no-comments",
+        "sass": "parcel build inst/assets/css/styles.scss -d inst/assets/css/ -o inst/assets/css/browsertools.min.css --no-cache --no-source-maps",
+        "build": "yarn babel && yarn sass",
+        "document" : "Rscript -e \"devtools::document()\"",
+        "package": "cd .. && R CMD build browsertools && R CMD install browsertools_*.tar.gz"
+    },
+    "homepage": "https://github.com/davidruvolo51/browsertools#readme",
+    "devDependencies": {
+        "@babel/cli": "^7.8.3",
+        "@babel/core": "^7.8.3",
+        "@babel/preset-env": "^7.8.3",
+        "babel-preset-minify": "^0.5.1"
+    },
+    "dependencies": {
+        "autoprefixer": "^9.7.4",
+        "cssnano": "^4.1.10",
+        "sass": "^1.26.3"
+    },
+    "postcss": {
+        "modules": false,
+        "plugins": {
+            "autoprefixer": {
+                "overrideBrowserslist": [
+                    ">1%",
+                    "last 4 versions",
+                    "Firefox ESR",
+                    "not ie < 9"
+                ],
+                "flexbox": "no-2009"
+            },
+            "cssnano": {
+                "calc": true,
+                "discardComments": {
+                    "removeAll": true
+                }
+            }
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/davidruvolo51/browsertools.git"
+    },
+    "bugs": {
+        "url": "https://github.com/davidruvolo51/browsertools/issues"
+    }
 }

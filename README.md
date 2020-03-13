@@ -4,7 +4,28 @@ A collection of my favorite tools for building shiny applications bundled into a
 
 ## Use
 
-Install the shinytools package. Like other shiny packages, you must load the assets at the top of the shiny app.
+The following functions are available in this packge. For more information and examples, please refer to the [wiki](https://github.com/davidruvolo51/browsertools/wiki).
+
+| function              | arguments | description | 
+| :-------              | :-------- | :---------- |
+| [`use_browsertools`](#use_browsertools) | --- | loads the browsertool dependencies into your shiny app (required)
+| [`add_css`](#add_css) | `elem`, `css` | add a css class to an element
+| [`as_js_object`](#as_js_object) | `x` | a data.frame to convert to javascript object
+| [`console_log`](#console_log) | `x` | log values to the browser console
+| [`console_table`](#console_table) | `x` | a json object to display in the console; use `as_js_object` function to convert your data before passing into the function
+| [`hide_elem`](#hide_elem) | `elem`, `css` | hides an element by adding a class by name or `hidden` 
+| [`inner_html`](#inner_html) | `elem`, `string`, `delay` | write values to an element. 
+| [`refresh_page`](#refresh_page) |  --- | trigger a page refresh (`history.go(0)`)
+| [`remove_css`](#remove_css) | `elem`, `css` | remove a css class from an element
+| [`remove_element`](#remove_element) | `elem` | remove an element from the DOM
+| [`remove_element_attribute`](#remove_element_attribute) | `elem`, `attr` | remove an attribute from an element
+| [`set_element_attribute`](#set_element_attribute) | `elem`, `attr`, `value` | update an attribute of an element 
+| [`scroll_to_top`](#scroll_to_top) | --- | scroll to top of page
+| [`show_elem`](#show_elem) | `elem`, `css` | show an element by removing a class name or `hidden`
+| [`toggle_css`](#toggle_css) | `elem`, `css` | toggle a css class
+
+
+Like other shiny packages, you must load the assets at the top of the shiny app.
 
 ```r
 ui <- tagList(
@@ -20,8 +41,6 @@ server <- function(input, output, session) {
     console_log(x = mtcars, asDir = F)
 }
 ```
-
-For a complete list of functions and examples, please refer to the [wiki](https://github.com/davidruvolo51/browsertools/wiki).
 
 ## Development
 

@@ -5,7 +5,7 @@
 \title{\code{get_shiny_session}
 A function for finding the shiny session}
 \usage{
-get_shiny_session(...)
+get_shiny_session()
 }
 \description{
 \code{get_shiny_session}

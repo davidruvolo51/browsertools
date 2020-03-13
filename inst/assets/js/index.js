@@ -2,7 +2,7 @@
 // FILE: index.js
 // AUTHOR: David Ruvolo
 // CREATED: 2019-11-11
-// MODIFIED: 2020-03-12
+// MODIFIED: 2020-03-13
 // PURPOSE: main js file for app
 // DEPENDENCIES: NA
 // STATUS: working
@@ -13,19 +13,8 @@
 
     // ADD CSS CLASS
     function add_css(elem, css) {
-        document.querySelectorAll(elem).classList.add(css);
-    }
-
-    // CLEAR INPUTS
-    function clear_input(elem, value) {
-        const inputs = document.querySelectorAll(elem);
-        inputs.forEach(input => {
-            if (value.length > 0) {
-                input.value = value
-            } else {
-                input.value = ""
-            }
-        });
+        const el = document.querySelector(elem);
+        el.classList.add(css);
     }
 
     // LOG SOMETHING TO THE CONSOLE
@@ -41,12 +30,7 @@
     // HIDE ELEM
     function hide_elem(elem, css) {
         const el = document.querySelector(elem);
-        if(css.length > 0) {
-            el.classList.add(css)
-        } else {
-            el.classList.add("hidden");
-        }
-        el.setAttribute("hidden", true);
+        el.classList.add(css);
     }
     
     // SET INNERHTML
@@ -67,7 +51,8 @@
 
     // REMOVE CSS CLASS
     function remove_css(elem, css) {
-        document.querySelectorAll(elem).classList.remove(css);
+        const el = document.querySelector(elem);
+        el.classList.remove(css);
     }
 
     // REMOVE ELEMENT
@@ -89,12 +74,7 @@
     // SHOW ELEM (SHOW / HIDE)
     function show_elem(elem, css) {
         const el = document.querySelector(elem);
-        if(css.length > 0) {
-            el.classList.remove(css);
-        } else {
-            el.classList.remove("hidden");
-        }
-        el.removeAttribute("hidden");
+        el.classList.remove(css);
     }
     
     // SCROLL TO TOP OF PAGE
@@ -113,10 +93,6 @@
     Shiny.addCustomMessageHandler("add_css", function (value) {
         add_css(value[0], value[1]);
     });
-
-    Shiny.addCustomMessageHandler("clear_input", function (value) {
-        clear_input(value[0], value[1])
-    })
 
     Shiny.addCustomMessageHandler("console_log", function (value) {
         console_log(value);

@@ -1,7 +1,7 @@
 #' \code{get_shiny_session}
 #' A function for finding the shiny session
 #' @keywords browsertools, session
-get_shiny_session <- function(...) {
+get_shiny_session <- function() {
     return(shiny::getDefaultReactiveDomain())
 }
 
@@ -16,9 +16,10 @@ use_browsertools <- function() {
     htmltools::htmlDependency(
         name = "browsertools",
         version = "0.1.0",
-        src = "assets/js/",
+        src = "assets/",
         package = "browsertools",
-        script = "browsertools.min.js",
+        script = "js/browsertools.min.js",
+        stylesheet = "css/browsertools.min.css",
         all_files = FALSE
     )
 }
@@ -37,20 +38,6 @@ use_browsertools <- function() {
 add_css <- function(elem, css) {
     session <- get_shiny_session()
     session$sendCustomMessage("add_css", list(elem, css))
-}
-
-#' \code{clear_input}
-#'
-#' Resets an html inputs value
-#' @param elem the id or class name of an html element
-#' @return Resets an html inputs value
-#' @keywords browsertools, input, clear
-#' @examples
-#' clear_input(elem = "#mydiv")
-#' @export
-clear_input <- function(elem, value = NULL) {
-    session <- get_shiny_session()
-    session$sendCustomMessage("clear_input", list(elem, value))
 }
 
 #' \code{console_log}
@@ -97,7 +84,7 @@ console_table <- function(x) {
 #' hide_elem(elem = "#mydiv")
 #' hide_elem(elem = "#mydiv", css = "show-div")
 #' @export
-hide_elem <- function(elem, css = NULL) {
+hide_elem <- function(elem, css = "hidden") {
     session <- get_shiny_session()
     session$sendCustomMessage("hide_elem", list(elem, css))
 }
@@ -224,7 +211,7 @@ set_element_attribute <- function(elem, attr, value) {
 #' show_elem(elem = "#mydiv")
 #' show_elem(elem = "#mydiv", css = "show-div")
 #' @export
-show_elem <- function(elem, css = NULL) {
+show_elem <- function(elem, css = "hidden") {
     session <- get_shiny_session()
     session$sendCustomMessage("show_elem", list(elem, css))
 }

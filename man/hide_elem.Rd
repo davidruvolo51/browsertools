@@ -4,7 +4,7 @@
 \alias{hide_elem}
 \title{\code{hide_elem}}
 \usage{
-hide_elem(elem, css = NULL)
+hide_elem(elem, css = "hidden")
 }
 \arguments{
 \item{elem}{the id or class name of an html elem}
