@@ -1,6 +1,6 @@
 # on load
 .onLoad <- function(libname, pkgname) {
-    shiny::addResourcePath(
+    addResourcePath(
         prefix = "assets",
         directoryPath = system.file(
             "assets",
@@ -11,5 +11,5 @@
 
 # on unload
 .onUnload <- function(libname, pkgname) {
-    shiny::removeResourcePath("assets")
+    removeResourcePath("assets")
 }
