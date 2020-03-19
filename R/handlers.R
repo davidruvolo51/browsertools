@@ -1,9 +1,3 @@
-#' \code{get_shiny_session}
-#' A function for finding the shiny session
-#' @keywords browsertools, session
-get_shiny_session <- function() {
-    return(shiny::getDefaultReactiveDomain())
-}
 
 #' \code{use_browsertools}
 #' Function that loads all assets into your shiny app
@@ -15,7 +9,7 @@ get_shiny_session <- function() {
 use_browsertools <- function() {
     htmltools::htmlDependency(
         name = "browsertools",
-        version = "0.1.0",
+        version = "0.1.1",
         src = "assets/",
         package = "browsertools",
         script = "js/browsertools.min.js",
@@ -35,8 +29,7 @@ use_browsertools <- function() {
 #' @examples
 #' add_css(elem = "#mydiv", css = "some-css-class")
 #' @export
-add_css <- function(elem, css) {
-    session <- get_shiny_session()
+add_css <- function(elem, css, session = getDefaultReactiveDomain()) {
     session$sendCustomMessage("add_css", list(elem, css))
 }
 
@@ -49,8 +42,7 @@ add_css <- function(elem, css) {
 #' @examples
 #' console_log(x = "Hello, world!")
 #' @export
-console_log <- function(x) {
-    session <- get_shiny_session()
+console_log <- function(x, session = getDefaultReactiveDomain()) {
     session$sendCustomMessage("console_log", x)
 }
 
@@ -63,8 +55,7 @@ console_log <- function(x) {
 #' @examples
 #' console_table(x = iris)
 #' @export
-console_table <- function(x) {
-    session <- get_shiny_session()
+console_table <- function(x, session = getDefaultReactiveDomain()) {
     session$sendCustomMessage("console_table", x)
 }
 
@@ -84,8 +75,7 @@ console_table <- function(x) {
 #' hide_elem(elem = "#mydiv")
 #' hide_elem(elem = "#mydiv", css = "show-div")
 #' @export
-hide_elem <- function(elem, css = "hidden") {
-    session <- get_shiny_session()
+hide_elem <- function(elem, css = "hidden", session = getDefaultReactiveDomain()) {
     session$sendCustomMessage("hide_elem", list(elem, css))
 }
 
@@ -103,8 +93,7 @@ hide_elem <- function(elem, css = "hidden") {
 #' @examples
 #' inner_html(elem = "#mydiv", string = "hello, world", delay = 500)
 #' @export
-inner_html <- function(elem, string, delay = NULL) {
-    session <- get_shiny_session()
+inner_html <- function(elem, string, delay = NULL, session = getDefaultReactiveDomain()) {
     session$sendCustomMessage("inner_html", list(elem, string, delay))
 }
 
@@ -116,8 +105,7 @@ inner_html <- function(elem, string, delay = NULL) {
 #' @examples
 #' refresh_page()
 #' @export
-refresh_page <- function() {
-    session <- get_shiny_session()
+refresh_page <- function(session = getDefaultReactiveDomain()) {
     session$sendCustomMessage("refresh_page", "")
 }
 
@@ -132,8 +120,7 @@ refresh_page <- function() {
 #' @examples
 #' remove_css(elem = "#mydiv", css = "some-css-class")
 #' @export
-remove_css <- function(elem, css) {
-    session <- get_shiny_session()
+remove_css <- function(elem, css, session = getDefaultReactiveDomain()) {
     session$sendCustomMessage("remove_css", list(elem, css))
 }
 
@@ -146,8 +133,7 @@ remove_css <- function(elem, css) {
 #' @examples
 #' remove_element(elem = "#mydiv")
 #' @export
-remove_element <- function(elem) {
-    session <- get_shiny_session()
+remove_element <- function(elem, session = getDefaultReactiveDomain()) {
     session$sendCustomMessage("remove_element", elem)
 }
 
@@ -161,8 +147,7 @@ remove_element <- function(elem) {
 #' @examples
 #' remove_element_attribute(elem = "#mydiv", attr = "class")
 #' @export
-remove_element_attribute <- function(elem, attr) {
-    session <- get_shiny_session()
+remove_element_attribute <- function(elem, attr, session = getDefaultReactiveDomain()) {
     session$sendCustomMessage("remove_element_attribute", list(elem, attr))
 }
 
@@ -174,8 +159,7 @@ remove_element_attribute <- function(elem, attr) {
 #' @examples
 #' scroll_to_top()
 #' @export
-scroll_to_top <- function() {
-    session <- get_shiny_session()
+scroll_to_top <- function(session = getDefaultReactiveDomain()) {
     session$sendCustomMessage("scroll_to_top", "")
 }
 
@@ -190,8 +174,7 @@ scroll_to_top <- function() {
 #' @examples
 #' set_element_attribute(elem = "#mydiv", attr = "data-value", value = "12345")
 #' @export
-set_element_attribute <- function(elem, attr, value) {
-    session <- get_shiny_session()
+set_element_attribute <- function(elem, attr, value, session = getDefaultReactiveDomain()) {
     session$sendCustomMessage("set_element_attribute", list(elem, attr, value))
 }
 
@@ -211,8 +194,7 @@ set_element_attribute <- function(elem, attr, value) {
 #' show_elem(elem = "#mydiv")
 #' show_elem(elem = "#mydiv", css = "show-div")
 #' @export
-show_elem <- function(elem, css = "hidden") {
-    session <- get_shiny_session()
+show_elem <- function(elem, css = "hidden", session = getDefaultReactiveDomain()) {
     session$sendCustomMessage("show_elem", list(elem, css))
 }
 
@@ -227,7 +209,6 @@ show_elem <- function(elem, css = "hidden") {
 #' @examples
 #' toggle_css(elem = "#mydiv", css = "mytheme")
 #' @export
-toggle_css <- function(elem, css) {
-    session <- get_shiny_session()
+toggle_css <- function(elem, css, session = getDefaultReactiveDomain()) {
     session$sendCustomMessage("toggle_css", list(elem, css))
 }

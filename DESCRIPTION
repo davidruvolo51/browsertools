@@ -1,7 +1,7 @@
 Package: browsertools
 Type: Package
 Title: a collection of js handlers and console tools
-Version: 0.1.0
+Version: 0.1.1
 Author: dcruvolo
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: This package provides a series of vanilla js handlers for 
@@ -9,5 +9,9 @@ Description: This package provides a series of vanilla js handlers for
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-Imports: htmltools (>= 0.4.0), shiny (>= 1.4.0)
+URL: https://github.com/davidruvolo51/browsertools
+BugReports: https://github.com/davidruvolo51/browsertools/issues
+Imports:
+    htmltools (>= 0.4.0),
+    shiny (>= 1.4.0)
 RoxygenNote: 7.0.2
