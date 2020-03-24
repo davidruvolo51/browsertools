@@ -1,6 +1,6 @@
 {
     "name": "browsertools",
-    "version": "0.0.2",
+    "version": "0.1.2",
     "author": "dcruvolo",
     "license": "ISC",
     "description": "a collection of tools for use in shiny",
@@ -15,6 +15,7 @@
         "sass": "parcel build inst/assets/css/styles.scss -d inst/assets/css/ -o inst/assets/css/browsertools.min.css --no-cache --no-source-maps",
         "build": "yarn babel && yarn sass",
         "document": "Rscript -e \"devtools::document()\"",
+        "uninstall": "Rscript -e \"devtools::uninstall()\"",
         "package": "Rscript -e \"devtools::build()\" && Rscript -e \"devtools::install()\""
     },
     "homepage": "https://github.com/davidruvolo51/browsertools#readme",

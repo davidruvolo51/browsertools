@@ -4,7 +4,7 @@
 \alias{inner_html}
 \title{\code{inner_html}}
 \usage{
-inner_html(elem, string, delay = NULL)
+inner_html(elem, string, delay = NULL, session = getDefaultReactiveDomain())
 }
 \arguments{
 \item{elem}{the ID or class name of an html element}
@@ -15,6 +15,8 @@ inner_html(elem, string, delay = NULL)
 before sending the content to the html element.
 Ideal for content that is rendered by the server.
 Input is time in milliseconds.}
+
+\item{session}{a shiny environment}
 }
 \value{
 Update the content of an element by id or class name

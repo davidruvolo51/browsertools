@@ -4,7 +4,7 @@
 \alias{set_element_attribute}
 \title{\code{set_element_attribute}}
 \usage{
-set_element_attribute(elem, attr, value)
+set_element_attribute(elem, attr, value, session = getDefaultReactiveDomain())
 }
 \arguments{
 \item{elem}{the id or class name of an html element}
@@ -12,6 +12,8 @@ set_element_attribute(elem, attr, value)
 \item{attr}{the name of the attribute to update}
 
 \item{value}{the value to add to the attribute}
+
+\item{session}{a shiny environment}
 }
 \value{
 Set an attribute of an html element

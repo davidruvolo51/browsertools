@@ -4,10 +4,12 @@
 \alias{console_table}
 \title{\code{console_table}}
 \usage{
-console_table(x)
+console_table(data, session = getDefaultReactiveDomain())
 }
 \arguments{
-\item{x}{an object to display in the browser (data.frame, etc.)}
+\item{data}{an object to display in the browser (data.frame, etc.)}
+
+\item{session}{a shiny environment}
 }
 \value{
 Outputs an object to the browser's console
@@ -16,7 +18,7 @@ Outputs an object to the browser's console
 Outputs an data object to the browser's console in table format
 }
 \examples{
-console_table(x = iris)
+console_table(data = iris)
 }
 \keyword{browsertools,}
 \keyword{console}

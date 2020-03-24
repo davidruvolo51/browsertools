@@ -4,13 +4,15 @@
 \alias{hide_elem}
 \title{\code{hide_elem}}
 \usage{
-hide_elem(elem, css = "hidden")
+hide_elem(elem, css = "hidden", session = getDefaultReactiveDomain())
 }
 \arguments{
 \item{elem}{the id or class name of an html elem}
 
 \item{css}{a string containing the class to remove from an html element
 (default class is \code{hidden})}
+
+\item{session}{a shiny environment}
 }
 \description{
 Hides an html element by id or class name. This function, by defauly,

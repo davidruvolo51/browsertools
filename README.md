@@ -1,19 +1,25 @@
 # browsertools
 
-A collection of my favorite tools for building shiny applications bundled into a tidy package. This repository contains a couple of files: `index.js` and `js_handlers.R`. These files contain handlers for passing data between R and JavaScript (and back again). In the file `js_handlers.R` there are a series of functions that wrap around `session$sendCustomMessage`.  The JavaScript functions that receive the input from the shiny server can be found in the `inst/assets/src/index.js` file. All functions are written in vanilla js and transpiled using `babel` and `babel-minify`
+This package contains a series of functions for running javascript functions in shiny. These functions are wrappers for custom message handlers for routine DOM manipulation within shiny server. All JavaScript functions were written in vanilla JS and transpiled using babel.js making this package ideal for custom shiny applications.
+
+See the [wiki](https://github.com/davidruvolo51/browsertools/wiki) for more information.
+
 
 ## Use
 
-The following functions are available in this packge. For more information and examples, please refer to the [wiki](https://github.com/davidruvolo51/browsertools/wiki).
+Available functions are listed in the table below.
 
 | function              | arguments | description | 
 | :-------              | :-------- | :---------- |
 | `use_browsertools` | --- | loads the browsertool dependencies into your shiny app (required)
 | `add_css` | `elem`, `css` | add a css class to an element
 | `as_js_object` | `x` | a data.frame to convert to javascript object
-| `console_log` | `x` | log values to the browser console
-| `console_table` | `x` | a json object to display in the console; use `as_js_object` function to convert your data before passing into the function
+| `console_error` | `message` | send an error message to the console
+| `console_log` | `message` | log values to the browser console
+| `console_table` | `data` | a json object to display in the console; use `as_js_object` function to convert your data before passing into the function
+| `console_warn` | `message` | send a warning message to the console
 | `hide_elem` | `elem`, `css` | hides an element by adding a class by name or `hidden` 
+| `insert_adjacent_html` | `id`, `html`, `position` | create a new child element(s) to a parent element
 | `inner_html` | `elem`, `string`, `delay` | write values to an element. 
 | `refresh_page` |  --- | trigger a page refresh (`history.go(0)`)
 | `remove_css` | `elem`, `css` | remove a css class from an element
@@ -25,21 +31,13 @@ The following functions are available in this packge. For more information and e
 | `toggle_css` | `elem`, `css` | toggle a css class
 
 
-Like other shiny packages, you must load the assets at the top of the shiny app.
+Call `user_browsertools` at the top of the UI (this loads the package dependencies). In the shiny server, call any function that you like. See the [wiki](https://github.com/davidruvolo51/browsertools/wiki) for more information and examples.
 
 ```r
 ui <- tagList(
     browsertools::use_browsertools()
     ...
 )
-```
-
-After doing so, you can use the functions in the server as normal R functions
-
-```r
-server <- function(input, output, session) {
-    console_log(x = mtcars, asDir = F)
-}
 ```
 
 ## Development
@@ -57,8 +55,16 @@ yarn clean    # removes previous verion
 yarn build    # builds new file
 ```
 
-To build the R package, run the following command in the terminal.
+Alternatively, you can rebuild each asset independently.
 
 ```bash
-yarn package
+yarn babel
+yarn sass
+```
+
+To build the R package, run the following commands in the terminal.
+
+```bash
+yarn document # build package documentation
+yarn package  # builds and installs using devtools
 ```

@@ -4,10 +4,12 @@
 \alias{remove_element}
 \title{\code{remove_element}}
 \usage{
-remove_element(elem)
+remove_element(elem, session = getDefaultReactiveDomain())
 }
 \arguments{
 \item{elem}{an ID of the element to remove}
+
+\item{session}{a shiny environment}
 }
 \value{
 Removes an html element from the DOM
