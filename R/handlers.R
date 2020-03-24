@@ -43,7 +43,7 @@ add_css <- function(elem, css, session = getDefaultReactiveDomain()) {
 #' console_log(x = "Hello, world!")
 #' @export
 console_log <- function(x, session = getDefaultReactiveDomain()) {
-    session$sendCustomMessage("console_log", x)
+    session$sendCustomMessage("console_log", list(x))
 }
 
 #' \code{console_table}
@@ -56,7 +56,7 @@ console_log <- function(x, session = getDefaultReactiveDomain()) {
 #' console_table(x = iris)
 #' @export
 console_table <- function(x, session = getDefaultReactiveDomain()) {
-    session$sendCustomMessage("console_table", x)
+    session$sendCustomMessage("console_table", list(x))
 }
 
 #' \code{hide_elem}
