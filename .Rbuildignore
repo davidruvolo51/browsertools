@@ -1,8 +1,11 @@
-node_modules/
-inst/assets/css/styles.scss
+inst/assets/css/styles.css
+inst/assets/css/browsertools.min.js
 inst/assets/js/index.js
+node_modules
 .babelrc
+.postcssrc
 package.json
 package-lock.json
-README.md
+yarn.lock
 browsertools.code-workspace
+README.md

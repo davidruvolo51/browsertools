@@ -4,12 +4,14 @@
 \alias{remove_element_attribute}
 \title{\code{remove_element_attribute}}
 \usage{
-remove_element_attribute(elem, attr)
+remove_element_attribute(elem, attr, session = getDefaultReactiveDomain())
 }
 \arguments{
 \item{elem}{an ID of the html element to be modified}
 
 \item{attr}{the name of the attribute to remove}
+
+\item{session}{a shiny environment}
 }
 \value{
 Remove an attribute from an html element

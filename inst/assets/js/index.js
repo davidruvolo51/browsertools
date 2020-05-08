@@ -2,7 +2,7 @@
 // FILE: index.js
 // AUTHOR: David Ruvolo
 // CREATED: 2019-11-11
-// MODIFIED: 2020-03-13
+// MODIFIED: 2020-03-24
 // PURPOSE: main js file for app
 // DEPENDENCIES: NA
 // STATUS: working
@@ -17,6 +17,11 @@
         el.classList.add(css);
     }
 
+    // LOG AN ERROR TO THE CONSOLE
+    function console_error(value) {
+        console.error(value)
+    }
+
     // LOG SOMETHING TO THE CONSOLE
     function console_log(value) {
         console.log(value);
@@ -27,10 +32,21 @@
         console.table(value)
     }
 
+    // CONSOLE WARN
+    function console_warn(value) {
+        console.warn(value);
+    }
+
     // HIDE ELEM
     function hide_elem(elem, css) {
         const el = document.querySelector(elem);
         el.classList.add(css);
+    }
+
+    // INSERT ADJACENT HTML
+    function insert_adjacent_html(id, html, position) {
+        const parent = document.getElementById(id);
+        parent.insertAdjacentHTML(position, html);
     }
     
     // SET INNERHTML
@@ -94,6 +110,10 @@
         add_css(value[0], value[1]);
     });
 
+    Shiny.addCustomMessageHandler("console_error", function(value) {
+        console_error(value);
+    });
+
     Shiny.addCustomMessageHandler("console_log", function (value) {
         console_log(value);
     });
@@ -102,9 +122,18 @@
         console_table(value);
     });
 
+    Shiny.addCustomMessageHandler("console_warn", function(value) {
+        console_warn(value);
+    });
+
     Shiny.addCustomMessageHandler("hide_elem", function (value) {
         hide_elem(value[0], value[1]);
     });
+
+    Shiny.addCustomMessageHandler("insert_adjacent_html", function(value) {
+        insert_adjacent_html(value[0], value[1], value[2])
+    });
+
     Shiny.addCustomMessageHandler("inner_html", function (value) {
         inner_html(value[0], value[1], value[2])
     });
