@@ -4,7 +4,11 @@
 \alias{hide_elem}
 \title{\code{hide_elem}}
 \usage{
-hide_elem(elem, css = "hidden", session = getDefaultReactiveDomain())
+hide_elem(
+  elem,
+  css = "browsertools-hidden",
+  session = getDefaultReactiveDomain()
+)
 }
 \arguments{
 \item{elem}{the id or class name of an html elem}

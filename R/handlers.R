@@ -1,23 +1,3 @@
-
-#' \code{use_browsertools}
-#' Function that loads all assets into your shiny app
-#' @return Function that loads all assets into your shiny app
-#' @keywords browsertools, use
-#' @examples
-#' browsertools::use_browsertools()
-#' @export
-use_browsertools <- function() {
-    htmltools::htmlDependency(
-        name = "browsertools",
-        version = "0.1.2",
-        src = "assets/",
-        package = "browsertools",
-        script = "js/browsertools.min.js",
-        stylesheet = "css/browsertools.min.css",
-        all_files = FALSE
-    )
-}
-
 #' \code{add_css}
 #'
 #' Adds a css class(es) to an element using id or classname.
@@ -113,7 +93,7 @@ console_warn <- function(message, session = getDefaultReactiveDomain()) {
 #' hide_elem(elem = "#mydiv")
 #' hide_elem(elem = "#mydiv", css = "show-div")
 #' @export
-hide_elem <- function(elem, css = "hidden", session = getDefaultReactiveDomain()) {
+hide_elem <- function(elem, css = "browsertools-hidden", session = getDefaultReactiveDomain()) {
     if (is.null(elem)) stop("argument 'elem' is undefined")
     if (is.null(css)) stop("argument 'css' is undefined")
     session$sendCustomMessage("hide_elem", list(elem, css))
@@ -171,7 +151,6 @@ insert_adjacent_html <- function(id, html, position = "beforeend", session = get
         list(id, as.character(html), position)
     )
 }
-
 
 #' \code{refresh_page}
 #'
@@ -285,7 +264,7 @@ set_element_attribute <- function(elem, attr, value, session = getDefaultReactiv
 #' show_elem(elem = "#mydiv")
 #' show_elem(elem = "#mydiv", css = "show-div")
 #' @export
-show_elem <- function(elem, css = "hidden", session = getDefaultReactiveDomain()) {
+show_elem <- function(elem, css = "browsertools-hidden", session = getDefaultReactiveDomain()) {
     if (is.null(elem)) stop("argument 'elem' is undefined")
     if (is.null(css)) stop("argument 'css' is undefined")
     session$sendCustomMessage("show_elem", list(elem, css))
