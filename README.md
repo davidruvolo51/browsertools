@@ -42,29 +42,30 @@ ui <- tagList(
 
 ## Development
 
-You will need to install [Node and Npm](https://nodejs.org/en/). You can use npm as the package manager, but I've integrated [yarn](https://yarnpkg.com/getting-started/install). Once all of the command line tools are installed, install of all of the development dependencies listed in the `package.json` file.
+If you would like to modify the package's css or js files, you will need to install [Node and Npm](https://nodejs.org/en/). This package also uses parceljs as the application bundler and a number of js packages. To install these tools, run the following command.
 
 ```bash
-yarn install
+npm install
 ```
 
-To build the javascript files, run the following commands in the terminal.
+To build the and css and javascript files, run the following commands in the terminal.
 
 ```bash
-yarn clean    # removes previous verion
-yarn build    # builds new file
+npm run clean    # removes existing files
+npm run build    # builds css and js files
 ```
 
 Alternatively, you can rebuild each asset independently.
 
 ```bash
-yarn babel
-yarn sass
+npm run babel
+npm run sass
 ```
 
-To build the R package, run the following commands in the terminal.
+When all changes are made and the css/js files are built, you can build the package using the following commands.
 
 ```bash
-yarn document # build package documentation
-yarn package  # builds and installs using devtools
+npm run uninstall    # uninstalls pkg
+npm run document     # builds pkg documentation
+npm run package      # builds and installs pkg
 ```
