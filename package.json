@@ -19,8 +19,7 @@
         "package": "Rscript -e \"devtools::build()\" && Rscript -e \"devtools::install()\""
     },
     "homepage": "https://github.com/davidruvolo51/browsertools",
-    "devDependencies": {},
-    "dependencies": {
+    "devDependencies": {
         "@babel/cli": "^7.8.3",
         "@babel/core": "^7.9.6",
         "@babel/preset-env": "^7.9.6",
@@ -30,6 +29,8 @@
         "parcel": "1.12.4",
         "postcss-modules": "^2.0.0",
         "sass": "^1.26.5"
+    },
+    "dependencies": {
     },
     "repository": {
         "type": "git",
