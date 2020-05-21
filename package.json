@@ -1,6 +1,6 @@
 {
     "name": "browsertools",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "author": "dcruvolo",
     "license": "ISC",
     "description": "a collection of tools for use in shiny",
@@ -11,9 +11,9 @@
     "main": "index.js",
     "scripts": {
         "clean": "rm -r inst/assets/js/browsertools.min.js inst/assets/css/browsertools.min.css",
-        "babel": "babel inst/assets/js --out-file inst/assets/js/browsertools.min.js --presets minify --no-comments",
+        "js": "parcel build inst/assets/js/index.js -d inst/assets/js/ -o inst/assets/js/browsertools.min.js --no-cache --no-source-maps",
         "sass": "parcel build inst/assets/css/styles.scss -d inst/assets/css/ -o inst/assets/css/browsertools.min.css --no-cache --no-source-maps",
-        "build": "yarn babel && yarn sass",
+        "build": "yarn js && yarn sass",
         "document": "Rscript -e \"devtools::document()\"",
         "uninstall": "Rscript -e \"devtools::uninstall()\"",
         "package": "Rscript -e \"devtools::build()\" && Rscript -e \"devtools::install()\""
