@@ -4,10 +4,7 @@
 \alias{refresh_page}
 \title{\code{refresh_page}}
 \usage{
-refresh_page(session = getDefaultReactiveDomain())
-}
-\arguments{
-\item{session}{a shiny environment}
+refresh_page()
 }
 \value{
 Trigger a page refres

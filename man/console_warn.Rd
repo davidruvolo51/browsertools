@@ -4,12 +4,10 @@
 \alias{console_warn}
 \title{\code{console_warn}}
 \usage{
-console_warn(message, session = getDefaultReactiveDomain())
+console_warn(message)
 }
 \arguments{
 \item{message}{a message to display}
-
-\item{session}{a shiny environment}
 }
 \value{
 Outputs a warning message to the console

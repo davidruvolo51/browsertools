@@ -4,12 +4,10 @@
 \alias{console_log}
 \title{\code{console_log}}
 \usage{
-console_log(message, session = getDefaultReactiveDomain())
+console_log(message)
 }
 \arguments{
 \item{message}{a message to display}
-
-\item{session}{a shiny environment}
 }
 \value{
 Outputs an object to the browser's console

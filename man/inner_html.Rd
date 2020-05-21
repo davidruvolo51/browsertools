@@ -4,19 +4,17 @@
 \alias{inner_html}
 \title{\code{inner_html}}
 \usage{
-inner_html(elem, string, delay = NULL, session = getDefaultReactiveDomain())
+inner_html(elem, string, delay = NULL)
 }
 \arguments{
 \item{elem}{the ID or class name of an html element}
 
-\item{string}{a string to display in the element}
+\item{string}{a string or html string to display in the element}
 
 \item{delay}{an optional arg to add a brief pause
 before sending the content to the html element.
 Ideal for content that is rendered by the server.
 Input is time in milliseconds.}
-
-\item{session}{a shiny environment}
 }
 \value{
 Update the content of an element by id or class name
@@ -28,5 +26,4 @@ Update the content of an element by id or class name
 inner_html(elem = "#mydiv", string = "hello, world", delay = 500)
 }
 \keyword{browsertools,}
-\keyword{html}
-\keyword{inner,}
+\keyword{innerhtml}

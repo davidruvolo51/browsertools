@@ -4,15 +4,13 @@
 \alias{add_css}
 \title{\code{add_css}}
 \usage{
-add_css(elem, css, session = getDefaultReactiveDomain())
+add_css(elem, css)
 }
 \arguments{
 \item{elem}{the id or class name of an html element}
 
 \item{css}{a string containing the class(es) to add to
 an html element}
-
-\item{session}{a shiny environment}
 }
 \value{
 Adds a css class(es) to an element using id or classname.
