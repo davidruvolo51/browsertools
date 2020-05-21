@@ -7,11 +7,12 @@ See the [wiki](https://github.com/davidruvolo51/browsertools/wiki) for more info
 
 ## Use
 
-Available functions are listed in the table below.
+You can use any of the following functions in the shiny server.
 
 | function              | arguments | description | 
 | :-------              | :-------- | :---------- |
 | `use_browsertools` | --- | loads the browsertool dependencies into your shiny app (required)
+| `debug` | --- | prints JavaScript errors in the R console
 | `add_css` | `elem`, `css` | add a css class to an element
 | `as_js_object` | `x` | a data.frame to convert to javascript object
 | `console_error` | `message` | send an error message to the console
@@ -20,7 +21,8 @@ Available functions are listed in the table below.
 | `console_warn` | `message` | send a warning message to the console
 | `hide_elem` | `elem`, `css` | hides an element by adding a class by name or `hidden` 
 | `insert_adjacent_html` | `id`, `html`, `position` | create a new child element(s) to a parent element
-| `inner_html` | `elem`, `string`, `delay` | write values to an element. 
+| `inner_html` | `elem`, `string`, `delay` | change the inner html of an element
+| `inner_text` | `elem`, `string`, `delay` | change the inner text of an element
 | `refresh_page` |  --- | trigger a page refresh (`history.go(0)`)
 | `remove_css` | `elem`, `css` | remove a css class from an element
 | `remove_element` | `elem` | remove an element from the DOM
@@ -42,30 +44,35 @@ ui <- tagList(
 
 ## Development
 
-If you would like to modify the package's css or js files, you will need to install [Node and Npm](https://nodejs.org/en/). This package also uses parceljs as the application bundler and a number of js packages. To install these tools, run the following command.
+If you would like to modify the package's css or js files, you will need to install the following tools.
+
+1. [Node and Npm](https://nodejs.org/en/). 
+2. [Yarn](https://yarnpkg.com/getting-started/install)
+
+This package also uses parceljs as the application bundler and a number of js packages. To install these tools, run the following command.
 
 ```bash
-npm install
+yarn install
 ```
 
 To build the and css and javascript files, run the following commands in the terminal.
 
 ```bash
-npm run clean    # removes existing files
-npm run build    # builds css and js files
+yarn clean    # removes existing files
+yarn build    # builds css and js files
 ```
 
 Alternatively, you can rebuild each asset independently.
 
 ```bash
-npm run babel
-npm run sass
+yarn js
+yarn sass
 ```
 
 When all changes are made and the css/js files are built, you can build the package using the following commands.
 
 ```bash
-npm run uninstall    # uninstalls pkg
-npm run document     # builds pkg documentation
-npm run package      # builds and installs pkg
+yarn uninstall    # uninstalls pkg
+yarn document     # builds pkg documentation
+yarn package      # builds and installs pkg
 ```

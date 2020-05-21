@@ -4,12 +4,7 @@
 \alias{insert_adjacent_html}
 \title{\code{insert_adjacent_html}}
 \usage{
-insert_adjacent_html(
-  id,
-  html,
-  position = "beforeend",
-  session = getDefaultReactiveDomain()
-)
+insert_adjacent_html(id, html, position = "beforeend")
 }
 \arguments{
 \item{id}{an id of the parent element to render new elements into}
@@ -19,8 +14,6 @@ insert_adjacent_html(
 \item{position}{a position relative to the html element
 (i.e., \code{beforebegin}, \code{afterbegin}, \code{beforeend},
 or \code{afterend})}
-
-\item{session}{a shiny environment}
 }
 \value{
 Create a new html element using shiny tags as a child of an element
@@ -28,5 +21,5 @@ Create a new html element using shiny tags as a child of an element
 \description{
 Create a new html element using shiny tags as a child of an element
 }
-\keyword{browsertoos,}
+\keyword{browsertools,}
 \keyword{html}

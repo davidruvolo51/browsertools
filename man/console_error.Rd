@@ -4,12 +4,10 @@
 \alias{console_error}
 \title{\code{console_error}}
 \usage{
-console_error(message, session = getDefaultReactiveDomain())
+console_error(message)
 }
 \arguments{
 \item{message}{an error to display}
-
-\item{session}{a shiny environment}
 }
 \value{
 Sends an error message to the browser's console

@@ -4,19 +4,13 @@
 \alias{show_elem}
 \title{\code{show_elem}}
 \usage{
-show_elem(
-  elem,
-  css = "browsertools-hidden",
-  session = getDefaultReactiveDomain()
-)
+show_elem(elem, css = "browsertools-hidden")
 }
 \arguments{
 \item{elem}{the id or class name of an html elem}
 
 \item{css}{a string containing the class to remove from an html element
 (default class is \code{hidden})}
-
-\item{session}{a shiny environment}
 }
 \description{
 Shows an html element by id or class name. This function, by defauly,

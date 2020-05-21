@@ -8,7 +8,7 @@
 use_browsertools <- function() {
     htmltools::htmlDependency(
         name = "browsertools",
-        version = "0.1.3",
+        version = "0.1.4",
         src = "assets/",
         package = "browsertools",
         script = "js/browsertools.min.js",

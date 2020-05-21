@@ -4,16 +4,13 @@
 \alias{scroll_to_top}
 \title{\code{scroll_to_top}}
 \usage{
-scroll_to_top(session = getDefaultReactiveDomain())
-}
-\arguments{
-\item{session}{a shiny environment}
+scroll_to_top()
 }
 \value{
-Adds a css class(es) to an element using id or classname.
+Scrolls the window to the top of the page
 }
 \description{
-Moves the current viewport to the top of the page
+Scrolls the window to the top of the page
 }
 \examples{
 scroll_to_top()

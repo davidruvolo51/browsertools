@@ -4,15 +4,13 @@
 \alias{toggle_css}
 \title{\code{toggle_css}}
 \usage{
-toggle_css(elem, css, session = getDefaultReactiveDomain())
+toggle_css(elem, css)
 }
 \arguments{
 \item{elem}{the id or class name of an html element}
 
 \item{css}{a string containing the class to remove from
 an html element}
-
-\item{session}{a shiny environment}
 }
 \value{
 Toggles a css state of an html element

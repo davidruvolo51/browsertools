@@ -4,15 +4,13 @@
 \alias{remove_css}
 \title{\code{remove_css}}
 \usage{
-remove_css(elem, css, session = getDefaultReactiveDomain())
+remove_css(elem, css)
 }
 \arguments{
 \item{elem}{the id or class name of an html element}
 
 \item{css}{a string containing the class(es) to remove from
 an html element}
-
-\item{session}{a shiny environment}
 }
 \value{
 Removes a css class(es) to an element using id or classname.
