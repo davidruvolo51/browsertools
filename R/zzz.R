@@ -1,9 +1,9 @@
 # on load
 .onLoad <- function(libname, pkgname) {
     addResourcePath(
-        prefix = "assets",
+        prefix = "browsertools",
         directoryPath = system.file(
-            "assets",
+            "browsertools",
             package = "browsertools"
         )
     )
@@ -11,5 +11,5 @@
 
 # on unload
 .onUnload <- function(libname, pkgname) {
-    removeResourcePath("assets")
+    removeResourcePath("browsertools")
 }

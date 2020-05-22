@@ -1,6 +1,6 @@
-inst/assets/css/styles.css
-inst/assets/css/browsertools.min.js
-inst/assets/js/index.js
+inst/browsertools/css/styles.css
+inst/browsertools/css/browsertools.min.js
+inst/browsertools/js/index.js
 node_modules
 .babelrc
 .postcssrc
