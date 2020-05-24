@@ -4,10 +4,12 @@
 \alias{console_log}
 \title{\code{console_log}}
 \usage{
-console_log(message)
+console_log(message, expand = FALSE)
 }
 \arguments{
 \item{message}{a message to display}
+
+\item{expand}{an option to expand arrays and objects (default: false)}
 }
 \value{
 Outputs an object to the browser's console
@@ -17,6 +19,9 @@ Outputs an object to the browser's console
 }
 \examples{
 console_log(x = "Hello, world!")
+}
+\references{
+\url{https://developer.mozilla.org/en-US/docs/Web/API/Console/log}
 }
 \keyword{browsertools,}
 \keyword{console}

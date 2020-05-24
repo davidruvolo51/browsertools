@@ -18,6 +18,9 @@ Sends an error message to the brower's console
 \examples{
 console_error(message = "Error: 'object' undefined")
 }
+\references{
+\url{https://developer.mozilla.org/en-US/docs/Web/API/Console/error}
+}
 \keyword{browsertools,}
 \keyword{console}
 \keyword{debugging,}

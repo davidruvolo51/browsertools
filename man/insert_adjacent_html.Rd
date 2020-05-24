@@ -21,5 +21,9 @@ Create a new html element using shiny tags as a child of an element
 \description{
 Create a new html element using shiny tags as a child of an element
 }
+\references{
+\url{https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML}
+}
 \keyword{browsertools,}
-\keyword{html}
+\keyword{html,}
+\keyword{insertHTML}

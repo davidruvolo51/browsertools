@@ -25,5 +25,8 @@ Update the content of an element by id or class name
 \examples{
 inner_html(elem = "#mydiv", string = "hello, world", delay = 500)
 }
+\references{
+\url{https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML}
+}
 \keyword{browsertools,}
 \keyword{innerhtml}

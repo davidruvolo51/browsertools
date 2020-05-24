@@ -21,6 +21,9 @@ Adds a css class(es) to an element using id or classname.
 \examples{
 add_css(elem = "#mydiv", css = "some-css-class")
 }
+\references{
+\url{https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/add}
+}
 \keyword{add}
 \keyword{browsertools,}
 \keyword{css,}

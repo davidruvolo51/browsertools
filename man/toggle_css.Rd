@@ -21,6 +21,9 @@ Toggles a css state of an html element
 \examples{
 toggle_css(elem = "#mydiv", css = "mytheme")
 }
+\references{
+\url{https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle}
+}
 \keyword{attribute,}
 \keyword{browsertools,}
 \keyword{value}

@@ -25,5 +25,8 @@ Modify the text of an element
 \examples{
 inner_text(elem = "#mydiv", string = "Hello, world", delay = 200)
 }
+\references{
+\url{https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText}
+}
 \keyword{browsertools,}
 \keyword{innertext}
