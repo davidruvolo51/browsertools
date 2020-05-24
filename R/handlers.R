@@ -8,6 +8,7 @@
 #' @keywords browsertools, css, add
 #' @examples
 #' add_css(elem = "#mydiv", css = "some-css-class")
+#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/add}
 #' @export
 add_css <- function(elem, css) {
 
@@ -20,6 +21,27 @@ add_css <- function(elem, css) {
     session$sendCustomMessage("add_css", list(elem = elem, css = css))
 }
 
+#' \code{alert}
+#'
+#' Send an alert dialog to the browser
+#' @return Send an alert dialog to the browser
+#' @param message a message to send
+#' @keywords browsertools, alert
+#' @examples
+#' alert("hello world")
+#' @importFrom shiny getDefaultReactiveDomain
+#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/Window/alert}
+#' @export
+alert <- function(message) {
+
+    # validate
+    if (is.null(message)) stop("argument 'message' cannot be empty")
+
+    # send
+    session <- getDefaultReactiveDomain()
+    session$sendCustomMessage("alert", list(message = message))
+}
+
 #' \code{console_error}
 #'
 #' Sends an error message to the brower's console
@@ -28,6 +50,8 @@ add_css <- function(elem, css) {
 #' @keywords browsertools, debugging, console
 #' @examples
 #' console_error(message = "Error: 'object' undefined")
+#' @importFrom shiny getDefaultReactiveDomain
+#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/error}
 #' @export
 console_error <- function(message) {
     if (is.null(message)) stop("argument 'message' is undefined")
@@ -39,15 +63,26 @@ console_error <- function(message) {
 #'
 #' Outputs an object to the browser's console
 #' @param message a message to display
+#' @param expand an option to expand arrays and objects (default: false)
 #' @return Outputs an object to the browser's console
 #' @keywords browsertools, debugging, console
 #' @examples
 #' console_log(x = "Hello, world!")
+#' @importFrom shiny getDefaultReactiveDomain
+#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/log}
 #' @export
-console_log <- function(message) {
+console_log <- function(message, expand = FALSE) {
+
+    # validate
     if (is.null(message)) stop("argument 'message' is undefined")
+    if (!is.logical(expand)) stop("argument 'expand' must be a logical value")
+
+    # send
     session <- getDefaultReactiveDomain()
-    session$sendCustomMessage("console_log", message)
+    session$sendCustomMessage(
+        "console_log",
+        list(message = message, expand = expand)
+    )
 }
 
 #' \code{console_table}
@@ -58,6 +93,8 @@ console_log <- function(message) {
 #' @keywords browsertools, debugging, console
 #' @examples
 #' console_table(data = iris)
+#' @importFrom shiny getDefaultReactiveDomain
+#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/table}
 #' @export
 console_table <- function(data) {
     if (is.null(data)) stop("argument 'data' is undefined")
@@ -73,6 +110,8 @@ console_table <- function(data) {
 #' @keywords browsertools, console, warn
 #' @examples
 #' console_warn(message = "this is a warning message")
+#' @importFrom shiny getDefaultReactiveDomain
+#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/warn}
 #' @export
 console_warn <- function(message) {
     if (is.null(message)) stop("argument 'message' is undefined")
@@ -95,6 +134,7 @@ console_warn <- function(message) {
 #' @examples
 #' hide_elem(elem = "#mydiv")
 #' hide_elem(elem = "#mydiv", css = "show-div")
+#' @importFrom shiny getDefaultReactiveDomain
 #' @export
 hide_elem <- function(elem, css = "browsertools-hidden") {
 
@@ -120,6 +160,8 @@ hide_elem <- function(elem, css = "browsertools-hidden") {
 #' @keywords browsertools, innerhtml
 #' @examples
 #' inner_html(elem = "#mydiv", string = "hello, world", delay = 500)
+#' @importFrom shiny getDefaultReactiveDomain
+#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML}
 #' @export
 inner_html <- function(elem, string, delay = NULL) {
 
@@ -148,6 +190,8 @@ inner_html <- function(elem, string, delay = NULL) {
 #' @keywords browsertools, innertext
 #' @examples
 #' inner_text(elem = "#mydiv", string = "Hello, world", delay = 200)
+#' @importFrom shiny getDefaultReactiveDomain
+#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText}
 #' @export
 inner_text <- function(elem, string, delay = NULL) {
 
@@ -172,7 +216,9 @@ inner_text <- function(elem, string, delay = NULL) {
 #' @param position a position relative to the html element
 #'             (i.e., \code{beforebegin}, \code{afterbegin}, \code{beforeend},
 #'             or \code{afterend})
-#' @keywords browsertools, html
+#' @keywords browsertools, html, insertHTML
+#' @importFrom shiny getDefaultReactiveDomain
+#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML}
 #' @export
 insert_adjacent_html <- function(id, html, position = "beforeend") {
 
@@ -202,6 +248,7 @@ insert_adjacent_html <- function(id, html, position = "beforeend") {
 #' @keywords browsertools, page, refresh
 #' @examples
 #' refresh_page()
+#' @importFrom shiny getDefaultReactiveDomain
 #' @export
 refresh_page <- function() {
     session <- getDefaultReactiveDomain()
@@ -218,6 +265,8 @@ refresh_page <- function() {
 #' @keywords browsertools, css, remove
 #' @examples
 #' remove_css(elem = "#mydiv", css = "some-css-class")
+#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/remove}
+#' @importFrom shiny getDefaultReactiveDomain
 #' @export
 remove_css <- function(elem, css) {
 
@@ -238,6 +287,7 @@ remove_css <- function(elem, css) {
 #' @keywords browsertools, remove, element
 #' @examples
 #' remove_element(elem = "#mydiv")
+#' @importFrom shiny getDefaultReactiveDomain
 #' @export
 remove_element <- function(elem) {
     if (is.null(elem)) stop("argument 'elem' is undefined")
@@ -254,6 +304,7 @@ remove_element <- function(elem) {
 #' @keywords browsertools, remove, attribute
 #' @examples
 #' remove_element_attribute(elem = "#mydiv", attr = "class")
+#' @importFrom shiny getDefaultReactiveDomain
 #' @export
 remove_element_attribute <- function(elem, attr) {
 
@@ -269,17 +320,30 @@ remove_element_attribute <- function(elem, attr) {
     )
 }
 
-#' \code{scroll_to_top}
+#' \code{scroll_to}
 #'
-#' Scrolls the window to the top of the page
-#' @return Scrolls the window to the top of the page
+#' Scrolls the window to the top of the page or a user defined coordinates
+#' @return Scrolls the window to the top of the page or a user
+#'          defined coordinates
+#' @param x amount (in pixels) to scroll along the horizontal axis
+#'          starting from the top left (default: 0)
+#' @param y amount (in pixels) to scroll along the vertical axis
+#'          starting from the top left (default: 0)
 #' @keywords browsertools, scroll
 #' @examples
-#' scroll_to_top()
+#' scroll_to()
+#' scroll_to(y = 250)
+#' @importFrom shiny getDefaultReactiveDomain
 #' @export
-scroll_to_top <- function() {
+scroll_to <- function(x = 0, y = 0) {
+
+    # validate
+    if (!is.numeric(x)) stop("argument 'x' must be numeric")
+    if (!is.numeric(y)) stop("argument 'y' must be numeric")
+
+    # send
     session <- getDefaultReactiveDomain()
-    session$sendCustomMessage("scroll_to_top", "")
+    session$sendCustomMessage("scroll_to_top", list(x = x, y = y))
 }
 
 #' \code{set_element_attribute}
@@ -292,6 +356,7 @@ scroll_to_top <- function() {
 #' @keywords browsertools, attribute, value
 #' @examples
 #' set_element_attribute(elem = "#mydiv", attr = "data-value", value = "12345")
+#' @importFrom shiny getDefaultReactiveDomain
 #' @export
 set_element_attribute <- function(elem, attr, value) {
 
@@ -323,6 +388,7 @@ set_element_attribute <- function(elem, attr, value) {
 #' @examples
 #' show_elem(elem = "#mydiv")
 #' show_elem(elem = "#mydiv", css = "show-div")
+#' @importFrom shiny getDefaultReactiveDomain
 #' @export
 show_elem <- function(elem, css = "browsertools-hidden") {
 
@@ -345,6 +411,8 @@ show_elem <- function(elem, css = "browsertools-hidden") {
 #' @keywords browsertools, attribute, value
 #' @examples
 #' toggle_css(elem = "#mydiv", css = "mytheme")
+#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle}
+#' @importFrom shiny getDefaultReactiveDomain
 #' @export
 toggle_css <- function(elem, css) {
 
