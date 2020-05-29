@@ -8,6 +8,11 @@
 #' PACKAGES: shiny, browsertools
 #' COMMENTS: NA
 #'////////////////////////////////////////////////////////////////////////////
+
+# pkgs
+suppressPackageStartupMessages(library(shiny))
+
+# server
 server <- function(input, output, session) {
 
     browsertools::debug()
@@ -154,27 +159,37 @@ server <- function(input, output, session) {
 
     # add attribute
     observeEvent(input$`set-element-attribute`, {
-        txt <- tags$p(
-            class = "sample-text",
-            `data-value` = "12345",
-            "This is an example element"
-        )
+        txt <- tags$p(id = "greeting", `data-value` = "123", "Hello!")
         browsertools::inner_text(
             elem = "#element-attribute-text-example",
             string = as.character(txt)
         )
+
+        #' In order to demonstrate the changes to the HTML
+        #' markup, the output is simulated. Instead, you would set the
+        #' attribute like so:
+        #' browsertools::set_element_attribute(
+        #'    elem = "#greeting",
+        #'    attr = "data-value",
+        #'    value = "123"
+        #' )
     })
 
     # remove attribute
     observeEvent(input$`remove-element-attribute`, {
-        txt <- tags$p(
-            class = "sample-text",
-            "This is an example element"
-        )
+        txt <- tags$p(id = "greeting", "Hello!")
         browsertools::inner_text(
             elem = "#element-attribute-text-example",
             string = as.character(txt)
         )
+
+        #' In order to demonstrate the changes to the HTML
+        #' markup, the output is simulated. Instead, you would remove the
+        #' attribute like so:
+        #' browsertools::remove_element_attribute(
+        #'    elem = "#greeting",
+        #'    attr = "data-value"
+        #' )
     })
 
     #'//////////////////////////////////////
@@ -192,5 +207,47 @@ server <- function(input, output, session) {
         browsertools::scroll_to(
             elem = "#getting-started"
         )
+    })
+
+    #'//////////////////////////////////////
+    
+    #' ~ 7 ~
+    #' EVENTS: Console Messages
+
+    # error
+    observeEvent(input$`console-error-example`, {
+        browsertools::console_error(
+            message = "Error: button 'Log Error' triggered an error."
+        )
+    })
+
+    # message
+    observeEvent(input$`console-log-example`, {
+        browsertools::console_log(
+            message = "Message: this is a generic message"
+        )
+    })
+
+    # table
+    observeEvent(input$`console-table-example`, {
+        d <- iris[sample(seq_len(NROW(iris)), 1), ]
+        d <- browsertools::as_js_object(d)
+        browsertools::console_table(d)
+    })
+
+    # warning
+    observeEvent(input$`console-warning-example`, {
+        browsertools::console_warn(
+            message = "Warning: clicking button 'Log Warning' will trigger an error."
+        )
+    })
+
+    #'//////////////////////////////////////
+    
+    #' ~ 8 ~
+    #' EVENTS: page refresh
+    observeEvent(input$`page-refresh-example`, {
+        browsertools::scroll_to()
+        browsertools::refresh_page()
     })
 }

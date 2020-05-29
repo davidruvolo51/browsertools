@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50px" height="50px" viewBox="0 0 50 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>browsertools</title>
+    <defs>
+        <circle id="path-1" cx="24.5" cy="24.5" r="24"></circle>
+    </defs>
+    <g id="browsertools" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="globe" transform="translate(0.500000, 0.500000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Mask" stroke="#f6f6f6" xlink:href="#path-1"></use>
+            <g mask="url(#mask-2)" stroke="#f6f6f6" stroke-linecap="square">
+                <g transform="translate(0.500000, 0.500000)">
+                    <line x1="-8.2171112e-17" y1="23.9752322" x2="47.3684211" y2="23.9752322" id="Line-2" stroke-width="0.986842105"></line>
+                    <ellipse id="Oval" stroke-width="1" cx="24" cy="24.2848297" rx="12" ry="23.5294118"></ellipse>
+                    <line x1="24.6328361" y1="0.755417957" x2="24.6328361" y2="47.1950464" id="Line" stroke-width="0.986842105"></line>
+                    <path d="M18.9473684,-13.5479876 C25.2631579,-7.02167183 28.4210526,0.978328173 28.4210526,10.4520124 C28.4210526,24.6625387 18.9473684,33.8204334 18.9473684,33.8204334" id="Line" stroke-width="0.986842105" transform="translate(23.684211, 10.136223) scale(-1, 1) rotate(90.000000) translate(-23.684211, -10.136223) "></path>
+                    <path d="M20.0270898,13.2360681 C26.2190402,19.8150155 29.3150155,28.0386997 29.3150155,37.9071207 C29.3150155,52.7097523 20.0270898,62.5781734 20.0270898,62.5781734" id="Line" stroke-width="0.986842105" transform="translate(24.671053, 37.907121) scale(-1, -1) rotate(90.000000) translate(-24.671053, -37.907121) "></path>
+                </g>
+            </g>
+        </g>
+        <g id="gear" transform="translate(24.000000, 23.000000)">
+            <circle id="Oval" fill="#f6f6f6" cx="13" cy="13" r="13"></circle>
+            <rect id="Rectangle" stroke="#43aa8b" fill="#43aa8b" stroke-linecap="square" x="11.1" y="2" width="3.9" height="3.9" rx="0.65"></rect>
+            <rect id="Rectangle-Copy-2" stroke="#43aa8b" fill="#43aa8b" stroke-linecap="square" transform="translate(6.359619, 6.359619) rotate(-45.000000) translate(-6.359619, -6.359619) " x="4.40961941" y="4.40961941" width="3.9" height="3.9" rx="0.65"></rect>
+            <rect id="Rectangle-Copy-3" stroke="#43aa8b" fill="#43aa8b" stroke-linecap="square" transform="translate(19.090381, 19.090381) rotate(-45.000000) translate(-19.090381, -19.090381) " x="17.1403806" y="17.1403806" width="3.9" height="3.9" rx="0.65"></rect>
+            <rect id="Rectangle" stroke="#43aa8b" fill="#43aa8b" stroke-linecap="square" x="11.1" y="19.55" width="3.9" height="3.9" rx="0.65"></rect>
+            <rect id="Rectangle" stroke="#43aa8b" fill="#43aa8b" stroke-linecap="square" transform="translate(21.175000, 13.050000) rotate(90.000000) translate(-21.175000, -13.050000) " x="19.225" y="10.775" width="3.9" height="4.55" rx="0.65"></rect>
+            <rect id="Rectangle" stroke="#43aa8b" fill="#43aa8b" stroke-linecap="square" transform="translate(3.950000, 13.050000) rotate(90.000000) translate(-3.950000, -13.050000) " x="2" y="11.1" width="3.9" height="3.9" rx="0.65"></rect>
+            <rect id="Rectangle" stroke="#43aa8b" fill="#43aa8b" stroke-linecap="square" transform="translate(19.090381, 6.359619) rotate(45.000000) translate(-19.090381, -6.359619) " x="17.1403806" y="4.40961941" width="3.9" height="3.9" rx="0.65"></rect>
+            <rect id="Rectangle-Copy" stroke="#43aa8b" fill="#43aa8b" stroke-linecap="square" transform="translate(6.589429, 18.860571) rotate(45.000000) translate(-6.589429, -18.860571) " x="4.63942911" y="16.5855709" width="3.9" height="4.55" rx="0.65"></rect>
+            <circle id="Oval" stroke="#43aa8b" fill="#43aa8b" stroke-linecap="square" cx="12.725" cy="12.725" r="8.125"></circle>
+            <circle id="Oval" stroke="#43aa8b" fill="#FFFFFF" stroke-linecap="square" cx="12.725" cy="12.725" r="4.875"></circle>
+        </g>
+    </g>
+</svg>

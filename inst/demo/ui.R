@@ -33,6 +33,24 @@ server <- function(input, output) {
 # app
 shinyApp(ui, server)"
 
+# pkgsname
+pkgname <- function() {
+    return(tags$span(class = "pkgname", "browsertools"))
+}
+
+# function name
+funcname <- function(name) {
+    stopifnot(!is.null(name))
+    return(tags$span(class = "funcname", name))
+}
+
+# argument name
+argname <- function(name) {
+    stopifnot(!is.null(name))
+    return(tags$span(class = "argname", name))
+}
+
+
 # ui
 ui <- tagList(
     browsertools::use_browsertools(),
@@ -51,10 +69,6 @@ ui <- tagList(
                 name = "description",
                 content = "A demonstration of the browsertools package"
             ),
-            # tags$meta(
-            #    property = "og:image",
-            #    content = "path/to/some/image"
-            # ),
             tags$meta(property = "og:title", content  = "browsertools demo"),
             tags$meta(
                 property = "og:description",
@@ -75,28 +89,11 @@ ui <- tagList(
             tags$title("browsertools | Demo")
         )
     ),
-    tags$a(
-        class = "visually-hidden",
-        href = "#main",
-        "to main content"
-    ),
-    tags$nav(
-        class = "navbar",
-        tags$ul(
-            class = "menu",
-            tags$li(
-                class = "menu-item",
-                tags$h1(
-                    class = "menu-title",
-                    "browsertools"
-                )
-            )
-        )
-    ),
     tags$header(
         class = "hero",
         tags$div(
             class = "hero-content",
+            tags$img(src = "browsertools.svg", id = "logo"),
             tags$h1("browsertools"),
             tags$h2("An Overview and Examples")
         )
@@ -163,18 +160,18 @@ ui <- tagList(
                     ),
                     tags$button(
                         id = "add-css",
-                        class = "shiny-bound-input action-button b b-primary",
+                        class = "shiny-bound-input action-button b",
                         "Add CSS"
                     ),
                     tags$button(
                         id = "remove-css",
                         class = "text-example",
-                        class = "shiny-bound-input action-button b b-primary",
+                        class = "shiny-bound-input action-button b",
                         "Remove CSS"
                     ),
                     tags$button(
                         id = "toggle-css",
-                        class = "shiny-bound-input action-button b b-primary",
+                        class = "shiny-bound-input action-button b",
                         "Toggle CSS"
                     )
                 ),
@@ -214,17 +211,17 @@ ui <- tagList(
                     ),
                     tags$button(
                         id = "hide-elem",
-                        class = "shiny-bound-input action-button b b-primary",
+                        class = "shiny-bound-input action-button b",
                         "Hide"
                     ),
                     tags$button(
                         id = "show-elem",
-                        class = "shiny-bound-input action-button b b-primary",
+                        class = "shiny-bound-input action-button b",
                         "Show"
                     ),
                     tags$button(
                         id = "reveal-elem",
-                        class = "shiny-bound-input action-button b b-primary",
+                        class = "shiny-bound-input action-button b",
                         "Reveal Element"
                     )
                 ),
@@ -275,7 +272,7 @@ ui <- tagList(
                     ),
                     tags$button(
                         id = "remove-add-elem",
-                        class = "shiny-bound-input action-button b b-primary",
+                        class = "shiny-bound-input action-button b",
                         "Remove and Add Element"
                     )
                 ),
@@ -313,17 +310,17 @@ ui <- tagList(
                     ),
                     tags$button(
                         id = "change-text",
-                        class = "shiny-bound-input action-button b b-primary",
+                        class = "shiny-bound-input action-button b",
                         "Change Text"
                     ),
                     tags$button(
                         id = "change-html",
-                        class = "shiny-bound-input action-button b b-primary",
+                        class = "shiny-bound-input action-button b",
                         "Change HTML"
                     ),
                     tags$button(
                         id = "append-html",
-                        class = "shiny-bound-input action-button b b-primary",
+                        class = "shiny-bound-input action-button b",
                         "Append HTML"
                     )
                 ),
@@ -363,29 +360,99 @@ ui <- tagList(
                     ),
                     tags$button(
                         id = "set-element-attribute",
-                        class = "shiny-bound-input action-button b b-primary",
+                        class = "shiny-bound-input action-button b",
                         "Set Attribute"
                     ),
                     tags$button(
                         id = "remove-element-attribute",
-                        class = "shiny-bound-input action-button b b-primary",
+                        class = "shiny-bound-input action-button b",
                         "Remove Attribute"
                     )
                 ),
                 tags$div(
-                    id = "element-attribute-text-example",
-                    class = "flex-child browsertools-results"
+                    class = "flex-child browsertools-results",
+                    tags$code(
+                        id = "element-attribute-text-example",
+                        '<p id="greeting">Hello!</p>'
+                    )
+                )
+            )
+        ),
+        tags$section(
+            id = "console-messages",
+            class = "section",
+            `aria-labelledby` = "console-messages-title",
+            tags$div(
+                class = "flex flex-50x2-layout",
+                tags$div(
+                    class = "flex-child browsertools-info",
+                    tags$h2(
+                        id = "console-messages-title",
+                        "Sending Messages to the Console"
+                    ),
+                    tags$p(
+                        "Depending on your application, you may want to log",
+                        "messages in the brower's console. These messages are",
+                        "useful for debugging errors in a producation app.",
+                        "There are a several functions available in the",
+                        pkgname(), "package"
+                    ),
+                    tags$ul(
+                        tags$li(
+                            funcname("console_error"), "log an error"
+                        ),
+                        tags$li(
+                            funcname("console_log"), "log a message"
+                        ),
+                        tags$li(
+                            funcname("console_table"), "log a data object"
+                        ),
+                        tags$li(
+                            funcname("console_warn"), "log a warning"
+                        )
+                    )
+                ),
+                tags$div(
+                    class = "flex-child browerstools-results",
+                    tags$p(
+                        "Open the browser's console and click the buttons",
+                        "on the right."
+                    ),
+                    tags$button(
+                        id = "console-error-example",
+                        class = "shiny-bound-input action-button b",
+                        "Log Error"
+                    ),
+                    tags$button(
+                        id = "console-log-example",
+                        class = "shiny-bound-input action-button b",
+                        "Log Message"
+                    ),
+                    tags$button(
+                        id = "console-table-example",
+                        class = "shiny-bound-input action-button b",
+                        "Log Table"
+                    ),
+                    tags$button(
+                        id = "console-warning-example",
+                        class = "shiny-bound-input action-button b",
+                        "Log Warning"
+                    )
                 )
             )
         ),
         tags$section(
             id = "scroll-to",
+            `aria-labelledby` = "scroll-to-title",
             class = "section",
             tags$div(
                 class = "flex flex-50x2-layout",
                 tags$div(
                     class = "flex-child browsertools-info",
-                    tags$h2("Scrolling the page"),
+                    tags$h2(
+                        id = "scroll-to-title",
+                        "Scrolling to Areas of the Page"
+                    ),
                     tags$p(
                         "It is also possible that you may want to",
                         "scroll the page to a specific point. For example,",
@@ -404,13 +471,37 @@ ui <- tagList(
                     class = "flex-child browsertools-results",
                     tags$button(
                         id = "scroll-to-top-example",
-                        class = "shiny-bound-input action-button b b-primary",
+                        class = "shiny-bound-input action-button b",
                         "Scroll to Top"
                     ),
                     tags$button(
                         id = "scroll-to-section-example",
-                        class = "shiny-bound-input action-button b b-primary",
+                        class = "shiny-bound-input action-button b",
                         "Scroll to 'Getting Started'"
+                    )
+                )
+            )
+        ),
+        tags$section(
+            id = "page-refresh",
+            class = "section",
+            `aria-labelledby` = "page-refresh-title",
+            tags$div(
+                class = "flex flex-50x2-layout",
+                tags$div(
+                    class = "flex-child browsertools-info",
+                    tags$h2(
+                        id = "page-refresh-title",
+                        "Refreshing the Page"
+                    ),
+                    tags$p(
+                        "Lastly, the function", funcname("refresh_page"),
+                        "will trigger a page refresh."
+                    ),
+                    tags$button(
+                        id = "page-refresh-example",
+                        class = "shiny-bound-input action-button b",
+                        "Refresh Page"
                     )
                 )
             )
