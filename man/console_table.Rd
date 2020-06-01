@@ -18,6 +18,9 @@ Outputs an data object to the browser's console in table format
 \examples{
 console_table(data = iris)
 }
+\references{
+\url{https://developer.mozilla.org/en-US/docs/Web/API/Console/table}
+}
 \keyword{browsertools,}
 \keyword{console}
 \keyword{debugging,}

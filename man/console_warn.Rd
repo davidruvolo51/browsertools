@@ -18,6 +18,9 @@ Outputs a warning message to the console
 \examples{
 console_warn(message = "this is a warning message")
 }
+\references{
+\url{https://developer.mozilla.org/en-US/docs/Web/API/Console/warn}
+}
 \keyword{browsertools,}
 \keyword{console,}
 \keyword{warn}

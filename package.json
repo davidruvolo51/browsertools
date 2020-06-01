@@ -1,6 +1,6 @@
 {
     "name": "browsertools",
-    "version": "0.1.41",
+    "version": "0.1.5",
     "author": "dcruvolo",
     "license": "ISC",
     "description": "a collection of tools for use in shiny",
@@ -16,7 +16,11 @@
         "build": "yarn js && yarn sass",
         "document": "Rscript -e \"devtools::document()\"",
         "uninstall": "Rscript -e \"devtools::uninstall()\"",
-        "package": "Rscript -e \"devtools::build()\" && Rscript -e \"devtools::install()\""
+        "package": "Rscript -e \"devtools::build()\" && Rscript -e \"devtools::install()\"",
+        "demo": "Rscript -e \"shiny::runApp(appDir = './inst/demo', port = 8000, launch.browser = FALSE)\"",
+        "demo_dev": "parcel inst/demo/src/index.js -d inst/demo/www/ -o inst/demo/www/demo.min.js --no-cache --no-source-maps",
+        "demo_build": "parcel build inst/demo/src/index.js -d inst/demo/www/ -o inst/demo/www/demo.min.js --no-cache --no-source-maps",
+        "demo_clean" : "rm -rf inst/demo/www/demo.min.*"
     },
     "homepage": "https://github.com/davidruvolo51/browsertools",
     "devDependencies": {

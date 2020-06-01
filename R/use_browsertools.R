@@ -4,11 +4,12 @@
 #' @keywords browsertools, use
 #' @examples
 #' browsertools::use_browsertools()
+#' @importFrom htmltools htmlDependency
 #' @export
 use_browsertools <- function() {
-    htmltools::htmlDependency(
+    htmlDependency(
         name = "browsertools",
-        version = "0.1.41",
+        version = "0.1.5",
         src = "browsertools/",
         package = "browsertools",
         script = "js/browsertools.min.js",

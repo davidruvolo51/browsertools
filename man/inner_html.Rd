@@ -4,12 +4,14 @@
 \alias{inner_html}
 \title{\code{inner_html}}
 \usage{
-inner_html(elem, string, delay = NULL)
+inner_html(elem, string, append = FALSE, delay = NULL)
 }
 \arguments{
 \item{elem}{the ID or class name of an html element}
 
 \item{string}{a string or html string to display in the element}
+
+\item{append}{an option that appends value of string or replaces it}
 
 \item{delay}{an optional arg to add a brief pause
 before sending the content to the html element.
@@ -24,6 +26,9 @@ Update the content of an element by id or class name
 }
 \examples{
 inner_html(elem = "#mydiv", string = "hello, world", delay = 500)
+}
+\references{
+\url{https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML}
 }
 \keyword{browsertools,}
 \keyword{innerhtml}

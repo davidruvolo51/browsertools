@@ -21,6 +21,9 @@ Removes a css class(es) to an element using id or classname.
 \examples{
 remove_css(elem = "#mydiv", css = "some-css-class")
 }
+\references{
+\url{https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/remove}
+}
 \keyword{browsertools,}
 \keyword{css,}
 \keyword{remove}

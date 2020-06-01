@@ -4,12 +4,14 @@
 \alias{inner_text}
 \title{\code{inner_text}}
 \usage{
-inner_text(elem, string, delay = NULL)
+inner_text(elem, string, append = FALSE, delay = NULL)
 }
 \arguments{
 \item{elem}{an element to select (e.g., ID, class, tag, etc.)}
 
 \item{string}{a string used to insert into the element}
+
+\item{append}{an option that appends value of string or replaces it}
 
 \item{delay}{an optional arg that adds a brief pause before
 sending the content to the html element. Ideal
@@ -24,6 +26,10 @@ Modify the text of an element
 }
 \examples{
 inner_text(elem = "#mydiv", string = "Hello, world", delay = 200)
+inner_text(elem = "#mydiv", string = "Hello, world", append = TRUE)
+}
+\references{
+\url{https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText}
 }
 \keyword{browsertools,}
 \keyword{innertext}
