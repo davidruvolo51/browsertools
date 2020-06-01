@@ -2,7 +2,7 @@
 #' FILE: app.R
 #' AUTHOR: David Ruvolo
 #' CREATED: 2020-05-25
-#' MODIFIED: 2020-05-28
+#' MODIFIED: 2020-06-01
 #' PURPOSE: browsertools demo
 #' STATUS: in.progress
 #' PACKAGES: shiny, browsertools
@@ -87,6 +87,24 @@ ui <- tagList(
                 )
             ),
             tags$title("browsertools | Demo")
+        )
+    ),
+    tags$nav(
+        class = "nav",
+        tags$ul(
+            class = "menu",
+            tags$li(
+                class = "menu-item",
+                tags$h1("browsertools")
+            ),
+            tags$li(
+                class = "menu-item",
+                tags$a(
+                    class = "menu-item-link",
+                    href = "https://github.com/davidruvolo51/browsertools",
+                    "GitHub"
+                )
+            )
         )
     ),
     tags$header(
@@ -496,14 +514,18 @@ ui <- tagList(
                     ),
                     tags$p(
                         "Lastly, the function", funcname("refresh_page"),
-                        "will trigger a page refresh."
+                        "will trigger a page refresh. Data or settings will",
+                        "not be saved automatically using this function. You",
+                        "must implement your own cache/storage of user",
+                        "settings."
                     ),
                     tags$button(
                         id = "page-refresh-example",
                         class = "shiny-bound-input action-button b",
                         "Refresh Page"
                     )
-                )
+                ),
+                tags$div(class = "flex-child")
             )
         )
     ),

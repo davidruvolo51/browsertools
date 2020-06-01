@@ -2,7 +2,7 @@
 #' FILE: server.R
 #' AUTHOR: David Ruvolo
 #' CREATED: 2020-05-25
-#' MODIFIED: 2020-05-28
+#' MODIFIED: 2020-06-01
 #' PURPOSE: Shiny server for demo app
 #' STATUS: in.progress
 #' PACKAGES: shiny, browsertools
