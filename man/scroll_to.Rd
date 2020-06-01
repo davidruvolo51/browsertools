@@ -4,7 +4,7 @@
 \alias{scroll_to}
 \title{\code{scroll_to}}
 \usage{
-scroll_to(x = 0, y = 0)
+scroll_to(x = 0, y = 0, elem = NULL)
 }
 \arguments{
 \item{x}{amount (in pixels) to scroll along the horizontal axis
@@ -12,17 +12,25 @@ starting from the top left (default: 0)}
 
 \item{y}{amount (in pixels) to scroll along the vertical axis
 starting from the top left (default: 0)}
+
+\item{elem}{a selector path of an element that you would like to scroll
+to (i.e., id, class, tag, etc.). Using elem will override any
+coordinates.}
 }
 \value{
 Scrolls the window to the top of the page or a user
          defined coordinates
 }
 \description{
-Scrolls the window to the top of the page or a user defined coordinates
+Scrolls the window to the top of the page, user defined coordinates, or
+a specific element. The default behavior of this function is to scroll
+to the top of the page (x: 0, y: 0). You can also use an element's selector
+path instead.
 }
 \examples{
 scroll_to()
 scroll_to(y = 250)
+scroll_to(elem = "#mydiv")
 }
 \keyword{browsertools,}
 \keyword{scroll}

@@ -16,8 +16,8 @@ Restructures a data.frame to JavaScript Object
 Restructures a data.frame to JavaScript Object
 }
 \examples{
-df <- as_js_object(x = iris)
-console_log(df)
+df <- as_js_object(x = iris[1:2, ])
+console_table(df)
 }
 \keyword{browsertools,}
 \keyword{object}
