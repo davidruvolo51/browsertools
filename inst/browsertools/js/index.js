@@ -33,7 +33,7 @@ Shiny.addCustomMessageHandler("browsertools_debug", function (value) {
 // @param func: name of the function called
 // @param e: the error object
 function send_error(func, e) {
-    console.log(e);
+    console.error("Error in", func, "\n", e);
     if (browsertools.debug) {
         const err = {
             func: func,
@@ -51,7 +51,7 @@ function send_error(func, e) {
 // @param css: name of css class to remove
 function add_css(elem, css) {
     try {
-        document.querySelectorAll(elem).forEach(el => el.classList.add(css));
+        document.querySelector(elem).classList.add(css);
     } catch (e) {
         send_error("add_css", e)
     }
@@ -127,10 +127,9 @@ Shiny.addCustomMessageHandler("console_warn", function (value) {
 // @param css: a class name that is used to hide an element (default class is: browsertools-hidden; see css file and R script)
 function hide_elem(elem, css) {
     try {
-        document.querySelector(elem).forEach(el => {
-            el.classList.add(css);
-            el.setAttribute("aria-hidden", "true");
-        });
+        const el = document.querySelector(elem);
+        el.classList.add(css);
+        el.setAttribute("aria-hidden", "true");
     } catch (e) {
         send_error("hide_elem", e);
     }
@@ -145,15 +144,22 @@ Shiny.addCustomMessageHandler("hide_elem", function (value) {
 // SET INNERHTML
 // @param elem: an element to select
 // @param string: content to add to element
+// @param append: option to append or replace content
 // @param delay: time (ms) to wait before inserting content
-function inner_html(elem, string, delay) {
+function inner_html(elem, string, append, delay) {
     try {
+
+        // select element and define content
+        const el = document.querySelector(elem);
+        const content = append ? el.innerHTML + string : string;
+
+        // update content based on delay
         if (delay) {
             setTimeout(function () {
-                document.querySelector(elem).innerHTML = string;
+                document.querySelector(elem).innerHTML = content;
             }, delay);
         } else {
-            document.querySelector(elem).innerHTML = string;
+            document.querySelector(elem).innerHTML = content;
         }
     } catch (e) {
         send_error("inner_html", e)
@@ -162,7 +168,7 @@ function inner_html(elem, string, delay) {
 
 // register
 Shiny.addCustomMessageHandler("inner_html", function (value) {
-    inner_html(value.elem, value.string, value.delay)
+    inner_html(value.elem, value.string, value.append, value.delay)
 });
 
 ////////////////////////////////////////
@@ -170,15 +176,22 @@ Shiny.addCustomMessageHandler("inner_html", function (value) {
 // SET INNERTEXT
 // @param elem: an element to select (e.g., ID, class, tag, etc.)
 // @param string: content to add
+// @param append: option to append or replace content
 // @param delay: time (ms) to wait before inserting content
-function inner_text(elem, string, delay) {
+function inner_text(elem, string, append, delay) {
     try {
+
+        // select element and define content
+        const el = document.querySelector(elem);
+        const content = append ? el.innerText + string : string;
+
+        // update content based on delay
         if (delay) {
             setTimeout(function () {
-                document.querySelector(elem).innerText = string;
+                document.querySelector(elem).innerText = content;
             }, delay);
         } else {
-            document.querySelector(elem).innerText = string;
+            document.querySelector(elem).innerText = content;
         }
     } catch (e) {
         send_error("inner_text", e)
@@ -187,7 +200,7 @@ function inner_text(elem, string, delay) {
 
 // register
 Shiny.addCustomMessageHandler("inner_text", function (value) {
-    inner_text(value.elem, value.string, value.delay);
+    inner_text(value.elem, value.string, value.append, value.delay);
 });
 
 ////////////////////////////////////////
@@ -247,7 +260,7 @@ Shiny.addCustomMessageHandler("refresh_page", function (value) {
 // @param css: a css classname to remove from an element
 function remove_css(elem, css) {
     try {
-        document.querySelector(elem).forEach(el => el.classList.remove(css)); 
+        document.querySelector(elem).classList.remove(css); 
     } catch (e) {
         send_error("remove_css", e);
     }
@@ -283,7 +296,7 @@ Shiny.addCustomMessageHandler("remove_element", function(value) {
 // @param attr: the name of the attribute to remove
 function remove_element_attribute(elem, attr) {
     try {
-        document.querySelectorAll(elem).forEach(el => el.removeAttribute(attr));
+        document.querySelector(elem).removeAttribute(attr);
     } catch (e) {
         send_error("remove_element_attribute", e);
     }
@@ -302,7 +315,7 @@ Shiny.addCustomMessageHandler("remove_element_attribute", function (value) {
 // @param value: the new value
 function set_element_attribute(elem, attr, value) {
     try {
-        document.querySelectorAll(elem).forEach(el => el.setAttribute(attr, value));
+        document.querySelector(elem).setAttribute(attr, value);
     } catch (e) {
         send_error("set_element_attribute", e);
     }
@@ -320,10 +333,9 @@ Shiny.addCustomMessageHandler("set_element_attribute", function (value) {
 // @para css: css class that shows an element (see hide elem)
 function show_elem(elem, css) {
     try {
-        document.querySelectorAll(elem).forEach(el => {
-            el.classList.remove(css);
-            el.removeAttribute("aria-hidden");
-        });
+        const el = document.querySelector(elem);
+        el.classList.remove(css);
+        el.removeAttribute("aria-hidden");
     } catch (e) {
         send_error("show_elem", e);
     }
@@ -339,14 +351,20 @@ Shiny.addCustomMessageHandler("show_elem", function (value) {
 // SCROLL TO
 // scroll to a specific point of a document
 // default usage will scroll to the top of the document
-// @param x amount to scroll along the horizontal axis
-function scroll_to(x, y) {
-    window.scrollTo(x, y);
+// @param x amount to scroll along the x axis (default: 0)
+// @param y amount to scroll along the y axis (default: 0)
+// @param elem an element to scroll to (optional: will override x/y)
+function scroll_to(x, y, elem) {
+    try {
+        elem ? document.querySelector(elem).scrollIntoView() : window.scrollTo(x, y);
+    } catch (e) {
+        send_error("scroll_to", e);
+    }
 }
 
 // register
 Shiny.addCustomMessageHandler("scroll_to", function (value) {
-    scroll_to_top(value.x, value.y);
+    scroll_to(value.x, value.y, value.elem);
 });
 
 ////////////////////////////////////////
@@ -356,7 +374,7 @@ Shiny.addCustomMessageHandler("scroll_to", function (value) {
 // @param css: a css class to toggle
 function toggle_css(elem, css) {
     try {
-        document.querySelectorAll(elem).forEach(el => el.classList.toggle(css));
+        document.querySelector(elem).classList.toggle(css);
     } catch (e) {
         send_error("toggle_css", e);
     }

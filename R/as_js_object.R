@@ -5,11 +5,12 @@
 #' @return Restructures a data.frame to JavaScript Object
 #' @keywords browsertools, object
 #' @examples
-#' df <- as_js_object(x = iris)
-#' console_log(df)
+#' df <- as_js_object(x = iris[1:2, ])
+#' console_table(df)
+#' @importFrom shiny getDefaultReactiveDomain
 #' @export
 as_js_object <- function(x) {
-    session <- get_shiny_session()
+    session <- getDefaultReactiveDomain()
     d <- as.data.frame(x)
     parent <- list()
     lapply(seq_len(NROW(d)), function(row) {

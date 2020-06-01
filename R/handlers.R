@@ -153,6 +153,7 @@ hide_elem <- function(elem, css = "browsertools-hidden") {
 #' @return Update the content of an element by id or class name
 #' @param elem the ID or class name of an html element
 #' @param string a string or html string to display in the element
+#' @param append an option that appends value of string or replaces it
 #' @param delay an optional arg to add a brief pause
 #'              before sending the content to the html element.
 #'              Ideal for content that is rendered by the server.
@@ -163,17 +164,18 @@ hide_elem <- function(elem, css = "browsertools-hidden") {
 #' @importFrom shiny getDefaultReactiveDomain
 #' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML}
 #' @export
-inner_html <- function(elem, string, delay = NULL) {
+inner_html <- function(elem, string, append = FALSE, delay = NULL) {
 
     # validate
     if (is.null(elem)) stop("argument 'elem' is undefined")
     if (is.null(string)) stop("argument 'string' is undefined")
+    if (!is.logical(append)) stop("argument 'append' must be TRUE or FALSE")
 
     # send
     session <- getDefaultReactiveDomain()
     session$sendCustomMessage(
         "inner_html",
-        list(elem = elem, string = string, delay = delay)
+        list(elem = elem, string = string, append = append, delay = delay)
     )
 }
 
@@ -182,7 +184,8 @@ inner_html <- function(elem, string, delay = NULL) {
 #' Modify the text of an element
 #' @return Modify the text of an element
 #' @param elem an element to select (e.g., ID, class, tag, etc.)
-#' @param string a string used to insert into the element 
+#' @param string a string used to insert into the element
+#' @param append an option that appends value of string or replaces it
 #' @param delay an optional arg that adds a brief pause before
 #'              sending the content to the html element. Ideal
 #'              for content that is rendered server-side. Input
@@ -190,20 +193,22 @@ inner_html <- function(elem, string, delay = NULL) {
 #' @keywords browsertools, innertext
 #' @examples
 #' inner_text(elem = "#mydiv", string = "Hello, world", delay = 200)
+#' inner_text(elem = "#mydiv", string = "Hello, world", append = TRUE)
 #' @importFrom shiny getDefaultReactiveDomain
 #' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText}
 #' @export
-inner_text <- function(elem, string, delay = NULL) {
+inner_text <- function(elem, string, append = FALSE, delay = NULL) {
 
     # validate
     if (is.null(elem)) stop("argument 'elem' is undefined")
     if (is.null(string)) stop("argument 'string' is undefined")
+    if (!is.logical(append)) stop("argument 'append' must be TRUE or FALSE")
 
     # send
     session <- getDefaultReactiveDomain()
     session$sendCustomMessage(
         "inner_text",
-        list(elem = elem, string = string, delay = delay)
+        list(elem = elem, string = string, append = append, delay = delay)
     )
 }
 
@@ -322,20 +327,27 @@ remove_element_attribute <- function(elem, attr) {
 
 #' \code{scroll_to}
 #'
-#' Scrolls the window to the top of the page or a user defined coordinates
+#' Scrolls the window to the top of the page, user defined coordinates, or
+#' a specific element. The default behavior of this function is to scroll
+#' to the top of the page (x: 0, y: 0). You can also use an element's selector
+#' path instead.
 #' @return Scrolls the window to the top of the page or a user
 #'          defined coordinates
 #' @param x amount (in pixels) to scroll along the horizontal axis
 #'          starting from the top left (default: 0)
 #' @param y amount (in pixels) to scroll along the vertical axis
 #'          starting from the top left (default: 0)
+#' @param elem a selector path of an element that you would like to scroll
+#'          to (i.e., id, class, tag, etc.). Using elem will override any
+#'          coordinates.
 #' @keywords browsertools, scroll
 #' @examples
 #' scroll_to()
 #' scroll_to(y = 250)
+#' scroll_to(elem = "#mydiv")
 #' @importFrom shiny getDefaultReactiveDomain
 #' @export
-scroll_to <- function(x = 0, y = 0) {
+scroll_to <- function(x = 0, y = 0, elem = NULL) {
 
     # validate
     if (!is.numeric(x)) stop("argument 'x' must be numeric")
@@ -343,7 +355,7 @@ scroll_to <- function(x = 0, y = 0) {
 
     # send
     session <- getDefaultReactiveDomain()
-    session$sendCustomMessage("scroll_to_top", list(x = x, y = y))
+    session$sendCustomMessage("scroll_to", list(x = x, y = y, elem = elem))
 }
 
 #' \code{set_element_attribute}
