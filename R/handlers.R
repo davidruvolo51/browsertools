@@ -89,6 +89,7 @@ console_log <- function(message, expand = FALSE) {
 #'
 #' Outputs an data object to the browser's console in table format
 #' @param data an object to display in the browser (data.frame, etc.)
+#' @param to_json an optional argument that transforms input data to json
 #' @return Outputs an object to the browser's console
 #' @keywords browsertools, debugging, console
 #' @examples
@@ -96,8 +97,13 @@ console_log <- function(message, expand = FALSE) {
 #' @importFrom shiny getDefaultReactiveDomain
 #' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/table}
 #' @export
-console_table <- function(data) {
+console_table <- function(data, to_json = TRUE) {
+
+    # validate
     if (is.null(data)) stop("argument 'data' is undefined")
+    if (to_json) data <- as_js_object(data)
+
+    # send
     session <- getDefaultReactiveDomain()
     session$sendCustomMessage("console_table", data)
 }

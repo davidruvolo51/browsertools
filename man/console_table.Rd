@@ -4,10 +4,12 @@
 \alias{console_table}
 \title{\code{console_table}}
 \usage{
-console_table(data)
+console_table(data, to_json = TRUE)
 }
 \arguments{
 \item{data}{an object to display in the browser (data.frame, etc.)}
+
+\item{to_json}{an optional argument that transforms input data to json}
 }
 \value{
 Outputs an object to the browser's console
