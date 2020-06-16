@@ -384,3 +384,27 @@ function toggle_css(elem, css) {
 Shiny.addCustomMessageHandler("toggle_css", function (value) {
     toggle_css(value.elem, value.css);
 });
+
+////////////////////////////////////////
+
+// TOGGLE ELEMENT
+// @param elem: an element to select (e.g., ID, class, tag, etc.)
+// @param css: a css class to add/remove (visibility class)
+function toggle_elem(elem, css) {
+    try {
+        let el = document.querySelector(elem);
+        // if hidden, then unhide. Else, hide.
+        if ([...el.classList].indexOf(css) > -1) {
+            show_elem(elem, css);
+        } else {
+            hide_elem(elem, css);
+        }
+    } catch (e) {
+        send_error("toggle_elem", e);
+    }
+}
+
+// register
+Shiny.addCustomMessageHandler("toggle_elem", function (value) {
+    toggle_elem(value.elem, value.css);
+});

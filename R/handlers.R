@@ -424,9 +424,8 @@ show_elem <- function(elem, css = "browsertools-hidden") {
 #' Toggles a css state of an html element
 #' @return Toggles a css state of an html element
 #' @param elem the id or class name of an html element
-#' @param css a string containing the class to remove from
-#'            an html element
-#' @keywords browsertools, attribute, value
+#' @param css a string containing the class to remove from an html element
+#' @keywords browsertools toggle css
 #' @examples
 #' toggle_css(elem = "#mydiv", css = "mytheme")
 #' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle}
@@ -441,4 +440,28 @@ toggle_css <- function(elem, css) {
     # send
     session <- getDefaultReactiveDomain()
     session$sendCustomMessage("toggle_css", list(elem = elem, css = css))
+}
+
+
+#' \code{toggle_elem}
+#'
+#' Toggle the visibility of an html element
+#' @return Toggle the visibility of an html element
+#' @param elem the id or class name of an html element
+#' @param css a string containing the class to remove from an html element
+#'          (default: browsertools-hidden; package default)
+#' @keywords browsertools toggle element
+#' @examples
+#' toggle_elem(elem = "#mydiv")
+#' @importFrom shiny getDefaultReactiveDomain
+#' @export
+toggle_elem <- function(elem, css = "browsertools-hidden") {
+
+    # validate
+    if (is.null(elem)) stop("argument 'elem' is undefined")
+    if (is.null(css)) stop("argument 'css' is undefined")
+
+    # send
+    session <- getDefaultReactiveDomain()
+    session$sendCustomMessage("toggle_elem", list(elem = elem, css = css))
 }
