@@ -59,6 +59,7 @@ This package offers the following functions. With the exception of the `use_brow
 | `scroll_to` | `x`, `y` | scroll to a position in a page (default: `0, 0` = top of document)
 | `show_elem` | `elem`, `css` | show an element by removing a class name or `hidden`
 | `toggle_css` | `elem`, `css` | toggle a css class
+| `toggle_elem` | `elem`, `css` | toggle the visibility of an element
 
 ## Development
 
@@ -94,26 +95,3 @@ yarn uninstall    # uninstalls pkg
 yarn document     # builds pkg documentation
 yarn package      # builds and installs pkg
 ```
-
-
-### Dependencies
-
-This package uses the following R dependencies.
-
-- htmltools (>= 0.4.0): htmlDependency 
-- shiny (>= 1.4.0): getDefaultReactiveDomain, removeResourcePath, addResourcePath, observeEvent
-- jsonlite (>= 1.6.0): fromJSON
-- rlang (>= 0.4.6): list2
-- purrr (>= 0.3.4): map
-
-And the following dev dependencies
-
-- @babel/cli: ^7.8.3,
-- @babel/core: ^7.9.6,
-- @babel/preset-env: ^7.9.6,
-- autoprefixer: ^9.7.6,
-- babel-preset-minify: ^0.5.1,
-- cssnano: ^4.1.10,
-- parcel: 1.12.4,
-- postcss-modules: ^2.0.0,
-- sass: ^1.26.5

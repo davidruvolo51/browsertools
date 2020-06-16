@@ -9,8 +9,7 @@ toggle_css(elem, css)
 \arguments{
 \item{elem}{the id or class name of an html element}
 
-\item{css}{a string containing the class to remove from
-an html element}
+\item{css}{a string containing the class to remove from an html element}
 }
 \value{
 Toggles a css state of an html element
@@ -24,6 +23,6 @@ toggle_css(elem = "#mydiv", css = "mytheme")
 \references{
 \url{https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle}
 }
-\keyword{attribute,}
-\keyword{browsertools,}
-\keyword{value}
+\keyword{browsertools}
+\keyword{css}
+\keyword{toggle}
