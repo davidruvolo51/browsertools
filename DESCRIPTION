@@ -1,12 +1,12 @@
 Package: browsertools
 Type: Package
 Title: a collection of js handlers and console tools
-Version: 0.1.6
+Version: 0.1.7
 Author: dcruvolo
 Maintainer: dcruvolo <yourself@somewhere.net>
 Description: This package provides a series of js handlers for 
     use in shiny applications. 
-License: What license is it under?
+License: MIT
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/davidruvolo51/browsertools
