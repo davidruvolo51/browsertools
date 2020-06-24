@@ -2,7 +2,7 @@
 #' FILE: server.R
 #' AUTHOR: David Ruvolo
 #' CREATED: 2020-05-25
-#' MODIFIED: 2020-06-01
+#' MODIFIED: 2020-06-24
 #' PURPOSE: Shiny server for demo app
 #' STATUS: in.progress
 #' PACKAGES: shiny, browsertools
@@ -190,6 +190,20 @@ server <- function(input, output, session) {
         #'    elem = "#greeting",
         #'    attr = "data-value"
         #' )
+    })
+
+    # get attribute
+    observeEvent(input$`get-element-attribute`, {
+        browsertools::inner_html(
+            elem = "#get-attribute-value-example",
+            string = paste0(
+                "\n",
+                "id: ", input$`sample-attribute`$id, "\n",
+                "class: ", input$`sample-attribute`$class, "\n",
+                "aria-hidden: ", input$`sample-attribute`$`aria-hidden`, "\n",
+                "data-value: ", input$`sample-attribute`$`data-value`, "\n"
+            )
+        )
     })
 
     #'//////////////////////////////////////
