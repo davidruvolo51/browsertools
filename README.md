@@ -32,6 +32,7 @@ This package offers the following functions. With the exception of the `use_brow
 | function | arguments | description | 
 | :------- | :-------- | :---------- |
 | `use_browsertools` | --- | loads the browsertool dependencies into your shiny app (required)
+| `enable_attributes` | --- | allows you to access the html attributes of an element in the shiny server; Element must have an ID 
 | `hidden` | `...`, `css` | Hide elements by default
 
 ### Shiny Server
@@ -60,6 +61,14 @@ This package offers the following functions. With the exception of the `use_brow
 | `show_elem` | `elem`, `css` | show an element by removing a class name or `hidden`
 | `toggle_css` | `elem`, `css` | toggle a css class
 | `toggle_elem` | `elem`, `css` | toggle the visibility of an element
+
+### Demo
+
+You can now view a demo of this package by running the following function.
+
+```r
+browsertools::run_demo()
+```
 
 ## Development
 

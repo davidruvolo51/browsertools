@@ -408,3 +408,26 @@ function toggle_elem(elem, css) {
 Shiny.addCustomMessageHandler("toggle_elem", function (value) {
     toggle_elem(value.elem, value.css);
 });
+
+
+////////////////////////////////////////
+
+// EnableAttributes Shiny InputBinding
+// Identify elements with the target selector and return values as an object
+// for use in shiny
+const enable_html_attribs = new Shiny.InputBinding();
+$.extend(enable_html_attribs, {
+    find: function(scope) {
+        return $(scope).find("span[data-browsertools-indexible='true']").parent();
+    },
+    getValue: function(el) {
+        let attributes = $(el.attributes);
+        let out = {}, attr;
+        attributes.map( a => {
+            attr = attributes[a];
+            out[`${attr.name}`] = attr.value
+        })
+        return out;
+    }
+});
+Shiny.inputBindings.register(enable_html_attribs);

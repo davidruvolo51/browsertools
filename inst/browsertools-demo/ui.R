@@ -2,7 +2,7 @@
 #' FILE: app.R
 #' AUTHOR: David Ruvolo
 #' CREATED: 2020-05-25
-#' MODIFIED: 2020-06-01
+#' MODIFIED: 2020-06-24
 #' PURPOSE: browsertools demo
 #' STATUS: in.progress
 #' PACKAGES: shiny, browsertools
@@ -373,8 +373,16 @@ ui <- tagList(
                         "creating custom interactive elements."
                     ),
                     tags$p(
+                        id = "sample-attribute",
+                        class = "sample-css-a sample-css-b",
+                        `aria-hidden` = "false",
+                        `data-value` = "1234",
+                        browsertools::enable_attributes(),
                         "The buttons below will demonstrate how to create a",
-                        "new data attribute."
+                        "new data attribute, as well as retrieve the",
+                        "attributes of an html element. Click the 'Get",
+                        "Attribute' button to print the attributes of this",
+                        "text element."
                     ),
                     tags$button(
                         id = "set-element-attribute",
@@ -385,13 +393,21 @@ ui <- tagList(
                         id = "remove-element-attribute",
                         class = "shiny-bound-input action-button b",
                         "Remove Attribute"
+                    ),
+                    tags$button(
+                        id = "get-element-attribute",
+                        class = "shiny-bound-input action-button b",
+                        "Get Attributes"
                     )
                 ),
                 tags$div(
                     class = "flex-child browsertools-results",
                     tags$code(
                         id = "element-attribute-text-example",
-                        '<p id="greeting">Hello!</p>'
+                        "<p id=\"greeting\">Hello!</p>"
+                    ),
+                    tags$code(
+                        id = "get-attribute-value-example"
                     )
                 )
             )

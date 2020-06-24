@@ -1,6 +1,6 @@
 {
     "name": "browsertools",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "author": "dcruvolo",
     "license": "ISC",
     "description": "a collection of tools for use in shiny",
@@ -14,13 +14,14 @@
         "js": "parcel build inst/browsertools/js/index.js -d inst/browsertools/js/ -o inst/browsertools/js/browsertools.min.js --no-cache --no-source-maps",
         "sass": "parcel build inst/browsertools/css/styles.scss -d inst/browsertools/css/ -o inst/browsertools/css/browsertools.min.css --no-cache --no-source-maps",
         "build": "yarn js && yarn sass",
-        "document": "Rscript -e \"devtools::document()\"",
+        "document": "Rscript -e \"devtools::check_man()\"",
+        "rcheck": "Rscript -e \"devtools::check()\"",
         "uninstall": "Rscript -e \"devtools::uninstall()\"",
         "package": "Rscript -e \"devtools::build()\" && Rscript -e \"devtools::install()\"",
-        "demo": "Rscript -e \"shiny::runApp(appDir = './inst/demo', port = 8000, launch.browser = FALSE)\"",
-        "demo_dev": "parcel inst/demo/src/index.js -d inst/demo/www/ -o inst/demo/www/demo.min.js --no-cache --no-source-maps",
-        "demo_build": "parcel build inst/demo/src/index.js -d inst/demo/www/ -o inst/demo/www/demo.min.js --no-cache --no-source-maps",
-        "demo_clean" : "rm -rf inst/demo/www/demo.min.*"
+        "demo": "Rscript -e \"shiny::runApp(appDir = './inst/browsertools-demo', port = 8000, launch.browser = FALSE)\"",
+        "demo_dev": "parcel inst/browsertools-demo/src/index.js -d inst/browsertools-demo/www/ -o inst/browsertools-demo/www/demo.min.js --no-cache --no-source-maps",
+        "demo_build": "parcel build inst/browsertools-demo/src/index.js -d inst/browsertools-demo/www/ -o inst/browsertools-demo/www/demo.min.js --no-cache --no-source-maps",
+        "demo_clean" : "rm -rf inst/browsertools-demo/www/demo.min.*"
     },
     "homepage": "https://github.com/davidruvolo51/browsertools",
     "devDependencies": {
