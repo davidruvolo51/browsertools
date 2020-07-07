@@ -1,3 +1,11 @@
+  <!-- badges: start -->
+  [![Codecov test coverage](https://codecov.io/gh/davidruvolo51/browsertools/branch/master/graph/badge.svg)](https://codecov.io/gh/davidruvolo51/browsertools?branch=master)
+  <!-- badges: end -->
+
+  <!-- badges: start -->
+  [![R build status](https://github.com/davidruvolo51/browsertools/workflows/R-CMD-check/badge.svg)](https://github.com/davidruvolo51/browsertools/actions)
+  <!-- badges: end -->
+
 # browsertools
 
 This package contains a series of functions for running javascript functions in shiny. These functions are wrappers for custom message handlers for routine DOM manipulation within shiny server. All JavaScript functions were written in vanilla JS and transpiled using babel.js.

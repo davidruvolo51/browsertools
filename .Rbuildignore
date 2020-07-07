@@ -9,3 +9,5 @@ package-lock.json
 yarn.lock
 browsertools.code-workspace
 README.md
+^codecov\.yml$
+^\.github$

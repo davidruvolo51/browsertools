@@ -1,6 +1,6 @@
 {
     "name": "browsertools",
-    "version": "0.1.7",
+    "version": "0.1.71",
     "author": "dcruvolo",
     "license": "ISC",
     "description": "a collection of tools for use in shiny",

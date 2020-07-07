@@ -19,11 +19,45 @@ Removes a css class(es) to an element using id or classname.
 Removes a css class(es) to an element using id or classname.
 }
 \examples{
-remove_css(elem = "#mydiv", css = "some-css-class")
+if (interactive()) {
+  library(shiny)
+  ui <- tagList(
+    browsertools::use_browsertools(),
+    tags$head(
+       tags$style(
+          ".blue-text {
+            color: blue;
+          }"
+       )
+    ),
+    tags$main(
+       tags$h2("Remove CSS Example"),
+       tags$p(
+         id = "my-text-example",
+         class = "blue-text",
+         "Click the button below to remove the blue color from the text"
+       ),
+       tags$button(
+          id = "removeCSS",
+          class = "shiny-bound-input action-button",
+          "Remove CSS"
+       )
+    )
+  )
+  server <- function(input, output, session) {
+     observeEvent(input$removeCSS, {
+       browsertools::remove_css(
+         elem = "#my-text-example",
+         css = "blue-text"
+       )
+     })
+  }
+  shinyApp(ui, server)
+}
 }
 \references{
 \url{https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/remove}
 }
-\keyword{browsertools,}
-\keyword{css,}
+\keyword{browsertools}
+\keyword{css}
 \keyword{remove}

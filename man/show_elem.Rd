@@ -20,9 +20,39 @@ selector called \code{hidden} and define the show styles. This allows you
 to add delays and apply other transformations.
 }
 \examples{
-show_elem(elem = "#mydiv")
-show_elem(elem = "#mydiv", css = "show-div")
+if (interactive()) {
+  library(shiny)
+  ui <- tagList(
+      browsertools::use_browsertools(),
+      tags$main(
+          tags$h2("Show Element Example"),
+          tags$p(
+              id = "my-text-example",
+              "Click the button below to show a hidden element."
+          ),
+          tags$button(
+              id = "showElement",
+              class = "shiny-bound-input action-button",
+              "Show Element"
+          ),
+          browsertools::hidden(
+              tags$p(
+                  id = "hiddenMessage",
+                  "You found the hidden message!"
+              )
+          )
+      )
+  )
+  server <- function(input, output, session) {
+      observeEvent(input$showElement, {
+          browsertools::show_elem(
+              elem = "#hiddenMessage"
+          )
+      })
+  }
+  shinyApp(ui, server)
 }
-\keyword{browsertools,}
-\keyword{css,}
+}
+\keyword{browsertools}
+\keyword{css}
 \keyword{show}

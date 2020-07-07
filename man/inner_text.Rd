@@ -25,11 +25,13 @@ Modify the text of an element
 Modify the text of an element
 }
 \examples{
-inner_text(elem = "#mydiv", string = "Hello, world", delay = 200)
-inner_text(elem = "#mydiv", string = "Hello, world", append = TRUE)
+if (interactive()) {
+  inner_text(elem = "#mydiv", string = "Hello, world", delay = 200)
+  inner_text(elem = "#mydiv", string = "Hello, world", append = TRUE)
+}
 }
 \references{
 \url{https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText}
 }
-\keyword{browsertools,}
+\keyword{browsertools}
 \keyword{innertext}

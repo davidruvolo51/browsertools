@@ -14,7 +14,16 @@ Print JavaScript errors in the R console. This function
 is designed to be used within the Shiny Server
 }
 \examples{
-browsertools::debug()
+if (interactive()) {
+  ui <- tagList(
+     tags$h2("Browsertools demo"),
+     tags$p("JavaScript messages will print in the R Console")
+  )
+  server <- function(input, output, session) {
+     browsertools::debug()
+  }
+  shinyApp(ui, server)
+}
 }
 \keyword{browsertools,}
 \keyword{debug,}

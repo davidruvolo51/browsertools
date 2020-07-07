@@ -18,7 +18,40 @@ Toggles a css state of an html element
 Toggles a css state of an html element
 }
 \examples{
-toggle_css(elem = "#mydiv", css = "mytheme")
+if (interactive()) {
+  library(shiny)
+  ui <- tagList(
+    browsertools::use_browsertools(),
+    tags$head(
+       tags$style(
+          ".blue-text {
+            color: blue;
+          }"
+       )
+    ),
+    tags$main(
+       tags$h2("Toggle CSS Example"),
+       tags$p(
+         id = "my-text-example",
+         "Click the button below to toggle the text color."
+       ),
+       tags$button(
+          id = "toggleCSS",
+          class = "shiny-bound-input action-button",
+          "Toggle CSS"
+       )
+    )
+  )
+  server <- function(input, output, session) {
+     observeEvent(input$toggleCSS, {
+       browsertools::toggle_css(
+         elem = "#my-text-example",
+         css = "blue-text"
+       )
+     })
+  }
+  shinyApp(ui, server)
+}
 }
 \references{
 \url{https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle}

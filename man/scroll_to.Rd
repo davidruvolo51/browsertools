@@ -28,9 +28,36 @@ to the top of the page (x: 0, y: 0). You can also use an element's selector
 path instead.
 }
 \examples{
-scroll_to()
-scroll_to(y = 250)
-scroll_to(elem = "#mydiv")
+if (interactive()) {
+  library(shiny)
+  ui <- tagList(
+    browsertools::use_browsertools(),
+    tags$head(
+        tags$style(
+            "#spacing{
+                height: 1200px;
+              }"
+        )
+    ),
+    tags$h2("Document Scrolling"),
+    tags$p("Click the button at the bottom of the page"),
+    tags$div(
+        id = "spacing",
+        `aria-hidden` = "true"
+    ),
+    tags$button(
+       id = "appScroll",
+       class = "shiny-bound-input action-button",
+       "Scroll to Top"
+    )
+  )
+  server <- function(input, output, session) {
+    observeEvent(input$appScroll, {
+        browsertools::scroll_to()
+    })
+  }
+  shinyApp(ui, server)
 }
-\keyword{browsertools,}
+}
+\keyword{browsertools}
 \keyword{scroll}

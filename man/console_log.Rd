@@ -18,11 +18,31 @@ Outputs an object to the browser's console
 Outputs an object to the browser's console
 }
 \examples{
-console_log(x = "Hello, world!")
+if (interactive()) {
+  library(shiny)
+  ui <- tagList(
+    browsertools::use_browsertools(),
+    tags$h2("Display Message in the Dev Console"),
+    tags$p("Open the browser's dev console and click the button below."),
+    tags$button(
+       id = "sendMessage",
+       class = "shiny-bound-input action-button",
+       "Send Message"
+    )
+  )
+  server <- function(input, output, session) {
+    observeEvent(input$sendMessage, {
+        browsertools::console_log(
+            message = "This is a message"
+        )
+    })
+  }
+  shinyApp(ui, server)
+}
 }
 \references{
 \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/log}
 }
-\keyword{browsertools,}
+\keyword{browsertools}
 \keyword{console}
-\keyword{debugging,}
+\keyword{debugging}
