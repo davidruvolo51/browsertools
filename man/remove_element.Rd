@@ -16,8 +16,31 @@ Removes an html element from the DOM
 Removes an html element from the DOM
 }
 \examples{
-remove_element(elem = "#mydiv")
+if (interactive()) {
+  library(shiny)
+  ui <- tagList(
+    browsertools::use_browsertools(),
+    tags$h2("Remove Element Example"),
+    tags$p(
+      id = "textToRemove",
+      "Click the button below to remove this message."
+    ),
+    tags$button(
+      id = "removeMessage",
+      class = "shiny-bound-input action-button",
+      "Remove Message"
+    )
+  )
+  server <- function(input, output, session) {
+    observeEvent(input$removeMessage, {
+      browsertools::remove_element(
+        elem = "#textToRemove"
+      )
+    })
+  }
+  shinyApp(ui, server)
 }
-\keyword{browsertools,}
+}
+\keyword{browsertools}
 \keyword{element}
-\keyword{remove,}
+\keyword{remove}

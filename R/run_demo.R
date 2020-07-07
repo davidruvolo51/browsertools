@@ -3,7 +3,9 @@
 #' Start the browsertools demo app
 #' @return Start the browsertools demo app
 #' @examples
-#' browsertools::run_demo()
+#' if (interactive()) {
+#'   browsertools::run_demo()
+#' }
 #' @importFrom shiny runApp
 #' @keywords browsertools demo
 #' @export

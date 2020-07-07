@@ -6,7 +6,9 @@
 #' @param css An optional class name used to hide elements
 #'          (Default class = "browsertools")
 #' @examples
-#' hidden(tags$p("hello, world"), tags$p("this is a test"))
+#' if (interactive()) {
+#'  hidden(tags$p("hello, world"), tags$p("this is a test"))
+#' }
 #' @keywords browsertools, hidden
 #' @importFrom purrr, map
 #' @importFrom rlang, list2

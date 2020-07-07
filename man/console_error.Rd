@@ -16,11 +16,31 @@ Sends an error message to the browser's console
 Sends an error message to the brower's console
 }
 \examples{
-console_error(message = "Error: 'object' undefined")
+if (interactive()) {
+  library(shiny)
+  ui <- tagList(
+    browsertools::use_browsertools(),
+    tags$h2("Display an Error Message in the Dev Console"),
+    tags$p("Open the browser's dev console and click the button below."),
+    tags$button(
+       id = "sendError",
+       class = "shiny-bound-input action-button",
+       "Send Error"
+    )
+  )
+  server <- function(input, output, session) {
+    observeEvent(input$sendError, {
+        browsertools::console_error(
+            message = "This is an error message"
+        )
+    })
+  }
+  shinyApp(ui, server)
+}
 }
 \references{
 \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/error}
 }
-\keyword{browsertools,}
+\keyword{browsertools}
 \keyword{console}
-\keyword{debugging,}
+\keyword{debugging}

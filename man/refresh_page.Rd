@@ -13,8 +13,26 @@ Trigger a page refres
 Trigger a page refresh
 }
 \examples{
-refresh_page()
+if (interactive()) {
+  library(shiny)
+  ui <- tagList(
+     browsertools::refresh_page(),
+     tags$h2("Refresh App Example"),
+     tags$p("Click the button to refresh the app"),
+     tags$button(
+         id = "refreshApp",
+         class = "shiny-bound-input action-button",
+         "Resfresh App"
+     )
+  )
+  server <- function(input, output, session) {
+    observeEvent(input$refreshApp, {
+      browsertools::refresh_page()
+    })
+  }
+  shinyApp(ui, server)
 }
-\keyword{browsertools,}
-\keyword{page,}
+}
+\keyword{browsertools}
+\keyword{page}
 \keyword{refresh}

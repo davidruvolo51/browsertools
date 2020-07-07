@@ -16,8 +16,24 @@ Restructures a data.frame to JavaScript Object
 Restructures a data.frame to JavaScript Object
 }
 \examples{
-df <- as_js_object(x = iris[1:2, ])
-console_table(df)
+if (interactive()) {
+ library(shiny)
+ ui <- tagList(
+     browsertools::use_browsertools(),
+     tags$p("Open the browser's dev console")
+ )
+ server <- function(input, output, session) {
+     n <- 10
+     df <- data.frame(
+         group = sample(letters, n),
+         x = rnorm(n),
+         y = rnorm(n),
+         z = rnorm(n)
+     )
+     browsertools::console_table(data = df)
+  }
+  shinyApp(ui, server)
+}
 }
 \keyword{browsertools,}
 \keyword{object}

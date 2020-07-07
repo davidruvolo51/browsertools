@@ -13,7 +13,9 @@ Start the browsertools demo app
 Start the browsertools demo app
 }
 \examples{
-browsertools::run_demo()
+if (interactive()) {
+  browsertools::run_demo()
+}
 }
 \keyword{browsertools}
 \keyword{demo}

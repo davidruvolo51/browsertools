@@ -21,9 +21,31 @@ Create a new html element using shiny tags as a child of an element
 \description{
 Create a new html element using shiny tags as a child of an element
 }
+\examples{
+if (interactive()) {
+  library(shiny)
+  ui <- tagList(
+    browsertools::use_browsertools(),
+    tags$main(
+      id = "main",
+      tags$h1("Inner Adjacent HTML Example")
+    )
+  )
+  server <- function(input, output, session) {
+  insert_adjacent_html(
+    id = "main",
+    html = tagList(
+        tags$h2("Hello, world!"),
+        tags$p("How are you doing today?")
+    ),
+    position = "afterbegin"
+  )
+}
+}
+}
 \references{
 \url{https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML}
 }
-\keyword{browsertools,}
-\keyword{html,}
+\keyword{browsertools}
+\keyword{html}
 \keyword{insertHTML}

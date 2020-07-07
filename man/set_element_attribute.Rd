@@ -20,8 +20,51 @@ Set an attribute of an html element
 Set an attribute of an html element
 }
 \examples{
-set_element_attribute(elem = "#mydiv", attr = "data-value", value = "12345")
+if (interactive()) {
+  library(shiny)
+  ui <- tagList(
+    browsertools::use_browsertools(),
+    tags$head(
+      tags$style(
+        "[aria-hidden='true'] {
+             position: absolute;
+             width: 1px;
+             height: 1px;
+             margin: -1px;
+             clip: rect(0, 0, 0, 0);
+             clip: rect(0 0 0 0);
+             overflow: hidden;
+             white-space: nowrap;
+        }"
+      )
+    ),
+    tags$h2("Set Element Attribute Example"),
+    tags$p(
+      "Click the button below to set an attribute of an element"
+    ),
+    tags$button(
+      id = "setAttr",
+      class = "shiny-bound-input action-button",
+      "Set Attribute"
+    ),
+    tags$p(
+      id = "mytext",
+      `aria-hidden` = "true",
+      "This element will be modified."
+    )
+  )
+  server <- function(input, output, session) {
+    observeEvent(input$removeAttr, {
+      browsertools::set_element_attribute(
+        elem = "#mytext",
+        attr = "aria-hidden",
+        value = "true"
+      )
+    })
+  }
+  shinyApp(ui, server)
 }
-\keyword{attribute,}
-\keyword{browsertools,}
+}
+\keyword{attribute}
+\keyword{browsertools}
 \keyword{value}

@@ -6,7 +6,16 @@
 #' @return Print JavaScript errors in the R console
 #' @keywords browsertools, debug, error
 #' @examples
-#' browsertools::debug()
+#' if (interactive()) {
+#'   ui <- tagList(
+#'      tags$h2("Browsertools demo"),
+#'      tags$p("JavaScript messages will print in the R Console")
+#'   )
+#'   server <- function(input, output, session) {
+#'      browsertools::debug()
+#'   }
+#'   shinyApp(ui, server)
+#' }
 #' @importFrom shiny getDefaultReactiveDomain observeEvent
 #' @importFrom jsonlite fromJSON
 #' @export

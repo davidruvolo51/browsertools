@@ -16,11 +16,31 @@ Outputs a warning message to the console
 Outputs a warning message to the console
 }
 \examples{
-console_warn(message = "this is a warning message")
+if (interactive()) {
+  library(shiny)
+  ui <- tagList(
+    browsertools::use_browsertools(),
+    tags$h2("Display Warning Message in the Dev Console"),
+    tags$p("Open the browser's dev console and click the button below."),
+    tags$button(
+       id = "sendWarning",
+       class = "shiny-bound-input action-button",
+       "Send Warning"
+    )
+  )
+  server <- function(input, output, session) {
+    observeEvent(input$sendWarning, {
+        browsertools::console_warn(
+            message = "This is a warning message"
+        )
+    })
+  }
+  shinyApp(ui, server)
+}
 }
 \references{
 \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/warn}
 }
-\keyword{browsertools,}
-\keyword{console,}
+\keyword{browsertools}
+\keyword{console}
 \keyword{warn}

@@ -7,8 +7,42 @@
 #' @return Adds a css class(es) to an element using id or classname.
 #' @keywords browsertools, css, add
 #' @examples
-#' add_css(elem = "#mydiv", css = "some-css-class")
-#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/add}
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'     browsertools::use_browsertools(),
+#'     tags$head(
+#'        tags$style(
+#'           ".blue-text {
+#'             color: blue;
+#'           }"
+#'        )
+#'     ),
+#'     tags$main(
+#'        tags$h2("Add CSS Example"),
+#'        tags$p(
+#'          id = "my-text-example",
+#'          "Click the button below to change the text color to blue"
+#'        ),
+#'        tags$button(
+#'           id = "addCSS",
+#'           class = "shiny-bound-input action-button",
+#'           "Add CSS"
+#'        )
+#'     )
+#'   )
+#'   server <- function(input, output, session) {
+#'      observeEvent(input$addCSS, {
+#'        browsertools::add_css(
+#'          elem = "#my-text-example",
+#'          css = "blue-text"
+#'        )
+#'      })
+#'   }
+#'   shinyApp(ui, server)
+#' }
+#' @references
+#'   \url{https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/add}
 #' @export
 add_css <- function(elem, css) {
 
@@ -24,13 +58,34 @@ add_css <- function(elem, css) {
 #' \code{alert}
 #'
 #' Send an alert dialog to the browser
-#' @return Send an alert dialog to the browser
 #' @param message a message to send
+#' @return Send an alert dialog to the browser
 #' @keywords browsertools, alert
 #' @examples
-#' alert("hello world")
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'     browsertools::use_browsertools(),
+#'     tags$h2("Display an alert"),
+#'     tags$p("Click the button below to display an alert."),
+#'     tags$button(
+#'        id = "alert",
+#'        class = "shiny-bound-input action-button",
+#'        "Display Alert"
+#'     )
+#'   )
+#'   server <- function(input, output, session) {
+#'     observeEvent(input$alert, {
+#'         browsertools::alert(
+#'             message = "This is an alert"
+#'         )
+#'     })
+#'   }
+#'   shinyApp(ui, server)
+#' }
+#' @references
+#'   \url{https://developer.mozilla.org/en-US/docs/Web/API/Window/alert}
 #' @importFrom shiny getDefaultReactiveDomain
-#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/Window/alert}
 #' @export
 alert <- function(message) {
 
@@ -47,11 +102,32 @@ alert <- function(message) {
 #' Sends an error message to the brower's console
 #' @param message an error to display
 #' @return Sends an error message to the browser's console
-#' @keywords browsertools, debugging, console
+#' @keywords browsertools debugging console
 #' @examples
-#' console_error(message = "Error: 'object' undefined")
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'     browsertools::use_browsertools(),
+#'     tags$h2("Display an Error Message in the Dev Console"),
+#'     tags$p("Open the browser's dev console and click the button below."),
+#'     tags$button(
+#'        id = "sendError",
+#'        class = "shiny-bound-input action-button",
+#'        "Send Error"
+#'     )
+#'   )
+#'   server <- function(input, output, session) {
+#'     observeEvent(input$sendError, {
+#'         browsertools::console_error(
+#'             message = "This is an error message"
+#'         )
+#'     })
+#'   }
+#'   shinyApp(ui, server)
+#' }
 #' @importFrom shiny getDefaultReactiveDomain
-#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/error}
+#' @references
+#'   \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/error}
 #' @export
 console_error <- function(message) {
     if (is.null(message)) stop("argument 'message' is undefined")
@@ -65,11 +141,32 @@ console_error <- function(message) {
 #' @param message a message to display
 #' @param expand an option to expand arrays and objects (default: false)
 #' @return Outputs an object to the browser's console
-#' @keywords browsertools, debugging, console
+#' @keywords browsertools debugging console
 #' @examples
-#' console_log(x = "Hello, world!")
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'     browsertools::use_browsertools(),
+#'     tags$h2("Display Message in the Dev Console"),
+#'     tags$p("Open the browser's dev console and click the button below."),
+#'     tags$button(
+#'        id = "sendMessage",
+#'        class = "shiny-bound-input action-button",
+#'        "Send Message"
+#'     )
+#'   )
+#'   server <- function(input, output, session) {
+#'     observeEvent(input$sendMessage, {
+#'         browsertools::console_log(
+#'             message = "This is a message"
+#'         )
+#'     })
+#'   }
+#'   shinyApp(ui, server)
+#' }
 #' @importFrom shiny getDefaultReactiveDomain
-#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/log}
+#' @references
+#'   \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/log}
 #' @export
 console_log <- function(message, expand = FALSE) {
 
@@ -91,11 +188,29 @@ console_log <- function(message, expand = FALSE) {
 #' @param data an object to display in the browser (data.frame, etc.)
 #' @param to_json an optional argument that transforms input data to json
 #' @return Outputs an object to the browser's console
-#' @keywords browsertools, debugging, console
+#' @keywords browsertools debugging console
 #' @examples
-#' console_table(data = iris)
+#' if (interactive()) {
+#'  library(shiny)
+#'  ui <- tagList(
+#'      browsertools::use_browsertools(),
+#'      tags$p("Open the browser's dev console")
+#'  )
+#'  server <- function(input, output, session) {
+#'      n <- 10
+#'      df <- data.frame(
+#'          group = sample(letters, n),
+#'          x = rnorm(n),
+#'          y = rnorm(n),
+#'          z = rnorm(n)
+#'      )
+#'      browsertools::console_table(data = df)
+#'   }
+#'   shinyApp(ui, server)
+#' }
 #' @importFrom shiny getDefaultReactiveDomain
-#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/table}
+#' @references
+#'   \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/table}
 #' @export
 console_table <- function(data, to_json = TRUE) {
 
@@ -113,11 +228,32 @@ console_table <- function(data, to_json = TRUE) {
 #' Outputs a warning message to the console
 #' @return Outputs a warning message to the console
 #' @param message a message to display
-#' @keywords browsertools, console, warn
+#' @keywords browsertools console warn
 #' @examples
-#' console_warn(message = "this is a warning message")
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'     browsertools::use_browsertools(),
+#'     tags$h2("Display Warning Message in the Dev Console"),
+#'     tags$p("Open the browser's dev console and click the button below."),
+#'     tags$button(
+#'        id = "sendWarning",
+#'        class = "shiny-bound-input action-button",
+#'        "Send Warning"
+#'     )
+#'   )
+#'   server <- function(input, output, session) {
+#'     observeEvent(input$sendWarning, {
+#'         browsertools::console_warn(
+#'             message = "This is a warning message"
+#'         )
+#'     })
+#'   }
+#'   shinyApp(ui, server)
+#' }
 #' @importFrom shiny getDefaultReactiveDomain
-#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/warn}
+#' @references
+#'      \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/warn}
 #' @export
 console_warn <- function(message) {
     if (is.null(message)) stop("argument 'message' is undefined")
@@ -136,10 +272,38 @@ console_warn <- function(message) {
 #' @param elem the id or class name of an html elem
 #' @param css a string containing the class to remove from an html element
 #'              (default class is \code{hidden})
-#' @keywords browsertools, css, show
+#' @keywords browsertools css show
 #' @examples
-#' hide_elem(elem = "#mydiv")
-#' hide_elem(elem = "#mydiv", css = "show-div")
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'       browsertools::use_browsertools(),
+#'       tags$main(
+#'           tags$h2("Hide Element Example"),
+#'           tags$p(
+#'               id = "my-text-example",
+#'               "Click the button below to hide the message below."
+#'           ),
+#'           tags$button(
+#'               id = "hideElement",
+#'               class = "shiny-bound-input action-button",
+#'               "Hide Element"
+#'           ),
+#'           tags$p(
+#'               id = "myMessage",
+#'               "Hide this message!"
+#'           )
+#'       )
+#'   )
+#'   server <- function(input, output, session) {
+#'       observeEvent(input$hideElement, {
+#'           browsertools::hide_elem(
+#'               elem = "#myMessage"
+#'           )
+#'       })
+#'   }
+#'   shinyApp(ui, server)
+#' }
 #' @importFrom shiny getDefaultReactiveDomain
 #' @export
 hide_elem <- function(elem, css = "browsertools-hidden") {
@@ -164,11 +328,14 @@ hide_elem <- function(elem, css = "browsertools-hidden") {
 #'              before sending the content to the html element.
 #'              Ideal for content that is rendered by the server.
 #'              Input is time in milliseconds.
-#' @keywords browsertools, innerhtml
+#' @keywords browsertools innerhtml
 #' @examples
-#' inner_html(elem = "#mydiv", string = "hello, world", delay = 500)
+#' if (interactive()) {
+#'   inner_html(elem = "#mydiv", string = "hello, world", delay = 500)
+#' }
 #' @importFrom shiny getDefaultReactiveDomain
-#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML}
+#' @references 
+#'   \url{https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML}
 #' @export
 inner_html <- function(elem, string, append = FALSE, delay = NULL) {
 
@@ -196,12 +363,15 @@ inner_html <- function(elem, string, append = FALSE, delay = NULL) {
 #'              sending the content to the html element. Ideal
 #'              for content that is rendered server-side. Input
 #'              time is in milliseconds.
-#' @keywords browsertools, innertext
+#' @keywords browsertools innertext
 #' @examples
-#' inner_text(elem = "#mydiv", string = "Hello, world", delay = 200)
-#' inner_text(elem = "#mydiv", string = "Hello, world", append = TRUE)
+#' if (interactive()) {
+#'   inner_text(elem = "#mydiv", string = "Hello, world", delay = 200)
+#'   inner_text(elem = "#mydiv", string = "Hello, world", append = TRUE)
+#' }
 #' @importFrom shiny getDefaultReactiveDomain
-#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText}
+#' @references
+#'   \url{https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText}
 #' @export
 inner_text <- function(elem, string, append = FALSE, delay = NULL) {
 
@@ -227,9 +397,31 @@ inner_text <- function(elem, string, append = FALSE, delay = NULL) {
 #' @param position a position relative to the html element
 #'             (i.e., \code{beforebegin}, \code{afterbegin}, \code{beforeend},
 #'             or \code{afterend})
-#' @keywords browsertools, html, insertHTML
+#' @examples
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'     browsertools::use_browsertools(),
+#'     tags$main(
+#'       id = "main",
+#'       tags$h1("Inner Adjacent HTML Example")
+#'     )
+#'   )
+#'   server <- function(input, output, session) {
+#'   insert_adjacent_html(
+#'     id = "main",
+#'     html = tagList(
+#'         tags$h2("Hello, world!"),
+#'         tags$p("How are you doing today?")
+#'     ),
+#'     position = "afterbegin"
+#'   )
+#' }
+#' }
+#' @keywords browsertools html insertHTML
 #' @importFrom shiny getDefaultReactiveDomain
-#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML}
+#' @references
+#'   \url{https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML}
 #' @export
 insert_adjacent_html <- function(id, html, position = "beforeend") {
 
@@ -256,9 +448,27 @@ insert_adjacent_html <- function(id, html, position = "beforeend") {
 #'
 #' Trigger a page refresh
 #' @return Trigger a page refres
-#' @keywords browsertools, page, refresh
+#' @keywords browsertools page refresh
 #' @examples
-#' refresh_page()
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'      browsertools::refresh_page(),
+#'      tags$h2("Refresh App Example"),
+#'      tags$p("Click the button to refresh the app"),
+#'      tags$button(
+#'          id = "refreshApp",
+#'          class = "shiny-bound-input action-button",
+#'          "Resfresh App"
+#'      )
+#'   )
+#'   server <- function(input, output, session) {
+#'     observeEvent(input$refreshApp, {
+#'       browsertools::refresh_page()
+#'     })
+#'   }
+#'   shinyApp(ui, server)
+#' }
 #' @importFrom shiny getDefaultReactiveDomain
 #' @export
 refresh_page <- function() {
@@ -273,10 +483,45 @@ refresh_page <- function() {
 #' @param css a string containing the class(es) to remove from
 #'            an html element
 #' @return Removes a css class(es) to an element using id or classname.
-#' @keywords browsertools, css, remove
+#' @keywords browsertools css remove
 #' @examples
-#' remove_css(elem = "#mydiv", css = "some-css-class")
-#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/remove}
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'     browsertools::use_browsertools(),
+#'     tags$head(
+#'        tags$style(
+#'           ".blue-text {
+#'             color: blue;
+#'           }"
+#'        )
+#'     ),
+#'     tags$main(
+#'        tags$h2("Remove CSS Example"),
+#'        tags$p(
+#'          id = "my-text-example",
+#'          class = "blue-text",
+#'          "Click the button below to remove the blue color from the text"
+#'        ),
+#'        tags$button(
+#'           id = "removeCSS",
+#'           class = "shiny-bound-input action-button",
+#'           "Remove CSS"
+#'        )
+#'     )
+#'   )
+#'   server <- function(input, output, session) {
+#'      observeEvent(input$removeCSS, {
+#'        browsertools::remove_css(
+#'          elem = "#my-text-example",
+#'          css = "blue-text"
+#'        )
+#'      })
+#'   }
+#'   shinyApp(ui, server)
+#' }
+#' @references
+#'   \url{https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/remove}
 #' @importFrom shiny getDefaultReactiveDomain
 #' @export
 remove_css <- function(elem, css) {
@@ -295,9 +540,32 @@ remove_css <- function(elem, css) {
 #' Removes an html element from the DOM
 #' @param elem an ID of the element to remove
 #' @return Removes an html element from the DOM
-#' @keywords browsertools, remove, element
+#' @keywords browsertools remove element
 #' @examples
-#' remove_element(elem = "#mydiv")
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'     browsertools::use_browsertools(),
+#'     tags$h2("Remove Element Example"),
+#'     tags$p(
+#'       id = "textToRemove",
+#'       "Click the button below to remove this message."
+#'     ),
+#'     tags$button(
+#'       id = "removeMessage",
+#'       class = "shiny-bound-input action-button",
+#'       "Remove Message"
+#'     )
+#'   )
+#'   server <- function(input, output, session) {
+#'     observeEvent(input$removeMessage, {
+#'       browsertools::remove_element(
+#'         elem = "#textToRemove"
+#'       )
+#'     })
+#'   }
+#'   shinyApp(ui, server)
+#' }
 #' @importFrom shiny getDefaultReactiveDomain
 #' @export
 remove_element <- function(elem) {
@@ -314,7 +582,49 @@ remove_element <- function(elem) {
 #' @return Remove an attribute from an html element
 #' @keywords browsertools, remove, attribute
 #' @examples
-#' remove_element_attribute(elem = "#mydiv", attr = "class")
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'     browsertools::use_browsertools(),
+#'     tags$head(
+#'       tags$style(
+#'         "[aria-hidden='true'] {
+#'              position: absolute;
+#'              width: 1px;
+#'              height: 1px;
+#'              margin: -1px;
+#'              clip: rect(0, 0, 0, 0);
+#'              clip: rect(0 0 0 0);
+#'              overflow: hidden;
+#'              white-space: nowrap;
+#'         }"
+#'       )
+#'     ),
+#'     tags$h2("Remove Element Attribute Example"),
+#'     tags$p(
+#'       "Click the button below to remove an attribute of a hidden element"
+#'     ),
+#'     tags$button(
+#'       id = "removeAttr",
+#'       class = "shiny-bound-input action-button",
+#'       "Remove Attribute"
+#'     ),
+#'     tags$p(
+#'       id = "hidden-text",
+#'       `aria-hidden` = "true",
+#'       "This is a hidden element"
+#'     )
+#'   )
+#'   server <- function(input, output, session) {
+#'     observeEvent(input$removeAttr, {
+#'       browsertools::remove_element_attribute(
+#'         elem = "#hidden-text",
+#'         attr = "aria-hidden"
+#'       )
+#'     })
+#'   }
+#'   shinyApp(ui, server)
+#' }
 #' @importFrom shiny getDefaultReactiveDomain
 #' @export
 remove_element_attribute <- function(elem, attr) {
@@ -346,11 +656,38 @@ remove_element_attribute <- function(elem, attr) {
 #' @param elem a selector path of an element that you would like to scroll
 #'          to (i.e., id, class, tag, etc.). Using elem will override any
 #'          coordinates.
-#' @keywords browsertools, scroll
+#' @keywords browsertools scroll
 #' @examples
-#' scroll_to()
-#' scroll_to(y = 250)
-#' scroll_to(elem = "#mydiv")
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'     browsertools::use_browsertools(),
+#'     tags$head(
+#'         tags$style(
+#'             "#spacing{
+#'                 height: 1200px;
+#'               }"
+#'         )
+#'     ),
+#'     tags$h2("Document Scrolling"),
+#'     tags$p("Click the button at the bottom of the page"),
+#'     tags$div(
+#'         id = "spacing",
+#'         `aria-hidden` = "true"
+#'     ),
+#'     tags$button(
+#'        id = "appScroll",
+#'        class = "shiny-bound-input action-button",
+#'        "Scroll to Top"
+#'     )
+#'   )
+#'   server <- function(input, output, session) {
+#'     observeEvent(input$appScroll, {
+#'         browsertools::scroll_to()
+#'     })
+#'   }
+#'   shinyApp(ui, server)
+#' }
 #' @importFrom shiny getDefaultReactiveDomain
 #' @export
 scroll_to <- function(x = 0, y = 0, elem = NULL) {
@@ -364,16 +701,108 @@ scroll_to <- function(x = 0, y = 0, elem = NULL) {
     session$sendCustomMessage("scroll_to", list(x = x, y = y, elem = elem))
 }
 
+#' \code{set_document_title}
+#'
+#' Set or change the document title
+#' @param title a string containing a title of the document
+#' @param append if TRUE the title will be added to the current title
+#' @keywords browsertools document title
+#' @examples
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'     browsertools::use_browsertools(),
+#'     tags$h2("Setting the Document Title"),
+#'     tags$p("Enter a new title for the document"),
+#'     tags$input(
+#'       id = "titleInput",
+#'       class = "shiny-bound-input",
+#'       type = "text"
+#'     ),
+#'     tags$button(
+#'        id = "submit",
+#'        class = "shiny-bound-input action-button",
+#'        "Submit"
+#'     )
+#'   )
+#'   server <- function(input, output, session) {
+#'     observeEvent(input$submit, {
+#'        browsertools::set_document_title(
+#'          title = as.character(input$titleInput)
+#'        )
+#'     })
+#'   }
+#'   shinyApp(ui, server)
+#' }
+#' @importFrom shiny getDefaultReactiveDomain
+#' @export
+set_document_title <- function(title, append = FALSE) {
+
+    # validate
+    if (!is.character(title)) stop("argument 'title' must be a character")
+    if (!is.logical(append)) stop("argument 'append' must be TRUE or FALSE")
+
+    # send
+    session <- getDefaultReactiveDomain()
+    session$sendCustomMessage(
+        "set_document_title",
+        list(title = title, append = append)
+    )
+}
+
 #' \code{set_element_attribute}
 #'
 #' Set an attribute of an html element
-#' @return Set an attribute of an html element
 #' @param elem the id or class name of an html element
 #' @param attr the name of the attribute to update
 #' @param value the value to add to the attribute
-#' @keywords browsertools, attribute, value
+#' @return Set an attribute of an html element
+#' @keywords browsertools attribute value
 #' @examples
-#' set_element_attribute(elem = "#mydiv", attr = "data-value", value = "12345")
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'     browsertools::use_browsertools(),
+#'     tags$head(
+#'       tags$style(
+#'         "[aria-hidden='true'] {
+#'              position: absolute;
+#'              width: 1px;
+#'              height: 1px;
+#'              margin: -1px;
+#'              clip: rect(0, 0, 0, 0);
+#'              clip: rect(0 0 0 0);
+#'              overflow: hidden;
+#'              white-space: nowrap;
+#'         }"
+#'       )
+#'     ),
+#'     tags$h2("Set Element Attribute Example"),
+#'     tags$p(
+#'       "Click the button below to set an attribute of an element"
+#'     ),
+#'     tags$button(
+#'       id = "setAttr",
+#'       class = "shiny-bound-input action-button",
+#'       "Set Attribute"
+#'     ),
+#'     tags$p(
+#'       id = "mytext",
+#'       `aria-hidden` = "true",
+#'       "This element will be modified."
+#'     )
+#'   )
+#'   server <- function(input, output, session) {
+#'     observeEvent(input$removeAttr, {
+#'       browsertools::set_element_attribute(
+#'         elem = "#mytext",
+#'         attr = "aria-hidden",
+#'         value = "true"
+#'       )
+#'     })
+#'   }
+#'   shinyApp(ui, server)
+#' }
 #' @importFrom shiny getDefaultReactiveDomain
 #' @export
 set_element_attribute <- function(elem, attr, value) {
@@ -402,10 +831,40 @@ set_element_attribute <- function(elem, attr, value) {
 #' @param elem the id or class name of an html elem
 #' @param css a string containing the class to remove from an html element
 #'              (default class is \code{hidden})
-#' @keywords browsertools, css, show
+#' @keywords browsertools css show
 #' @examples
-#' show_elem(elem = "#mydiv")
-#' show_elem(elem = "#mydiv", css = "show-div")
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'       browsertools::use_browsertools(),
+#'       tags$main(
+#'           tags$h2("Show Element Example"),
+#'           tags$p(
+#'               id = "my-text-example",
+#'               "Click the button below to show a hidden element."
+#'           ),
+#'           tags$button(
+#'               id = "showElement",
+#'               class = "shiny-bound-input action-button",
+#'               "Show Element"
+#'           ),
+#'           browsertools::hidden(
+#'               tags$p(
+#'                   id = "hiddenMessage",
+#'                   "You found the hidden message!"
+#'               )
+#'           )
+#'       )
+#'   )
+#'   server <- function(input, output, session) {
+#'       observeEvent(input$showElement, {
+#'           browsertools::show_elem(
+#'               elem = "#hiddenMessage"
+#'           )
+#'       })
+#'   }
+#'   shinyApp(ui, server)
+#' }
 #' @importFrom shiny getDefaultReactiveDomain
 #' @export
 show_elem <- function(elem, css = "browsertools-hidden") {
@@ -427,8 +886,42 @@ show_elem <- function(elem, css = "browsertools-hidden") {
 #' @param css a string containing the class to remove from an html element
 #' @keywords browsertools toggle css
 #' @examples
-#' toggle_css(elem = "#mydiv", css = "mytheme")
-#' @references \url{https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle}
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'     browsertools::use_browsertools(),
+#'     tags$head(
+#'        tags$style(
+#'           ".blue-text {
+#'             color: blue;
+#'           }"
+#'        )
+#'     ),
+#'     tags$main(
+#'        tags$h2("Toggle CSS Example"),
+#'        tags$p(
+#'          id = "my-text-example",
+#'          "Click the button below to toggle the text color."
+#'        ),
+#'        tags$button(
+#'           id = "toggleCSS",
+#'           class = "shiny-bound-input action-button",
+#'           "Toggle CSS"
+#'        )
+#'     )
+#'   )
+#'   server <- function(input, output, session) {
+#'      observeEvent(input$toggleCSS, {
+#'        browsertools::toggle_css(
+#'          elem = "#my-text-example",
+#'          css = "blue-text"
+#'        )
+#'      })
+#'   }
+#'   shinyApp(ui, server)
+#' }
+#' @references
+#'   \url{https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle}
 #' @importFrom shiny getDefaultReactiveDomain
 #' @export
 toggle_css <- function(elem, css) {
@@ -452,7 +945,38 @@ toggle_css <- function(elem, css) {
 #'          (default: browsertools-hidden; package default)
 #' @keywords browsertools toggle element
 #' @examples
-#' toggle_elem(elem = "#mydiv")
+#' if (interactive()) {
+#'   library(shiny)
+#'   ui <- tagList(
+#'       browsertools::use_browsertools(),
+#'       tags$main(
+#'           tags$h2("Toggle Element Example"),
+#'           tags$p(
+#'               id = "my-text-example",
+#'               "Click the button below to toggle the hidden element."
+#'           ),
+#'           tags$button(
+#'               id = "toggleElement",
+#'               class = "shiny-bound-input action-button",
+#'               "Toggle Element"
+#'           ),
+#'           browsertools::hidden(
+#'               tags$p(
+#'                   id = "hiddenMessage",
+#'                   "You found the hidden message!"
+#'               )
+#'           )
+#'       )
+#'   )
+#'   server <- function(input, output, session) {
+#'       observeEvent(input$toggleElement, {
+#'           browsertools::toggle_elem(
+#'               elem = "#hiddenMessage"
+#'           )
+#'       })
+#'   }
+#'   shinyApp(ui, server)
+#' }
 #' @importFrom shiny getDefaultReactiveDomain
 #' @export
 toggle_elem <- function(elem, css = "browsertools-hidden") {

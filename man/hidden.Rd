@@ -19,7 +19,9 @@ Hide elements by when rendered
 Hide elements by when rendered
 }
 \examples{
-hidden(tags$p("hello, world"), tags$p("this is a test"))
+if (interactive()) {
+ hidden(tags$p("hello, world"), tags$p("this is a test"))
+}
 }
 \keyword{browsertools,}
 \keyword{hidden}

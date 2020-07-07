@@ -20,9 +20,37 @@ selector called \code{hidden} and define the hide styles. This allows you
 to add delays and apply other transformations.
 }
 \examples{
-hide_elem(elem = "#mydiv")
-hide_elem(elem = "#mydiv", css = "show-div")
+if (interactive()) {
+  library(shiny)
+  ui <- tagList(
+      browsertools::use_browsertools(),
+      tags$main(
+          tags$h2("Hide Element Example"),
+          tags$p(
+              id = "my-text-example",
+              "Click the button below to hide the message below."
+          ),
+          tags$button(
+              id = "hideElement",
+              class = "shiny-bound-input action-button",
+              "Hide Element"
+          ),
+          tags$p(
+              id = "myMessage",
+              "Hide this message!"
+          )
+      )
+  )
+  server <- function(input, output, session) {
+      observeEvent(input$hideElement, {
+          browsertools::hide_elem(
+              elem = "#myMessage"
+          )
+      })
+  }
+  shinyApp(ui, server)
 }
-\keyword{browsertools,}
-\keyword{css,}
+}
+\keyword{browsertools}
+\keyword{css}
 \keyword{show}

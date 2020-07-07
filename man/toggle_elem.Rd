@@ -19,7 +19,38 @@ Toggle the visibility of an html element
 Toggle the visibility of an html element
 }
 \examples{
-toggle_elem(elem = "#mydiv")
+if (interactive()) {
+  library(shiny)
+  ui <- tagList(
+      browsertools::use_browsertools(),
+      tags$main(
+          tags$h2("Toggle Element Example"),
+          tags$p(
+              id = "my-text-example",
+              "Click the button below to toggle the hidden element."
+          ),
+          tags$button(
+              id = "toggleElement",
+              class = "shiny-bound-input action-button",
+              "Toggle Element"
+          ),
+          browsertools::hidden(
+              tags$p(
+                  id = "hiddenMessage",
+                  "You found the hidden message!"
+              )
+          )
+      )
+  )
+  server <- function(input, output, session) {
+      observeEvent(input$toggleElement, {
+          browsertools::toggle_elem(
+              elem = "#hiddenMessage"
+          )
+      })
+  }
+  shinyApp(ui, server)
+}
 }
 \keyword{browsertools}
 \keyword{element}

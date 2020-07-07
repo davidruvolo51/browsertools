@@ -2,7 +2,7 @@
 // FILE: index.js
 // AUTHOR: David Ruvolo
 // CREATED: 2019-11-11
-// MODIFIED: 2020-05-24
+// MODIFIED: 2020-07-07
 // PURPOSE: main js file for app
 // DEPENDENCIES: NA
 // STATUS: working
@@ -306,6 +306,23 @@ function remove_element_attribute(elem, attr) {
 Shiny.addCustomMessageHandler("remove_element_attribute", function (value) {
     remove_element_attribute(value.elem, value.attr)
 });
+
+////////////////////////////////////////
+
+// SET DOCUMENT TITLE
+// @param title a string containing a title for the document
+// @param append if TRUE, the title will be appeneded to the current one
+function set_document_title(title) {
+    try {
+        if (append) {
+            document.title = document.title + title;
+        } else {
+            document.title = title;
+        }
+    } catch(e) {
+        send_error("set_document_title", e);
+    }
+}
 
 ////////////////////////////////////////
 

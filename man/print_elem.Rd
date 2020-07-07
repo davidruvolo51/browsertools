@@ -16,7 +16,24 @@ Select and print an element in both the JavaScript and R console
 Select and print an html element in both the JavaScript and R consoles
 }
 \examples{
-print_elem(elem = "#mydiv")
+if (interactive()) {
+   ui <- tagList(
+       browsertools::use_browsertools(),
+       tags$div(
+         id = "mydiv",
+         tags$h2("My Element"),
+         tags$p(
+           "This is an example element. The structure will be printed",
+           "in the R console."
+         )
+       )
+   )
+   server <- function(input, output) {
+     observe({
+        print_elem(elem = "#mydiv")
+     })
+   }
+}
 }
 \keyword{browsertools,}
 \keyword{print}

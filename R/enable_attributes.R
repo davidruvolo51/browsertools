@@ -16,26 +16,28 @@
 #' after the last attribute.
 #'
 #' @examples
-#' ui <- tagList(
-#'     browsertools::use_browsertools(),
-#'     tags$p(
-#'        id = "my-text-elem",
-#'        class = "text-bold text-size-lg",
-#'        `data-value` = "12345",
-#'        enable_attributes(),
-#'        "You can access this element's attributes in the server"
-#'     ),
-#'     tags$button(
-#'         id = "getAttribs",
-#'         class = "shiny-bound-input action-button",
-#'         "Get Attributes"
-#'     )
-#' )
-#'
-#' server <- function(input, output) {
-#'      observeEvent(input$getAttribs, {
-# '          print(input$`my-text-elem`)
-#'      })
+#' if (interactive()) {
+#'   ui <- tagList(
+#'       browsertools::use_browsertools(),
+#'       tags$p(
+#'          id = "my-text-elem",
+#'          class = "text-bold text-size-lg",
+#'          `data-value` = "12345",
+#'          enable_attributes(),
+#'          "You can access this element's attributes in the server"
+#'       ),
+#'       tags$button(
+#'           id = "getAttribs",
+#'           class = "shiny-bound-input action-button",
+#'           "Get Attributes"
+#'       )
+#'   )
+#'   server <- function(input, output) {
+#'        observeEvent(input$getAttribs, {
+#'            print(input$`my-text-elem`)
+#'        })
+#'   }
+#'   shinyApp(ui, server)
 #' }
 #' @usage enable_attributes()
 #' @keywords browsertools attributes

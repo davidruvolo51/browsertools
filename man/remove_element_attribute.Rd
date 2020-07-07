@@ -18,7 +18,49 @@ Remove an attribute from an html element
 Removes an html attribute from an element
 }
 \examples{
-remove_element_attribute(elem = "#mydiv", attr = "class")
+if (interactive()) {
+  library(shiny)
+  ui <- tagList(
+    browsertools::use_browsertools(),
+    tags$head(
+      tags$style(
+        "[aria-hidden='true'] {
+             position: absolute;
+             width: 1px;
+             height: 1px;
+             margin: -1px;
+             clip: rect(0, 0, 0, 0);
+             clip: rect(0 0 0 0);
+             overflow: hidden;
+             white-space: nowrap;
+        }"
+      )
+    ),
+    tags$h2("Remove Element Attribute Example"),
+    tags$p(
+      "Click the button below to remove an attribute of a hidden element"
+    ),
+    tags$button(
+      id = "removeAttr",
+      class = "shiny-bound-input action-button",
+      "Remove Attribute"
+    ),
+    tags$p(
+      id = "hidden-text",
+      `aria-hidden` = "true",
+      "This is a hidden element"
+    )
+  )
+  server <- function(input, output, session) {
+    observeEvent(input$removeAttr, {
+      browsertools::remove_element_attribute(
+        elem = "#hidden-text",
+        attr = "aria-hidden"
+      )
+    })
+  }
+  shinyApp(ui, server)
+}
 }
 \keyword{attribute}
 \keyword{browsertools,}
