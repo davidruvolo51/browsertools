@@ -1,10 +1,8 @@
-  <!-- badges: start -->
-  [![Codecov test coverage](https://codecov.io/gh/davidruvolo51/browsertools/branch/master/graph/badge.svg)](https://codecov.io/gh/davidruvolo51/browsertools?branch=master)
-  <!-- badges: end -->
+<!-- badges: start -->
+[![Build Status](https://travis-ci.com/davidruvolo51/browsertools.svg?branch=prod)](https://travis-ci.com/davidruvolo51/browsertools)
 
-  <!-- badges: start -->
-  [![R build status](https://github.com/davidruvolo51/browsertools/workflows/R-CMD-check/badge.svg)](https://github.com/davidruvolo51/browsertools/actions)
-  <!-- badges: end -->
+[![R build status](https://github.com/davidruvolo51/browsertools/workflows/R-CMD-check/badge.svg)](https://github.com/davidruvolo51/browsertools/actions)
+<!-- badges: end -->
 
 # browsertools
 
