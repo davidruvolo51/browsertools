@@ -312,7 +312,7 @@ Shiny.addCustomMessageHandler("remove_element_attribute", function (value) {
 // SET DOCUMENT TITLE
 // @param title a string containing a title for the document
 // @param append if TRUE, the title will be appeneded to the current one
-function set_document_title(title) {
+function set_document_title(title, append) {
     try {
         if (append) {
             document.title = document.title + title;
@@ -323,6 +323,11 @@ function set_document_title(title) {
         send_error("set_document_title", e);
     }
 }
+
+// register
+Shiny.addCustomMessageHandler("set_document_title", function(value) {
+    set_document_title(value.title, value.append)
+});
 
 ////////////////////////////////////////
 

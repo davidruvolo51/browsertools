@@ -1,7 +1,7 @@
 <!-- badges: start -->
 [![Build Status](https://travis-ci.com/davidruvolo51/browsertools.svg?branch=prod)](https://travis-ci.com/davidruvolo51/browsertools)
 
-[![R build status](https://github.com/davidruvolo51/browsertools/workflows/R-CMD-check/badge.svg)](https://github.com/davidruvolo51/browsertools/actions)
+![R-CMD-check](https://github.com/davidruvolo51/browsertools/workflows/R-CMD-check/badge.svg)
 <!-- badges: end -->
 
 # browsertools
@@ -15,8 +15,7 @@ See the [wiki](https://github.com/davidruvolo51/browsertools/wiki) for more info
 You can install `browsertools` in R using the following command.
 
 ```r
-install.packages("devtools")
-devtools::install_github("davidruvolo51/browsertools")
+devtools::install_github("davidruvolo51/browsertools@prod")
 ```
 
 ## Use
@@ -62,7 +61,8 @@ This package offers the following functions. With the exception of the `use_brow
 | `remove_css` | `elem`, `css` | remove a css class from an element
 | `remove_element` | `elem` | remove an element from the DOM
 | `remove_element_attribute` | `elem`, `attr` | remove an attribute from an element
-| `set_element_attribute` | `elem`, `attr`, `value` | update an attribute of an element 
+| `set_document_title` | `title`, `append` | change the title of the document
+| `set_element_attribute` | `elem`, `attr`, `value` | update an attribute of an element
 | `scroll_to` | `x`, `y` | scroll to a position in a page (default: `0, 0` = top of document)
 | `show_elem` | `elem`, `css` | show an element by removing a class name or `hidden`
 | `toggle_css` | `elem`, `css` | toggle a css class
