@@ -11,3 +11,5 @@ browsertools.code-workspace
 README.md
 ^codecov\.yml$
 ^\.github$
+.travis.yml
+
