@@ -15,7 +15,7 @@
 #'           color: blue;
 #'         }"
 #'       )
-#'     )
+#'     ),
 #'     tags$h2("Browsertools demo"),
 #'     tags$p(
 #'       id = "txt",

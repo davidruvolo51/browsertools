@@ -22,6 +22,7 @@ usethis::use_package(package = "htmltools", min_version = "0.4.0")
 usethis::use_package(package = "shiny", min_version = "1.4.0")
 usethis::use_package(package = "rlang", min_version = "0.4.7")
 usethis::use_package(package = "purrr", min_version = "0.3.4")
+usethis::use_package(package = "jsonlite", min_version = "1.7.0")
 
 #'//////////////////////////////////////
 
@@ -29,30 +30,25 @@ usethis::use_package(package = "purrr", min_version = "0.3.4")
 #' Package Ignores
 
 # ignore git
-git <- c(
-    ".Rproj.user",
+gitignore <- c(
     ".Rhistory",
     ".RData",
-    ".Ruserdata",
-    "node_modules/"
+    ".Rproj.user",
+    ".DS_STORE",
+    "node_modules",
+    ".cache",
+    "yarn.lock",
+    "yarn-error.log"
 )
-
 # ignore r build
 rbuild <- c(
-
-    # include git
-    git,
-
-    # dirs
-    "dev/",
+    gitignore,
+    "dev",
     ".github",
-
-    # file extensions
-    "[*.yml]",
-    "[*.code-workspace]",
-    "[*.lock]",
-
-    # named files
+    ".travis.yml",
+    "browsertools.code-workspace",
+    "package.json",
+    "yarn.lock",
     ".babelrc",
     ".postcssrc",
     ".gitignore"
@@ -60,7 +56,7 @@ rbuild <- c(
 
 
 # add
-usethis::use_git_ignore(ignores = git)
+usethis::use_git_ignore(ignores = gitignore)
 usethis::use_build_ignore(files = rbuild)
 
 #'//////////////////////////////////////

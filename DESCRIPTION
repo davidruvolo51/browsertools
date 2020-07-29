@@ -20,4 +20,5 @@ Imports:
     htmltools (>= 0.4.0),
     shiny (>= 1.4.0),
     rlang (>= 0.4.7),
-    purrr (>= 0.3.4)
+    purrr (>= 0.3.4),
+    jsonlite (>= 1.7.0)
