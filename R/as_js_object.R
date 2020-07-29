@@ -1,15 +1,15 @@
 #' \code{as_js_object}
 #'
-#' Restructures a data.frame to JavaScript Object
+#' Restructure a data.frame to JavaScript Object
+#'
 #' @param x a data frame object
-#' @return Restructures a data.frame to JavaScript Object
-#' @keywords browsertools, object
+#'
 #' @examples
 #' if (interactive()) {
 #'  library(shiny)
 #'  ui <- tagList(
 #'      browsertools::use_browsertools(),
-#'      tags$p("Open the browser's dev console")
+#'      tags$p("Open the browser's dev console to view the data")
 #'  )
 #'  server <- function(input, output, session) {
 #'      n <- 10
@@ -23,10 +23,13 @@
 #'   }
 #'   shinyApp(ui, server)
 #' }
-#' @importFrom shiny getDefaultReactiveDomain
+#'
+#' @seealso [console_log()], [console_table()]
+#' @keywords browsertools object
+#' @return Restructures a data.frame to JavaScript Object
+#'
 #' @export
 as_js_object <- function(x) {
-    session <- getDefaultReactiveDomain()
     d <- as.data.frame(x)
     parent <- list()
     lapply(seq_len(NROW(d)), function(row) {
