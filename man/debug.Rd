@@ -2,7 +2,7 @@
 % Please edit documentation in R/debug.R
 \name{debug}
 \alias{debug}
-\title{\code{Debug}}
+\title{\code{debug}}
 \usage{
 debug()
 }
@@ -10,21 +10,41 @@ debug()
 Print JavaScript errors in the R console
 }
 \description{
-Print JavaScript errors in the R console. This function
-is designed to be used within the Shiny Server
+Print JavaScript errors in the R console. This may be useful for debugging
+errors that may arise when using functions included in this pacakge. For
+example, if an element cannot be found using the \code{add_css} function, the
+\code{debug} function will print the corresponding error.
 }
 \examples{
 if (interactive()) {
   ui <- tagList(
-     tags$h2("Browsertools demo"),
-     tags$p("JavaScript messages will print in the R Console")
+    tags$head(
+      tags$style(
+        ".blue-text {
+          color: blue;
+        }"
+      )
+    ),
+    tags$h2("Browsertools demo"),
+    tags$p(
+      id = "txt",
+      "JavaScript messages will print in the R Console"
+    )
   )
   server <- function(input, output, session) {
-     browsertools::debug()
+    browsertools::debug()
+    browsertools::add_css(
+      elem = "#t",
+      css = "blue-text"
+    )
   }
   shinyApp(ui, server)
 }
+
 }
-\keyword{browsertools,}
-\keyword{debug,}
+\seealso{
+\code{\link[=console_log]{console_log()}}, \code{\link[=console_error]{console_error()}}, \code{\link[=console_warn]{console_warn()}}, \code{\link[=alert]{alert()}}, \code{\link[=print_elem]{print_elem()}}
+}
+\keyword{browsertools}
+\keyword{debug}
 \keyword{error}

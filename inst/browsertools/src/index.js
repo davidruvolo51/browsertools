@@ -2,13 +2,16 @@
 // FILE: index.js
 // AUTHOR: David Ruvolo
 // CREATED: 2019-11-11
-// MODIFIED: 2020-07-07
+// MODIFIED: 2020-07-30
 // PURPOSE: main js file for app
 // DEPENDENCIES: NA
 // STATUS: working
 // COMMENTS: run yarn build to transpile
 ////////////////////////////////////////////////////////////////////////////////
 // DEFINE FUNCTIONS
+
+// import scss 
+import "./styles.scss"
 
 // Set Package Options
 let browsertools = {
@@ -143,23 +146,23 @@ Shiny.addCustomMessageHandler("hide_elem", function (value) {
 
 // SET INNERHTML
 // @param elem: an element to select
-// @param string: content to add to element
+// @param content: content to render
 // @param append: option to append or replace content
 // @param delay: time (ms) to wait before inserting content
-function inner_html(elem, string, append, delay) {
+function inner_html(elem, content, append, delay) {
     try {
 
         // select element and define content
         const el = document.querySelector(elem);
-        const content = append ? el.innerHTML + string : string;
+        const newContent = append ? el.innerHTML + content : content;
 
         // update content based on delay
         if (delay) {
             setTimeout(function () {
-                document.querySelector(elem).innerHTML = content;
+                document.querySelector(elem).innerHTML = newContent;
             }, delay);
         } else {
-            document.querySelector(elem).innerHTML = content;
+            document.querySelector(elem).innerHTML = newContent;
         }
     } catch (e) {
         send_error("inner_html", e)
@@ -168,30 +171,30 @@ function inner_html(elem, string, append, delay) {
 
 // register
 Shiny.addCustomMessageHandler("inner_html", function (value) {
-    inner_html(value.elem, value.string, value.append, value.delay)
+    inner_html(value.elem, value.content, value.append, value.delay)
 });
 
 ////////////////////////////////////////
 
 // SET INNERTEXT
 // @param elem: an element to select (e.g., ID, class, tag, etc.)
-// @param string: content to add
+// @param content: content to render
 // @param append: option to append or replace content
 // @param delay: time (ms) to wait before inserting content
-function inner_text(elem, string, append, delay) {
+function inner_text(elem, content, append, delay) {
     try {
 
         // select element and define content
         const el = document.querySelector(elem);
-        const content = append ? el.innerText + string : string;
+        const newContent = append ? el.innerText + content : content;
 
         // update content based on delay
         if (delay) {
             setTimeout(function () {
-                document.querySelector(elem).innerText = content;
+                document.querySelector(elem).innerText = newContent;
             }, delay);
         } else {
-            document.querySelector(elem).innerText = content;
+            document.querySelector(elem).innerText = newContent;
         }
     } catch (e) {
         send_error("inner_text", e)
@@ -200,19 +203,19 @@ function inner_text(elem, string, append, delay) {
 
 // register
 Shiny.addCustomMessageHandler("inner_text", function (value) {
-    inner_text(value.elem, value.string, value.append, value.delay);
+    inner_text(value.elem, value.content, value.append, value.delay);
 });
 
 ////////////////////////////////////////
 
 // INSERT ADJACENT HTML
 // @param id: An ID used to select an element
-// @param html: an html string to insert
+// @param content: an html string to insert
 // @param position: location where to insert (beforebegin, etc.)
-function insert_adjacent_html(id, html, position) {
+function insert_adjacent_html(id, content, position) {
     try {
         const parent = document.getElementById(id);
-        parent.insertAdjacentHTML(position, html);
+        parent.insertAdjacentHTML(position, content);
     } catch (e) {
         send_error("insert_adjacent_html", e);
     }
@@ -220,7 +223,7 @@ function insert_adjacent_html(id, html, position) {
 
 // register
 Shiny.addCustomMessageHandler("insert_adjacent_html", function (value) {
-    insert_adjacent_html(value.id, value.html, value.position)
+    insert_adjacent_html(value.id, value.content, value.position)
 });
 
 ////////////////////////////////////////
@@ -450,6 +453,9 @@ $.extend(enable_html_attribs, {
             out[`${attr.name}`] = attr.value
         })
         return out;
+    },
+    unsubscribe: function(el) {
+        $(el).off(".enable_html_attribs");
     }
 });
 Shiny.inputBindings.register(enable_html_attribs);

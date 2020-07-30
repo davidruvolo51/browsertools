@@ -1,8 +1,15 @@
 #' \code{print_elem}
 #'
-#' Select and print an html element in both the JavaScript and R consoles
-#' @return Select and print an element in both the JavaScript and R console
+#' Find and print an HTML element in the R console. This function is designed
+#' to be used during application development rather than production
+#' applications as the corresponding JavaScript does not create a new
+#' instance when called. Use this function to debug the HTML markup of
+#' elements or simply to view a structure of an element. This may be
+#' useful when applications are running the viewer pane rather than in the
+#' browser.
+#'
 #' @param elem an element to select (i.e., ID, class, tag, etc.)
+#'
 #' @examples
 #' if (interactive()) {
 #'    ui <- tagList(
@@ -22,9 +29,10 @@
 #'      })
 #'    }
 #' }
-#' @keywords browsertools, print
-#' @importFrom shiny getDefaultReactiveDomain
-#' @importFrom jsonlite fromJSON
+#'
+#' @keywords browsertools print debugging
+#' @return Find and print an HTML element in the R console.
+#'
 #' @export
 print_elem <- function(elem) {
 
@@ -32,13 +40,18 @@ print_elem <- function(elem) {
     if (!is.character(elem)) stop("argument 'elem' must be a character")
 
     # send
-    session <- getDefaultReactiveDomain()
-    session$sendCustomMessage("print_elem", list(elem = elem))
+    session <- shiny::getDefaultReactiveDomain()
+    session$sendCustomMessage(
+        type = "print_elem",
+        message = list(
+            elem = elem
+        )
+    )
 
     # receive
     input <- session$input
-    observeEvent(input$print_elem_response, {
-        el <- fromJSON(input$print_elem_response)
+    shiny::observeEvent(input$print_elem_response, {
+        el <- jsonlite::fromJSON(input$print_elem_response)
         message("print_elem: ", elem, "\n", el, "\n")
     })
 }

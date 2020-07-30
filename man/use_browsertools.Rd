@@ -2,8 +2,7 @@
 % Please edit documentation in R/use_browsertools.R
 \name{use_browsertools}
 \alias{use_browsertools}
-\title{\code{use_browsertools}
-Function that loads all assets into your shiny app}
+\title{\code{use_browsertools}}
 \usage{
 use_browsertools()
 }
@@ -11,11 +10,24 @@ use_browsertools()
 Function that loads all assets into your shiny app
 }
 \description{
-\code{use_browsertools}
-Function that loads all assets into your shiny app
+Function that loads all package assets into your shiny app (css and js
+file). This function is required and should be called at the top of the
+Shiny app. If you are using other ShinyUI layouts, you may need to wrap
+your app in \code{tagList}.
 }
 \examples{
-browsertools::use_browsertools()
+if (interactive()) {
+  ui <- tagList(
+    browsertools::use_browsertools(),
+    tags$h2("Hello, world!")
+  )
+  server <- function(input, output, session) {
+  }
+  shinyApp(ui, server)
 }
-\keyword{browsertools,}
+
+}
+\keyword{browsertools}
+\keyword{initial}
+\keyword{setup}
 \keyword{use}

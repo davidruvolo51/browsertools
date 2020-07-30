@@ -7,7 +7,7 @@
 #' However, if you are using an HTML/JavaScript based library, chart styling
 #' should be done using CSS.
 #'
-#' This functions works by injecting an <span> element immediately after the
+#' This functions works by injecting an span element immediately after the
 #' target element. Using a custom input binding, the function looks for the
 #' parent element and restructures the html attributes into an object.
 #'
@@ -39,16 +39,16 @@
 #'   }
 #'   shinyApp(ui, server)
 #' }
-#' @usage enable_attributes()
+#'
+#' @seealso [print_elem()]
+#' @return View and print attributes of an html element
 #' @keywords browsertools attributes
-#' @importFrom htmltools tagList tags
+#'
 #' @export
 enable_attributes <- function() {
-    tagList(
-        tags$span(
-            `data-browsertools-indexible` = "true",
-            class = "browsertools-hidden",
-            `aria-hidden` = "true"
-        )
+    htmltools::tags$span(
+        `data-browsertools-indexible` = "true",
+        class = "browsertools-hidden browsertools-attributes",
+        `aria-hidden` = "true"
     )
 }

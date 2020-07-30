@@ -13,14 +13,14 @@ as_js_object(x)
 Restructures a data.frame to JavaScript Object
 }
 \description{
-Restructures a data.frame to JavaScript Object
+Restructure a data.frame to JavaScript Object
 }
 \examples{
 if (interactive()) {
  library(shiny)
  ui <- tagList(
      browsertools::use_browsertools(),
-     tags$p("Open the browser's dev console")
+     tags$p("Open the browser's dev console to view the data")
  )
  server <- function(input, output, session) {
      n <- 10
@@ -34,6 +34,10 @@ if (interactive()) {
   }
   shinyApp(ui, server)
 }
+
 }
-\keyword{browsertools,}
+\seealso{
+\code{\link[=console_log]{console_log()}}, \code{\link[=console_table]{console_table()}}
+}
+\keyword{browsertools}
 \keyword{object}

@@ -2,9 +2,9 @@
 #' FILE: server.R
 #' AUTHOR: David Ruvolo
 #' CREATED: 2020-05-25
-#' MODIFIED: 2020-06-24
+#' MODIFIED: 2020-07-30
 #' PURPOSE: Shiny server for demo app
-#' STATUS: in.progress
+#' STATUS: working; ongoing
 #' PACKAGES: shiny, browsertools
 #' COMMENTS: NA
 #'////////////////////////////////////////////////////////////////////////////
@@ -111,7 +111,7 @@ server <- function(input, output, session) {
         # insert
         browsertools::insert_adjacent_html(
             id = "remove-element-example-container",
-            html = as.character(new_elem)
+            content = as.character(new_elem)
         )
     })
 
@@ -124,7 +124,7 @@ server <- function(input, output, session) {
     observeEvent(input$`change-text`, {
         browsertools::inner_text(
             elem = "#change-content-text-example",
-            string = "This sentence was changed using the function inner_text"
+            content = "This sentence was changed using the function inner_text"
         )
     })
 
@@ -132,7 +132,7 @@ server <- function(input, output, session) {
     observeEvent(input$`change-html`, {
         browsertools::inner_html(
             elem = "#change-content-text-example",
-            string = paste0(
+            content = paste0(
                 "This sentence was changed using the function ",
                 "<span class='funcname'>inner_html</span>."
             )
@@ -143,7 +143,7 @@ server <- function(input, output, session) {
     observeEvent(input$`append-html`, {
         browsertools::inner_html(
             elem = "#change-content-text-example",
-            string = paste0(
+            content = paste0(
                 "Using the argument",
                 tags$code(class = "argname", "append"),
                 ", you can add text or html content to an element."
@@ -162,7 +162,7 @@ server <- function(input, output, session) {
         txt <- tags$p(id = "greeting", `data-value` = "123", "Hello!")
         browsertools::inner_text(
             elem = "#element-attribute-text-example",
-            string = as.character(txt)
+            content = as.character(txt)
         )
 
         #' In order to demonstrate the changes to the HTML
@@ -180,7 +180,7 @@ server <- function(input, output, session) {
         txt <- tags$p(id = "greeting", "Hello!")
         browsertools::inner_text(
             elem = "#element-attribute-text-example",
-            string = as.character(txt)
+            content = as.character(txt)
         )
 
         #' In order to demonstrate the changes to the HTML
@@ -196,7 +196,7 @@ server <- function(input, output, session) {
     observeEvent(input$`get-element-attribute`, {
         browsertools::inner_html(
             elem = "#get-attribute-value-example",
-            string = paste0(
+            content = paste0(
                 "\n",
                 "id: ", input$`sample-attribute`$id, "\n",
                 "class: ", input$`sample-attribute`$class, "\n",
@@ -224,7 +224,7 @@ server <- function(input, output, session) {
     })
 
     #'//////////////////////////////////////
-    
+
     #' ~ 7 ~
     #' EVENTS: Console Messages
 
@@ -244,8 +244,9 @@ server <- function(input, output, session) {
 
     # table
     observeEvent(input$`console-table-example`, {
-        d <- iris[sample(seq_len(NROW(iris)), 1), ]
+        d <- quakes[sample(seq_len(NROW(quakes)), 1), ]
         d <- browsertools::as_js_object(d)
+        browsertools::console_log("Printing a random row from `quakes`:")
         browsertools::console_table(d)
     })
 
@@ -257,7 +258,7 @@ server <- function(input, output, session) {
     })
 
     #'//////////////////////////////////////
-    
+
     #' ~ 8 ~
     #' EVENTS: page refresh
     observeEvent(input$`page-refresh-example`, {
