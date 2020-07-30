@@ -26,8 +26,8 @@ use_browsertools <- function() {
         version = "0.1.72",
         src = "browsertools/",
         package = "browsertools",
-        script = "js/browsertools.min.js",
-        stylesheet = "css/browsertools.min.css",
+        script = "browsertools.min.js",
+        stylesheet = "browsertools.min.css",
         all_files = FALSE
     )
 }

@@ -2,13 +2,16 @@
 // FILE: index.js
 // AUTHOR: David Ruvolo
 // CREATED: 2019-11-11
-// MODIFIED: 2020-07-29
+// MODIFIED: 2020-07-30
 // PURPOSE: main js file for app
 // DEPENDENCIES: NA
 // STATUS: working
 // COMMENTS: run yarn build to transpile
 ////////////////////////////////////////////////////////////////////////////////
 // DEFINE FUNCTIONS
+
+// import scss 
+import "./styles.scss"
 
 // Set Package Options
 let browsertools = {
