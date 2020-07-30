@@ -2,7 +2,7 @@
 #' FILE: server.R
 #' AUTHOR: David Ruvolo
 #' CREATED: 2020-05-25
-#' MODIFIED: 2020-07-29
+#' MODIFIED: 2020-07-30
 #' PURPOSE: Shiny server for demo app
 #' STATUS: working; ongoing
 #' PACKAGES: shiny, browsertools
@@ -111,7 +111,7 @@ server <- function(input, output, session) {
         # insert
         browsertools::insert_adjacent_html(
             id = "remove-element-example-container",
-            html = as.character(new_elem)
+            content = as.character(new_elem)
         )
     })
 
@@ -244,8 +244,9 @@ server <- function(input, output, session) {
 
     # table
     observeEvent(input$`console-table-example`, {
-        d <- iris[sample(seq_len(NROW(iris)), 1), ]
+        d <- quakes[sample(seq_len(NROW(quakes)), 1), ]
         d <- browsertools::as_js_object(d)
+        browsertools::console_log("Printing a random row from `quakes`:")
         browsertools::console_table(d)
     })
 
