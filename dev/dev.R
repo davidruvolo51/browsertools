@@ -13,6 +13,8 @@
 usethis::use_namespace()
 usethis::use_description()
 usethis::use_news_md()
+usethis::use_github_action_check_standard()
+usethis::use_travis()
 
 #' ~ 0 ~
 #' Set Dependencies
@@ -51,21 +53,14 @@ rbuild <- c(
     "yarn.lock",
     ".babelrc",
     ".postcssrc",
-    ".gitignore"
+    ".gitignore",
+    "inst/browsertools/src"
 )
 
 
 # add
 usethis::use_git_ignore(ignores = gitignore)
 usethis::use_build_ignore(files = rbuild)
-
-#'//////////////////////////////////////
-
-#' ~ 2 ~
-#' Packge Checks
-
-usethis::use_github_action_check_standard()
-usethis::use_travis()
 
 
 #'//////////////////////////////////////

@@ -10,10 +10,16 @@ print_elem(elem)
 \item{elem}{an element to select (i.e., ID, class, tag, etc.)}
 }
 \value{
-Select and print an element in both the JavaScript and R console
+Find and print an HTML element in the R console.
 }
 \description{
-Select and print an html element in both the JavaScript and R consoles
+Find and print an HTML element in the R console. This function is designed
+to be used during application development rather than production
+applications as the corresponding JavaScript does not create a new
+instance when called. Use this function to debug the HTML markup of
+elements or simply to view a structure of an element. This may be
+useful when applications are running the viewer pane rather than in the
+browser.
 }
 \examples{
 if (interactive()) {
@@ -34,6 +40,8 @@ if (interactive()) {
      })
    }
 }
+
 }
-\keyword{browsertools,}
+\keyword{browsertools}
+\keyword{debugging}
 \keyword{print}

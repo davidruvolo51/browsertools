@@ -1,23 +1,18 @@
 <!-- badges: start -->
-[![Build Status](https://travis-ci.com/davidruvolo51/browsertools.svg?branch=prod)](https://travis-ci.com/davidruvolo51/browsertools)
-
 ![R-CMD-check](https://github.com/davidruvolo51/browsertools/workflows/R-CMD-check/badge.svg)
-[![R build status](https://github.com/davidruvolo51/browsertools/workflows/R-CMD-check/badge.svg)](https://github.com/davidruvolo51/browsertools/actions)
-[![Travis build status](https://travis-ci.com/davidruvolo51/browsertools.svg?branch=master)](https://travis-ci.com/davidruvolo51/browsertools)
+[![Travis build status](https://travis-ci.com/davidruvolo51/browsertools.svg?branch=prod)](https://travis-ci.com/davidruvolo51/browsertools)
 <!-- badges: end -->
 
 # browsertools
 
-This package contains a series of functions for running javascript functions in shiny. These functions are wrappers for custom message handlers for routine DOM manipulation within shiny server. All JavaScript functions were written in vanilla JS and transpiled using babel.js.
-
-See the [wiki](https://github.com/davidruvolo51/browsertools/wiki) for more information.
+This package contains a series of functions for running JavaScript functions in shiny. These functions are wrappers for custom message handlers for routine DOM manipulation within shiny server. All JavaScript functions were written in vanilla JS and compiled using babel.js.
 
 ## Install
 
 You can install `browsertools` in R using the following command.
 
 ```r
-devtools::install_github("davidruvolo51/browsertools@prod")
+devtools::install_github("davidruvolo51/browsertools")
 ```
 
 ## Use
@@ -32,14 +27,14 @@ ui <- tagList(
 )
 ```
 
-This package offers the following functions. With the exception of the `use_browsertools` and `hidden`, these functions are designed to run within the shiny server.
+The package offers the following functions.
 
 ### Shiny UI
 
 | function | arguments | description | 
 | :------- | :-------- | :---------- |
-| `use_browsertools` | --- | loads the browsertool dependencies into your shiny app (required)
-| `enable_attributes` | --- | allows you to access the html attributes of an element in the shiny server; Element must have an ID 
+| `use_browsertools` | --- | load `browsertools` dependencies into your shiny app (required). This will load the package's JavaScript file and CSS file.
+| `enable_attributes` | --- | allows you to access the HTML attributes of an element in the shiny server; Element must have an ID 
 | `hidden` | `...`, `css` | Hide elements by default
 
 ### Shiny Server

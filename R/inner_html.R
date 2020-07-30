@@ -38,7 +38,7 @@
 #'   \url{https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML}
 #'
 #' @seealso [inner_text()], [insert_adjacent_html()]
-#' @keywords browsertools innerhtml
+#' @keywords innerhtml
 #' @return Update the content of an element by id or class name
 #'
 #' @export

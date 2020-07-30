@@ -6,6 +6,9 @@
 \usage{
 enable_attributes()
 }
+\value{
+View and print attributes of an html element
+}
 \description{
 This function allows you to access the attributes of an html element
 as R objects. This may be useful if there are cases where you need an html
@@ -15,7 +18,7 @@ However, if you are using an HTML/JavaScript based library, chart styling
 should be done using CSS.
 }
 \details{
-This functions works by injecting an <span> element immediately after the
+This functions works by injecting an span element immediately after the
 target element. Using a custom input binding, the function looks for the
 parent element and restructures the html attributes into an object.
 
@@ -47,6 +50,10 @@ if (interactive()) {
   }
   shinyApp(ui, server)
 }
+
+}
+\seealso{
+\code{\link[=print_elem]{print_elem()}}
 }
 \keyword{attributes}
 \keyword{browsertools}
