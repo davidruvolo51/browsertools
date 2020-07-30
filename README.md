@@ -1,3 +1,5 @@
+![browsertools r package](browsertools.png)
+
 <!-- badges: start -->
 ![R-CMD-check](https://github.com/davidruvolo51/browsertools/workflows/R-CMD-check/badge.svg)
 [![Travis build status](https://travis-ci.com/davidruvolo51/browsertools.svg?branch=prod)](https://travis-ci.com/davidruvolo51/browsertools)
@@ -93,17 +95,4 @@ yarn clean    # removes existing files
 yarn build    # builds css and js files
 ```
 
-Alternatively, you can rebuild each asset independently.
-
-```bash
-yarn js
-yarn sass
-```
-
-When all changes are made and the css/js files are built, you can build the package using the following commands.
-
-```bash
-yarn uninstall    # uninstalls pkg
-yarn document     # builds pkg documentation
-yarn package      # builds and installs pkg
-```
+Use the R script `dev/dev.R` for managing the package. 

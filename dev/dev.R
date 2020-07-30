@@ -54,7 +54,8 @@ rbuild <- c(
     ".babelrc",
     ".postcssrc",
     ".gitignore",
-    "inst/browsertools/src"
+    "inst/browsertools/src",
+    "browsertools.png"
 )
 
 
@@ -68,5 +69,10 @@ usethis::use_build_ignore(files = rbuild)
 #' ~ 3 ~
 #' Build
 
+
+# run checks
 devtools::check_man()
 devtools::check()
+
+# for local testing
+devtools::load_all()

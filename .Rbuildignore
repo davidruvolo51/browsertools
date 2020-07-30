@@ -15,3 +15,4 @@
 ^\.postcssrc$
 ^\.gitignore$
 ^inst/browsertools/src$
+^browsertools\.png$
