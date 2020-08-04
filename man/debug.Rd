@@ -13,7 +13,8 @@ Print JavaScript errors in the R console
 Print JavaScript errors in the R console. This may be useful for debugging
 errors that may arise when using functions included in this pacakge. For
 example, if an element cannot be found using the \code{add_css} function, the
-\code{debug} function will print the corresponding error.
+\code{debug} function will print the corresponding error. (The correct selector
+for \code{add_css} is \verb{#txt}.)
 }
 \examples{
 if (interactive()) {
@@ -43,7 +44,7 @@ if (interactive()) {
 
 }
 \seealso{
-\code{\link[=console_log]{console_log()}}, \code{\link[=console_error]{console_error()}}, \code{\link[=console_warn]{console_warn()}}, \code{\link[=alert]{alert()}}, \code{\link[=print_elem]{print_elem()}}
+\code{\link[=print_elem]{print_elem()}}
 }
 \keyword{browsertools}
 \keyword{debug}

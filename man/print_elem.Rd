@@ -42,6 +42,9 @@ if (interactive()) {
 }
 
 }
+\seealso{
+\code{\link[=debug]{debug()}}
+}
 \keyword{browsertools}
 \keyword{debugging}
 \keyword{print}

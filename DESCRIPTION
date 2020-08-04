@@ -1,6 +1,6 @@
 Package: browsertools
-Title: What the Package Does (One Line, Title Case)
-Version: 0.1.72
+Title: Running Specific JavaScript functions from R
+Version: 0.1.73
 Authors@R: 
     person(
         given = "David",

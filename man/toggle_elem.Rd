@@ -4,13 +4,10 @@
 \alias{toggle_elem}
 \title{\code{toggle_elem}}
 \usage{
-toggle_elem(elem, css = "browsertools-hidden")
+toggle_elem(elem)
 }
 \arguments{
 \item{elem}{the id or class name of an html element}
-
-\item{css}{a string containing the class to remove from an html element
-(default: browsertools-hidden; package default)}
 }
 \value{
 Toggle the visibility of an html element
@@ -57,5 +54,4 @@ if (interactive()) {
 \code{\link[=hide_elem]{hide_elem()}}, \code{\link[=show_elem]{show_elem()}}
 }
 \keyword{browsertools}
-\keyword{element}
 \keyword{toggle}

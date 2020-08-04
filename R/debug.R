@@ -4,7 +4,8 @@
 #' Print JavaScript errors in the R console. This may be useful for debugging
 #' errors that may arise when using functions included in this pacakge. For
 #' example, if an element cannot be found using the `add_css` function, the
-#' `debug` function will print the corresponding error.
+#' `debug` function will print the corresponding error. (The correct selector
+#' for `add_css` is `#txt`.)
 #'
 #' @examples
 #' if (interactive()) {
@@ -32,7 +33,7 @@
 #'   shinyApp(ui, server)
 #' }
 #'
-#' @seealso [console_log()], [console_error()], [console_warn()], [alert()], [print_elem()]
+#' @seealso [print_elem()]
 #' @keywords browsertools debug error
 #' @return Print JavaScript errors in the R console
 #'
@@ -54,9 +55,21 @@ debug <- function() {
     input <- session$input
     shiny::observeEvent(input$browsertools_debug, {
         e <- jsonlite::fromJSON(input$browsertools_debug)
-        warning(
-            "Error in ", e$func, ":\n  ", e$name, ": ", e$message,
-            call. = FALSE
-        )
+
+        # if TypeError
+        if (e$name == "TypeError") {
+            warning(
+                "Error in ", e$func, ":\n\n  ", e$name, ": ", e$message, "\n",
+                "\nIt is likely that the element cannot be found.",
+                "\nIs selector path correct?",
+                call. = FALSE
+            )
+        } else {
+            # for all other warnings (if applicable)
+             warning(
+                "Error in ", e$func, ":\n  ", e$name, ": ", e$message,
+                call. = FALSE
+            )
+        }
     })
 }

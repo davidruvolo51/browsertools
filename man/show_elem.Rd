@@ -4,23 +4,16 @@
 \alias{show_elem}
 \title{\code{show_elem}}
 \usage{
-show_elem(elem, css = "browsertools-hidden")
+show_elem(elem)
 }
 \arguments{
 \item{elem}{the id or class name of an html elem}
-
-\item{css}{a string containing the class to remove from an html element
-(default class is \code{hidden})}
 }
 \value{
 Show a hidden html element
 }
 \description{
-Shows an html element by id or class name. This function, by defauly,
-removes the class \code{hidden} from the desired element and updates
-aria attriute \code{hidden}. In your css file, create a corresponding
-selector called \code{hidden} and define the show styles. This allows you
-to add delays and apply other transformations.
+Shows an html element by id or class name.
 }
 \examples{
 if (interactive()) {
@@ -61,5 +54,4 @@ if (interactive()) {
 \code{\link[=hide_elem]{hide_elem()}}, \code{\link[=hidden]{hidden()}}, \code{\link[=toggle_elem]{toggle_elem()}}
 }
 \keyword{browsertools}
-\keyword{css}
 \keyword{show}

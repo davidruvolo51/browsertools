@@ -2,9 +2,9 @@
 #' FILE: app.R
 #' AUTHOR: David Ruvolo
 #' CREATED: 2020-05-25
-#' MODIFIED: 2020-06-24
+#' MODIFIED: 2020-08-04
 #' PURPOSE: browsertools demo
-#' STATUS: in.progress
+#' STATUS: working; ongoing
 #' PACKAGES: shiny, browsertools
 #' COMMENTS: NA
 #'////////////////////////////////////////////////////////////////////////////
@@ -54,40 +54,38 @@ argname <- function(name) {
 # ui
 ui <- tagList(
     browsertools::use_browsertools(),
-    singleton(
-        tags$head(
-            tags$meta(charset = "utf-8"),
-            tags$meta(
-                `http-quiv` = "x-ua-compatible",
-                content = "ie=edge"
-            ),
-            tags$meta(
-                name = "viewport",
-                content = "width=device-width, initial-scale=1"
-            ),
-            tags$meta(
-                name = "description",
-                content = "A demonstration of the browsertools package"
-            ),
-            tags$meta(property = "og:title", content  = "browsertools demo"),
-            tags$meta(
-                property = "og:description",
-                content = "A demonstration of the browsertools package"
-            ),
-            tags$meta(property = "og:url", content = "[url to your app]"),
-            tags$meta(propery = "twitter:card", content = "summary"),
-            tags$link(rel = "stylesheet", href = "demo.min.css"),
-            tags$style(
-                HTML(
-                    ".text {
-                        font-weight: bold;
-                        color: #353535;
-                        font-size: 24pt;
-                     }"
-                )
-            ),
-            tags$title("browsertools | Demo")
-        )
+    tags$head(
+        tags$meta(charset = "utf-8"),
+        tags$meta(
+            `http-quiv` = "x-ua-compatible",
+            content = "ie=edge"
+        ),
+        tags$meta(
+            name = "viewport",
+            content = "width=device-width, initial-scale=1"
+        ),
+        tags$meta(
+            name = "description",
+            content = "A demonstration of the browsertools package"
+        ),
+        tags$meta(property = "og:title", content  = "browsertools demo"),
+        tags$meta(
+            property = "og:description",
+            content = "A demonstration of the browsertools package"
+        ),
+        tags$meta(property = "og:url", content = "[url to your app]"),
+        tags$meta(propery = "twitter:card", content = "summary"),
+        tags$link(rel = "stylesheet", href = "demo.min.css"),
+        tags$style(
+            HTML(
+                ".text {
+                    font-weight: bold;
+                    color: #353535;
+                    font-size: 24pt;
+                    }"
+            )
+        ),
+        tags$title("browsertools | Demo")
     ),
     tags$nav(
         class = "nav",
@@ -545,7 +543,5 @@ ui <- tagList(
             )
         )
     ),
-    singleton(
-        tags$script(src = "demo.min.js")
-    )
+    tags$script(src = "demo.min.js")
 )

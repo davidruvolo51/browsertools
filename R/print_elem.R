@@ -30,6 +30,7 @@
 #'    }
 #' }
 #'
+#' @seealso [debug()]
 #' @keywords browsertools print debugging
 #' @return Find and print an HTML element in the R console.
 #'

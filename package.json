@@ -1,6 +1,6 @@
 {
     "name": "browsertools",
-    "version": "0.1.72",
+    "version": "0.1.73",
     "author": "dcruvolo",
     "license": "MIT",
     "description": "This package contains a series of functions for running JavaScript functions in shiny.",
@@ -10,12 +10,14 @@
     ],
     "main": "index.js",
     "scripts": {
-        "clean": "rm -r inst/browsertools/browsertools.min.*",
-        "build": "parcel build inst/browsertools/src/index.js -d inst/browsertools -o inst/browsertools/browsertools.min.js --no-cache --no-source-maps",
+        "clean": "rm -r inst/browsertools/browsertools.min.* .cache",
+        "dev": "parcel dev inst/browsertools/src/index.js -d inst/browsertools -o inst/browsertools/browsertools.min.js --no-source-maps",
+        "build": "parcel build inst/browsertools/src/index.js -d inst/browsertools -o inst/browsertools/browsertools.min.js --no-source-maps",
         "demo": "Rscript -e \"shiny::runApp(appDir = './inst/browsertools-demo', port = 8000, launch.browser = FALSE)\"",
         "demo_dev": "parcel inst/browsertools-demo/src/index.js -d inst/browsertools-demo/www/ -o inst/browsertools-demo/www/demo.min.js --no-cache --no-source-maps",
         "demo_build": "parcel build inst/browsertools-demo/src/index.js -d inst/browsertools-demo/www/ -o inst/browsertools-demo/www/demo.min.js --no-cache --no-source-maps",
-        "demo_clean" : "rm -rf inst/browsertools-demo/www/demo.min.*"
+        "demo_clean" : "rm -rf inst/browsertools-demo/www/demo.min.*",
+        "shiny" : "Rscript -e \"shiny::runApp(appDir = 'dev/dev-app/', port = 8000, launch.browser = FALSE)\""
     },
     "homepage": "https://github.com/davidruvolo51/browsertools",
     "devDependencies": {

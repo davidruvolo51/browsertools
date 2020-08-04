@@ -4,13 +4,10 @@
 \alias{hidden}
 \title{\code{hidden}}
 \usage{
-hidden(..., css = "browsertools-hidden")
+hidden(...)
 }
 \arguments{
-\item{...}{A Shiny tag element or a tagList object}
-
-\item{css}{An optional class name used to hide elements
-(Default class = "browsertools")}
+\item{...}{Shiny tag element(s) to hide}
 }
 \value{
 Hide elements by when rendered

@@ -4,21 +4,16 @@
 \alias{hide_elem}
 \title{\code{hide_elem}}
 \usage{
-hide_elem(elem, css = "browsertools-hidden")
+hide_elem(elem)
 }
 \arguments{
-\item{elem}{the id or class name of an html elem}
-
-\item{css}{a string containing the class to remove from an html element
-(default class is \code{hidden})}
+\item{elem}{the id or class name of an html elem to hide}
 }
 \value{
 hide an HTML element
 }
 \description{
-Hides an html element by id or class name. This function, by default,
-adds the class \code{browsertools-hidden} to the desired element and updates
-attribute \code{aria-hidden}.
+Hides an html element by id or class name.
 }
 \examples{
 if (interactive()) {
@@ -57,5 +52,4 @@ if (interactive()) {
 \code{\link[=show_elem]{show_elem()}}, \code{\link[=toggle_elem]{toggle_elem()}}, \code{\link[=hidden]{hidden()}}
 }
 \keyword{browsertools}
-\keyword{css}
-\keyword{show}
+\keyword{hide}
