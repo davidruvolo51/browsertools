@@ -2,9 +2,8 @@
 #'
 #' Hide an element or elements by default (i.e., at the time of page render)
 #'
-#' @param ... A Shiny tag element or a tagList object
-#' @param css An optional class name used to hide elements
-#'          (Default class = "browsertools")
+#' @param ... Shiny tag element(s) to hide
+#'
 #' @examples
 #' if (interactive()) {
 #'  hidden(tags$p("hello, world"), tags$p("this is a test"))
@@ -29,17 +28,13 @@
 #' @return Hide elements by when rendered
 #'
 #' @export
-hidden <- function(..., css = "browsertools-hidden") {
-
-    # validate
-    if (is.null(css)) stop("argument 'css' cannot be empty")
-
-    # modify elements
+hidden <- function(...) {
     args <- rlang::list2(...)
     elems <- purrr::map(args, function(d) {
-        d$attribs$class <- paste0(d$attribs$class, " ", css)
-        d$attribs$`aria-hidden` <- "true"
-        return(d)
+        if (class(d) == "shiny.tag") {
+            d$attribs$`hidden` <- ""
+            return(d)
+        }
     })
     return(elems)
 }

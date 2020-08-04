@@ -1,8 +1,8 @@
 ![browsertools r package](browsertools.png)
 
 <!-- badges: start -->
-![R-CMD-check](https://github.com/davidruvolo51/browsertools/workflows/R-CMD-check/badge.svg)
 [![Travis build status](https://travis-ci.com/davidruvolo51/browsertools.svg?branch=prod)](https://travis-ci.com/davidruvolo51/browsertools)
+[![R build status](https://github.com/davidruvolo51/browsertools/workflows/R-CMD-check/badge.svg)](https://github.com/davidruvolo51/browsertools/actions)
 <!-- badges: end -->
 
 # browsertools
@@ -35,9 +35,9 @@ The package offers the following functions.
 
 | function | arguments | description | 
 | :------- | :-------- | :---------- |
-| `use_browsertools` | --- | load `browsertools` dependencies into your shiny app (required). This will load the package's JavaScript file and CSS file.
+| `use_browsertools` | --- | load `browsertools` dependencies into your shiny app (required).
 | `enable_attributes` | --- | allows you to access the HTML attributes of an element in the shiny server; Element must have an ID 
-| `hidden` | `...`, `css` | Hide elements by default
+| `hidden` | `...` | Hide element(s) by default
 
 ### Shiny Server
 
@@ -51,7 +51,7 @@ The package offers the following functions.
 | `console_table` | `data` | a json object to display in the console; use `as_js_object` function to convert your data before passing into the function
 | `console_warn` | `message` | send a warning message to the console
 | `debug` | --- | prints JavaScript errors in the R console
-| `hide_elem` | `elem`, `css` | hides an element by adding a class by name or `hidden` 
+| `hide_elem` | `elem` | hides an element
 | `insert_adjacent_html` | `id`, `html`, `position` | create a new child element(s) to a parent element
 | `inner_html` | `elem`, `string`, `delay` | change the inner html of an element
 | `inner_text` | `elem`, `string`, `delay` | change the inner text of an element
@@ -62,10 +62,10 @@ The package offers the following functions.
 | `remove_element_attribute` | `elem`, `attr` | remove an attribute from an element
 | `set_document_title` | `title`, `append` | change the title of the document
 | `set_element_attribute` | `elem`, `attr`, `value` | update an attribute of an element
-| `scroll_to` | `x`, `y` | scroll to a position in a page (default: `0, 0` = top of document)
-| `show_elem` | `elem`, `css` | show an element by removing a class name or `hidden`
+| `scroll_to` | `x`, `y`, `elem` | scroll to a position in a page or element (default: `0, 0` = top of document)
+| `show_elem` | `elem` | show an element
 | `toggle_css` | `elem`, `css` | toggle a css class
-| `toggle_elem` | `elem`, `css` | toggle the visibility of an element
+| `toggle_elem` | `elem` | toggle the state of an element (i.e., hide or show)
 
 ### Demo
 
@@ -77,7 +77,7 @@ browsertools::run_demo()
 
 ## Development
 
-If you would like to modify the package's css or js files, you will need to install the following tools.
+If you would like to modify the package's js files, you will need to install the following tools.
 
 1. [Node and Npm](https://nodejs.org/en/). 
 2. [Yarn](https://yarnpkg.com/getting-started/install)
@@ -88,11 +88,11 @@ This package also uses parceljs as the application bundler and a number of js pa
 yarn install
 ```
 
-To build the and css and javascript files, run the following commands in the terminal.
+To build javascript file, run the following command in the terminal.
 
 ```bash
 yarn clean    # removes existing files
-yarn build    # builds css and js files
+yarn build    # rebuilds js
 ```
 
-Use the R script `dev/dev.R` for managing the package. 
+Use the R script `dev/dev.R` for managing the package and the dev app for debugging/building new features.

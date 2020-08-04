@@ -1,14 +1,8 @@
 #' \code{show_elem}
 #'
-#' Shows an html element by id or class name. This function, by defauly,
-#' removes the class \code{hidden} from the desired element and updates
-#' aria attriute \code{hidden}. In your css file, create a corresponding
-#' selector called \code{hidden} and define the show styles. This allows you
-#' to add delays and apply other transformations.
+#' Shows an html element by id or class name.
 #'
 #' @param elem the id or class name of an html elem
-#' @param css a string containing the class to remove from an html element
-#'              (default class is \code{hidden})
 #' @examples
 #' if (interactive()) {
 #'   library(shiny)
@@ -44,23 +38,21 @@
 #' }
 #'
 #' @seealso [hide_elem()], [hidden()], [toggle_elem()]
-#' @keywords browsertools css show
+#' @keywords browsertools show
 #' @return Show a hidden html element
 #'
 #' @export
-show_elem <- function(elem, css = "browsertools-hidden") {
+show_elem <- function(elem) {
 
     # validate
     if (is.null(elem)) stop("argument 'elem' is undefined")
-    if (is.null(css)) stop("argument 'css' is undefined")
 
     # send
     session <- shiny::getDefaultReactiveDomain()
     session$sendCustomMessage(
         type = "show_elem",
         message = list(
-            elem = elem,
-            css = css
+            elem = elem
         )
     )
 }

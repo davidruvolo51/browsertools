@@ -1,9 +1,9 @@
 #' \code{use_browsertools}
 #'
-#' Function that loads all package assets into your shiny app (css and js
-#' file). This function is required and should be called at the top of the
+#' Function that loads the browsertools JavaScript file into your shiny app.
+#' This function is required and should be called at the top of the
 #' Shiny app. If you are using other ShinyUI layouts, you may need to wrap
-#' your app in `tagList`.
+#' your app in `tagList`. (The size of the js file is approximately 5.1kb.)
 #'
 #' @examples
 #' if (interactive()) {
@@ -23,11 +23,10 @@
 use_browsertools <- function() {
     htmltools::htmlDependency(
         name = "browsertools",
-        version = "0.1.72",
+        version = "0.1.73",
         src = "browsertools/",
         package = "browsertools",
         script = "browsertools.min.js",
-        stylesheet = "browsertools.min.css",
         all_files = FALSE
     )
 }

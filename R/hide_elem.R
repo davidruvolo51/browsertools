@@ -1,12 +1,8 @@
 #' \code{hide_elem}
 #'
-#' Hides an html element by id or class name. This function, by default,
-#' adds the class \code{browsertools-hidden} to the desired element and updates
-#' attribute \code{aria-hidden}.
+#' Hides an html element by id or class name.
 #'
-#' @param elem the id or class name of an html elem
-#' @param css a string containing the class to remove from an html element
-#'              (default class is \code{hidden})
+#' @param elem the id or class name of an html elem to hide
 #'
 #' @examples
 #' if (interactive()) {
@@ -41,23 +37,21 @@
 #' }
 #'
 #' @seealso [show_elem()], [toggle_elem()], [hidden()]
-#' @keywords browsertools css show
+#' @keywords browsertools hide
 #' @return hide an HTML element
 #'
 #' @export
-hide_elem <- function(elem, css = "browsertools-hidden") {
+hide_elem <- function(elem) {
 
     # validate
     if (is.null(elem)) stop("argument 'elem' is undefined")
-    if (is.null(css)) stop("argument 'css' is undefined")
 
     # send
     session <- shiny::getDefaultReactiveDomain()
     session$sendCustomMessage(
         type = "hide_elem",
         message = list(
-            elem = elem,
-            css = css
+            elem = elem
         )
     )
 }

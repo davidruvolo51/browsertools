@@ -2,16 +2,13 @@
 // FILE: index.js
 // AUTHOR: David Ruvolo
 // CREATED: 2019-11-11
-// MODIFIED: 2020-07-30
+// MODIFIED: 2020-08-04
 // PURPOSE: main js file for app
 // DEPENDENCIES: NA
 // STATUS: working
 // COMMENTS: run yarn build to transpile
 ////////////////////////////////////////////////////////////////////////////////
 // DEFINE FUNCTIONS
-
-// import scss 
-import "./styles.scss"
 
 // Set Package Options
 let browsertools = {
@@ -119,6 +116,7 @@ function console_warn(value) {
     console.warn(value);
 }
 
+// register
 Shiny.addCustomMessageHandler("console_warn", function (value) {
     console_warn(value);
 });
@@ -127,19 +125,18 @@ Shiny.addCustomMessageHandler("console_warn", function (value) {
 
 // HIDE ELEM
 // @param elem: an element to select (e.g., ID, class, tag, etc.)
-// @param css: a class name that is used to hide an element (default class is: browsertools-hidden; see css file and R script)
-function hide_elem(elem, css) {
+function hide_elem(elem) {
     try {
         const el = document.querySelector(elem);
-        el.classList.add(css);
-        el.setAttribute("aria-hidden", "true");
+        el.setAttribute("hidden", "");
     } catch (e) {
         send_error("hide_elem", e);
     }
 }
 
+// register
 Shiny.addCustomMessageHandler("hide_elem", function (value) {
-    hide_elem(value.elem, value.css);
+    hide_elem(value.elem);
 });
 
 ////////////////////////////////////////
@@ -355,12 +352,10 @@ Shiny.addCustomMessageHandler("set_element_attribute", function (value) {
 
 // SHOW ELEM (SHOW / HIDE)
 // @param elem: an element to select (e.g., ID, class, tag, etc.)
-// @para css: css class that shows an element (see hide elem)
-function show_elem(elem, css) {
+function show_elem(elem) {
     try {
         const el = document.querySelector(elem);
-        el.classList.remove(css);
-        el.removeAttribute("aria-hidden");
+        el.removeAttribute("hidden");
     } catch (e) {
         send_error("show_elem", e);
     }
@@ -368,7 +363,7 @@ function show_elem(elem, css) {
 
 // register
 Shiny.addCustomMessageHandler("show_elem", function (value) {
-    show_elem(value.elem, value.css);
+    show_elem(value.elem);
 });
 
 ////////////////////////////////////////
@@ -414,15 +409,14 @@ Shiny.addCustomMessageHandler("toggle_css", function (value) {
 
 // TOGGLE ELEMENT
 // @param elem: an element to select (e.g., ID, class, tag, etc.)
-// @param css: a css class to add/remove (visibility class)
-function toggle_elem(elem, css) {
+function toggle_elem(elem) {
     try {
         let el = document.querySelector(elem);
         // if hidden, then unhide. Else, hide.
-        if ([...el.classList].indexOf(css) > -1) {
-            show_elem(elem, css);
+        if (el.hasAttribute("hidden")) {
+            show_elem(elem);
         } else {
-            hide_elem(elem, css);
+            hide_elem(elem);
         }
     } catch (e) {
         send_error("toggle_elem", e);
@@ -431,7 +425,7 @@ function toggle_elem(elem, css) {
 
 // register
 Shiny.addCustomMessageHandler("toggle_elem", function (value) {
-    toggle_elem(value.elem, value.css);
+    toggle_elem(value.elem);
 });
 
 
@@ -453,9 +447,6 @@ $.extend(enable_html_attribs, {
             out[`${attr.name}`] = attr.value
         })
         return out;
-    },
-    unsubscribe: function(el) {
-        $(el).off(".enable_html_attribs");
     }
 });
 Shiny.inputBindings.register(enable_html_attribs);

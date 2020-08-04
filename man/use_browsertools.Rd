@@ -10,10 +10,10 @@ use_browsertools()
 Function that loads all assets into your shiny app
 }
 \description{
-Function that loads all package assets into your shiny app (css and js
-file). This function is required and should be called at the top of the
+Function that loads the browsertools JavaScript file into your shiny app.
+This function is required and should be called at the top of the
 Shiny app. If you are using other ShinyUI layouts, you may need to wrap
-your app in \code{tagList}.
+your app in \code{tagList}. (The size of the js file is approximately 5.1kb.)
 }
 \examples{
 if (interactive()) {
