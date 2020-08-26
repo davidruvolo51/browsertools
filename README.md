@@ -1,6 +1,7 @@
 ![browsertools r package](browsertools.png)
 
 <!-- badges: start -->
+![version](https://img.shields.io/github/package-json/v/davidruvolo51/browsertools/prod?color=%2326709e)
 [![Travis build status](https://travis-ci.com/davidruvolo51/browsertools.svg?branch=prod)](https://travis-ci.com/davidruvolo51/browsertools)
 [![R build status](https://github.com/davidruvolo51/browsertools/workflows/R-CMD-check/badge.svg)](https://github.com/davidruvolo51/browsertools/actions)
 <!-- badges: end -->
