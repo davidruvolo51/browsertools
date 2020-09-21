@@ -5,33 +5,34 @@
     "license": "MIT",
     "description": "This package contains a series of functions for running JavaScript functions in shiny.",
     "keywords": [
+        "r",
         "shiny",
         "js"
     ],
-    "main": "index.js",
     "scripts": {
-        "clean": "rm -r inst/browsertools/browsertools.min.* .cache",
-        "dev": "parcel dev inst/browsertools/src/index.js -d inst/browsertools -o inst/browsertools/browsertools.min.js --no-source-maps",
-        "build": "parcel build inst/browsertools/src/index.js -d inst/browsertools -o inst/browsertools/browsertools.min.js --no-source-maps",
-        "demo": "Rscript -e \"shiny::runApp(appDir = './inst/browsertools-demo', port = 8000, launch.browser = FALSE)\"",
-        "demo_dev": "parcel inst/browsertools-demo/src/index.js -d inst/browsertools-demo/www/ -o inst/browsertools-demo/www/demo.min.js --no-cache --no-source-maps",
-        "demo_build": "parcel build inst/browsertools-demo/src/index.js -d inst/browsertools-demo/www/ -o inst/browsertools-demo/www/demo.min.js --no-cache --no-source-maps",
-        "demo_clean" : "rm -rf inst/browsertools-demo/www/demo.min.*",
-        "shiny" : "Rscript -e \"shiny::runApp(appDir = 'dev/dev-app/', port = 8000, launch.browser = FALSE)\""
+        "clean": "rm -r inst/browsertools/browsertools.min.*",
+        "start": "parcel serve inst/browsertools/src/index.js --target assets",
+        "build": "parcel build inst/browsertools/src/index.js --target assets",
+        "demo_start": "parcel serve inst/browsertools-demo/src/index.js --target demo",
+        "demo_build": "parcel build inst/browsertools-demo/src/index.js --target demo",
+        "demo_clean": "rm -rf inst/browsertools-demo/www/demo.min.*"
     },
-    "homepage": "https://github.com/davidruvolo51/browsertools",
     "devDependencies": {
-        "@babel/cli": "^7.8.3",
-        "@babel/core": "^7.9.6",
-        "@babel/preset-env": "^7.9.6",
-        "autoprefixer": "^9.7.6",
-        "babel-preset-minify": "^0.5.1",
-        "cssnano": "^4.1.10",
-        "parcel": "1.12.4",
-        "postcss-modules": "^2.0.0",
-        "sass": "^1.26.5"
+        "autoprefixer": "9.8.6",
+        "parcel": "^2.0.0-beta.1"
     },
-    "dependencies": {
+    "assets": "inst/browsertools/browsertools.min.js",
+    "demo": "inst/browsertools-demo/www/demo.min.js",
+    "targets": {
+        "main": false,
+        "assets": {
+            "distDir": "inst/browsertools/",
+            "sourceMap": false
+        },
+        "demo": {
+            "distDir": "inst/browsertools-demo/www",
+            "sourceMap": false
+        }
     },
     "repository": {
         "type": "git",
