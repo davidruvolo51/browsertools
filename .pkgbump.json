@@ -1,0 +1,10 @@
+{
+  "name": "pkgbump.config",
+  "updated": "2020-09-21 19:04:24",
+  "n": 2,
+  "files": ["DESCRIPTION", "R/use_browsertools.R"],
+  "patterns": {
+    "R": "version = .\\d+.\\d+.\\d+.|version=.\\d+.\\d+.\\d+.",
+    "DESCRIPTION": "Version:"
+  }
+}
