@@ -1,13 +1,13 @@
-#'////////////////////////////////////////////////////////////////////////////
+#' ////////////////////////////////////////////////////////////////////////////
 #' FILE: dev.R
 #' AUTHOR: David Ruvolo
 #' CREATED: 2020-07-29
-#' MODIFIED: 2020-07-29
+#' MODIFIED: 2020-09-21
 #' PURPOSE: package management
 #' STATUS: ongoing
 #' PACKAGES: usethis
 #' COMMENTS: NA
-#'////////////////////////////////////////////////////////////////////////////
+#' ////////////////////////////////////////////////////////////////////////////
 
 # init
 usethis::use_namespace()
@@ -26,7 +26,7 @@ usethis::use_package(package = "rlang", min_version = "0.4.7")
 usethis::use_package(package = "purrr", min_version = "0.3.4")
 usethis::use_package(package = "jsonlite", min_version = "1.7.0")
 
-#'//////////////////////////////////////
+#' //////////////////////////////////////
 
 #' ~ 1 ~
 #' Package Ignores
@@ -40,31 +40,41 @@ gitignore <- c(
     "node_modules",
     ".cache",
     "yarn.lock",
-    "yarn-error.log"
+    "yarn-error.log",
+    ".parcel-cache"
 )
-# ignore r build
-rbuild <- c(
-    gitignore,
-    "dev",
-    ".github",
-    ".travis.yml",
-    "browsertools.code-workspace",
-    "package.json",
-    "yarn.lock",
-    ".babelrc",
-    ".postcssrc",
-    ".gitignore",
-    "inst/browsertools/src",
-    "browsertools.png"
-)
-
 
 # add
 usethis::use_git_ignore(ignores = gitignore)
-usethis::use_build_ignore(files = rbuild)
+usethis::use_build_ignore(
+    files = c(
+        gitignore,
+        "dev",
+        ".github",
+        ".travis.yml",
+        "browsertools.code-workspace",
+        "package.json",
+        "yarn.lock",
+        ".babelrc",
+        ".postcssrc",
+        ".gitignore",
+        "inst/browsertools/src",
+        "browsertools.png"
+    )
+)
 
 
-#'//////////////////////////////////////
+# pkgbump
+pkgbump::set_pkgbump(
+    files = c(
+        "DESCRIPTION",
+        "R/use_browsertools.R"
+    )
+)
+
+pkgbump::pkgbump(version = "0.1.74")
+
+#' //////////////////////////////////////
 
 #' ~ 3 ~
 #' Build
@@ -76,3 +86,14 @@ devtools::check()
 
 # for local testing
 devtools::load_all()
+
+
+# run dev app
+shiny::runApp(appDir = "./dev/dev-app/", port = 8000, launch.browser = FALSE)
+
+# run demo app
+shiny::runApp(
+    appDir = "./inst/browsertools-demo",
+    port = 8000,
+    launch.browser = FALSE
+)

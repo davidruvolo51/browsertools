@@ -16,3 +16,5 @@
 ^\.gitignore$
 ^inst/browsertools/src$
 ^browsertools\.png$
+^\.parcel-cache$
+^\.pkgbump\.json$
