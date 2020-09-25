@@ -12,6 +12,8 @@
 # pkgs
 suppressPackageStartupMessages(library(shiny))
 
+devtools::load_all()
+
 # define example app
 sample_code <- "
 # pkg
@@ -19,7 +21,7 @@ library(shiny)
 
 # ui
 ui <- tagList(
-    browsertools::use_browsertools(),
+    use_browsertools(),
     h1('Hello, world!')
 )
 
@@ -27,7 +29,7 @@ ui <- tagList(
 server <- function(input, output) {
 
     # use debug
-    browsertools::debug()
+    debug()
 }
 
 # app
@@ -50,10 +52,9 @@ argname <- function(name) {
     return(tags$span(class = "argname", name))
 }
 
-
 # ui
 ui <- tagList(
-    browsertools::use_browsertools(),
+    use_browsertools(),
     tags$head(
         tags$meta(charset = "utf-8"),
         tags$meta(
@@ -82,7 +83,7 @@ ui <- tagList(
                     font-weight: bold;
                     color: #353535;
                     font-size: 24pt;
-                    }"
+                }"
             )
         ),
         tags$title("browsertools | Demo")
@@ -93,7 +94,7 @@ ui <- tagList(
             class = "menu",
             tags$li(
                 class = "menu-item",
-                tags$h1("browsertools")
+                tags$span("browsertools")
             ),
             tags$li(
                 class = "menu-item",
@@ -250,7 +251,7 @@ ui <- tagList(
                         "Click the buttons 'hide' and 'show' to the",
                         "visibility of this sentence."
                     ),
-                    browsertools::hidden(
+                    hidden(
                         tags$p(
                             id = "reveal-text-example",
                             "This sentence is hidden by default using the",
@@ -375,7 +376,7 @@ ui <- tagList(
                         class = "sample-css-a sample-css-b",
                         `aria-hidden` = "false",
                         `data-value` = "1234",
-                        browsertools::enable_attributes(),
+                        enable_attributes(),
                         "The buttons below will demonstrate how to create a",
                         "new data attribute, as well as retrieve the",
                         "attributes of an html element. Click the 'Get",

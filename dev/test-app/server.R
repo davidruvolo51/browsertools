@@ -11,11 +11,12 @@
 
 # pkgs
 suppressPackageStartupMessages(library(shiny))
+devtools::load_all()
 
 # server
 server <- function(input, output, session) {
 
-    browsertools::debug()
+    debug()
     #'//////////////////////////////////////
 
     # ~ 1 ~
@@ -23,7 +24,7 @@ server <- function(input, output, session) {
 
     # add css
     observeEvent(input$`add-css`, {
-        browsertools::add_css(
+        add_css(
             elem = "#css-text-example",
             css = "text"
         )
@@ -31,7 +32,7 @@ server <- function(input, output, session) {
 
     # remove css
     observeEvent(input$`remove-css`, {
-        browsertools::remove_css(
+        remove_css(
             elem = "#css-text-example",
             css = "text"
         )
@@ -39,7 +40,7 @@ server <- function(input, output, session) {
 
     # toggle css
     observeEvent(input$`toggle-css`, {
-        browsertools::toggle_css(
+        toggle_css(
             elem = "#css-text-example",
             css = "text"
         )
@@ -52,21 +53,21 @@ server <- function(input, output, session) {
 
     # hide
     observeEvent(input$`hide-elem`, {
-        browsertools::hide_elem(
+        hide_elem(
             elem = "#hide-show-text-example"
         )
     })
 
     # show
     observeEvent(input$`show-elem`, {
-        browsertools::show_elem(
+        show_elem(
             elem = "#hide-show-text-example"
         )
     })
 
     # reveal
     observeEvent(input$`reveal-elem`, {
-        browsertools::show_elem(
+        show_elem(
             elem = "#reveal-text-example"
         )
     })
@@ -94,7 +95,7 @@ server <- function(input, output, session) {
     observeEvent(input$`remove-add-elem`, {
 
         # remove existing element
-        browsertools::remove_element(
+        remove_element(
             elem = "#remove-element-text-example"
         )
 
@@ -109,7 +110,7 @@ server <- function(input, output, session) {
         )
 
         # insert
-        browsertools::insert_adjacent_html(
+        insert_adjacent_html(
             id = "remove-element-example-container",
             content = as.character(new_elem)
         )
@@ -122,7 +123,7 @@ server <- function(input, output, session) {
 
     # inner_text
     observeEvent(input$`change-text`, {
-        browsertools::inner_text(
+        inner_text(
             elem = "#change-content-text-example",
             content = "This sentence was changed using the function inner_text"
         )
@@ -130,7 +131,7 @@ server <- function(input, output, session) {
 
     # inner_html
     observeEvent(input$`change-html`, {
-        browsertools::inner_html(
+        inner_html(
             elem = "#change-content-text-example",
             content = paste0(
                 "This sentence was changed using the function ",
@@ -141,7 +142,7 @@ server <- function(input, output, session) {
 
     # append html.
     observeEvent(input$`append-html`, {
-        browsertools::inner_html(
+        inner_html(
             elem = "#change-content-text-example",
             content = paste0(
                 "Using the argument",
@@ -160,7 +161,7 @@ server <- function(input, output, session) {
     # add attribute
     observeEvent(input$`set-element-attribute`, {
         txt <- tags$p(id = "greeting", `data-value` = "123", "Hello!")
-        browsertools::inner_text(
+        inner_text(
             elem = "#element-attribute-text-example",
             content = as.character(txt)
         )
@@ -168,7 +169,7 @@ server <- function(input, output, session) {
         #' In order to demonstrate the changes to the HTML
         #' markup, the output is simulated. Instead, you would set the
         #' attribute like so:
-        #' browsertools::set_element_attribute(
+        #' set_element_attribute(
         #'    elem = "#greeting",
         #'    attr = "data-value",
         #'    value = "123"
@@ -178,7 +179,7 @@ server <- function(input, output, session) {
     # remove attribute
     observeEvent(input$`remove-element-attribute`, {
         txt <- tags$p(id = "greeting", "Hello!")
-        browsertools::inner_text(
+        inner_text(
             elem = "#element-attribute-text-example",
             content = as.character(txt)
         )
@@ -186,7 +187,7 @@ server <- function(input, output, session) {
         #' In order to demonstrate the changes to the HTML
         #' markup, the output is simulated. Instead, you would remove the
         #' attribute like so:
-        #' browsertools::remove_element_attribute(
+        #' remove_element_attribute(
         #'    elem = "#greeting",
         #'    attr = "data-value"
         #' )
@@ -194,7 +195,7 @@ server <- function(input, output, session) {
 
     # get attribute
     observeEvent(input$`get-element-attribute`, {
-        browsertools::inner_html(
+        inner_html(
             elem = "#get-attribute-value-example",
             content = paste0(
                 "\n",
@@ -213,12 +214,12 @@ server <- function(input, output, session) {
 
     # to top
     observeEvent(input$`scroll-to-top-example`, {
-        browsertools::scroll_to()
+        scroll_to()
     })
 
     # to 'getting started'
     observeEvent(input$`scroll-to-section-example`, {
-        browsertools::scroll_to(
+        scroll_to(
             elem = "#getting-started"
         )
     })
@@ -230,14 +231,14 @@ server <- function(input, output, session) {
 
     # error
     observeEvent(input$`console-error-example`, {
-        browsertools::console_error(
+        console_error(
             message = "Error: button 'Log Error' triggered an error."
         )
     })
 
     # message
     observeEvent(input$`console-log-example`, {
-        browsertools::console_log(
+        console_log(
             message = "Message: this is a generic message"
         )
     })
@@ -245,14 +246,14 @@ server <- function(input, output, session) {
     # table
     observeEvent(input$`console-table-example`, {
         d <- quakes[sample(seq_len(NROW(quakes)), 1), ]
-        d <- browsertools::as_js_object(d)
-        browsertools::console_log("Printing a random row from `quakes`:")
-        browsertools::console_table(d)
+        d <- as_js_object(d)
+        console_log("Printing a random row from `quakes`:")
+        console_table(d)
     })
 
     # warning
     observeEvent(input$`console-warning-example`, {
-        browsertools::console_warn(
+        console_warn(
             message = "Warning: clicking button 'Log Warning' will trigger an error."
         )
     })
@@ -262,7 +263,7 @@ server <- function(input, output, session) {
     #' ~ 8 ~
     #' EVENTS: page refresh
     observeEvent(input$`page-refresh-example`, {
-        browsertools::scroll_to()
-        browsertools::refresh_page()
+        scroll_to()
+        refresh_page()
     })
 }

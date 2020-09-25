@@ -15,7 +15,7 @@ library(shiny)
 # add resource path
 addResourcePath(
     "browsertools",
-    "~/Github/browsertools/inst/browsertools/"
+    "~/Github/browsertools/inst/browsertools/public"
 )
 
 # load package functions

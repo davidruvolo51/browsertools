@@ -2,10 +2,10 @@
 #' FILE: dev.R
 #' AUTHOR: David Ruvolo
 #' CREATED: 2020-07-29
-#' MODIFIED: 2020-09-21
+#' MODIFIED: 2020-09-25
 #' PURPOSE: package management
 #' STATUS: ongoing
-#' PACKAGES: usethis
+#' PACKAGES: usethis; pkgbump
 #' COMMENTS: NA
 #' ////////////////////////////////////////////////////////////////////////////
 
@@ -38,10 +38,7 @@ gitignore <- c(
     ".Rproj.user",
     ".DS_STORE",
     "node_modules",
-    ".cache",
-    "yarn.lock",
-    "yarn-error.log",
-    ".parcel-cache"
+    "yarn-error.log"
 )
 
 # add
@@ -49,17 +46,19 @@ usethis::use_git_ignore(ignores = gitignore)
 usethis::use_build_ignore(
     files = c(
         gitignore,
-        "dev",
         ".github",
+        "config",
+        "dev",
+        "inst/browsertools/src",
+        ".babelrc",
+        ".gitignore",
+        ".pkgbump.json",
         ".travis.yml",
         "browsertools.code-workspace",
         "package.json",
-        "yarn.lock",
-        ".babelrc",
-        ".postcssrc",
-        ".gitignore",
-        "inst/browsertools/src",
-        "browsertools.png"
+        "postcss.config.js",
+        "webpack.config.js",
+        "yarn.lock"
     )
 )
 
@@ -68,11 +67,12 @@ usethis::use_build_ignore(
 pkgbump::set_pkgbump(
     files = c(
         "DESCRIPTION",
-        "R/use_browsertools.R"
+        "R/use_browsertools.R",
+        "package.json"
     )
 )
 
-pkgbump::pkgbump(version = "0.1.74")
+pkgbump::pkgbump(version = "0.1.8")
 
 #' //////////////////////////////////////
 
@@ -91,9 +91,5 @@ devtools::load_all()
 # run dev app
 shiny::runApp(appDir = "./dev/dev-app/", port = 8000, launch.browser = FALSE)
 
-# run demo app
-shiny::runApp(
-    appDir = "./inst/browsertools-demo",
-    port = 8000,
-    launch.browser = FALSE
-)
+# run test app
+shiny::runApp(appDir = "./dev/test-app/", port = 9000, launch.browser = FALSE)
