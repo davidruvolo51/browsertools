@@ -20,7 +20,7 @@ module.exports = {
     entry: "./inst/browsertools/src/index.js",
     output: {
         filename: "browsertools.min.js",
-        path: path.join(__dirname, "..", "inst/browsertools/"),
+        path: path.join(__dirname, "..", "inst/browsertools/public/"),
     }  ,
     plugins: [
         new webpack.ProgressPlugin(),

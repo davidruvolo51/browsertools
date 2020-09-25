@@ -1,3 +1,8 @@
+# browsertools 0.1.8
+
+* Switched to Webpack as the application bundler
+* Removed demo from the package and placed in dev/test-app/
+
 # browsertools 0.1.73
 
 * The functions `hide_elem`, `show_elem` and `toggle_elem` now use `hidden` attribute by default. Rather than `aria_hidden`.
