@@ -1,4 +1,3 @@
-![browsertools r package](browsertools.png)
 
 <!-- badges: start -->
 ![version](https://img.shields.io/github/package-json/v/davidruvolo51/browsertools/prod?color=%2326709e)
@@ -67,33 +66,3 @@ The package offers the following functions.
 | `show_elem` | `elem` | show an element
 | `toggle_css` | `elem`, `css` | toggle a css class
 | `toggle_elem` | `elem` | toggle the state of an element (i.e., hide or show)
-
-### Demo
-
-You can now view a demo of this package by running the following function.
-
-```r
-browsertools::run_demo()
-```
-
-## Development
-
-If you would like to modify the package's js files, you will need to install the following tools.
-
-1. [Node and Npm](https://nodejs.org/en/). 
-2. [Yarn](https://yarnpkg.com/getting-started/install)
-
-This package also uses parceljs as the application bundler and a number of js packages. To install these tools, run the following command.
-
-```bash
-yarn install
-```
-
-To build javascript file, run the following command in the terminal.
-
-```bash
-yarn clean    # removes existing files
-yarn build    # rebuilds js
-```
-
-Use the R script `dev/dev.R` for managing the package and the dev app for debugging/building new features.
