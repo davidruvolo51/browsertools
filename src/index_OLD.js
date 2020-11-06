@@ -8,7 +8,6 @@
 // STATUS: working
 // COMMENTS: run yarn build to transpile
 ////////////////////////////////////////////////////////////////////////////////
-// DEFINE FUNCTIONS
 
 // Set Package Options
 let browsertools = {
@@ -68,7 +67,7 @@ Shiny.addCustomMessageHandler("add_css", function (value) {
 // ALERT
 // @oaram message: an message to display
 // register
-Shiny.addCustomMessageHandler("alert", function(value) {
+Shiny.addCustomMessageHandler("alert", function (value) {
     alert(value.message);
 });
 
@@ -237,7 +236,7 @@ function print_elem(elem) {
 }
 
 // register
-Shiny.addCustomMessageHandler("print_elem", function(value) {
+Shiny.addCustomMessageHandler("print_elem", function (value) {
     print_elem(value.elem);
 });
 
@@ -260,7 +259,7 @@ Shiny.addCustomMessageHandler("refresh_page", function (value) {
 // @param css: a css classname to remove from an element
 function remove_css(elem, css) {
     try {
-        document.querySelector(elem).classList.remove(css); 
+        document.querySelector(elem).classList.remove(css);
     } catch (e) {
         send_error("remove_css", e);
     }
@@ -285,7 +284,7 @@ function remove_element(elem) {
 }
 
 // register
-Shiny.addCustomMessageHandler("remove_element", function(value) {
+Shiny.addCustomMessageHandler("remove_element", function (value) {
     remove_element(value.elem);
 });
 
@@ -319,13 +318,13 @@ function set_document_title(title, append) {
         } else {
             document.title = title;
         }
-    } catch(e) {
+    } catch (e) {
         send_error("set_document_title", e);
     }
 }
 
 // register
-Shiny.addCustomMessageHandler("set_document_title", function(value) {
+Shiny.addCustomMessageHandler("set_document_title", function (value) {
     set_document_title(value.title, value.append)
 });
 
@@ -436,13 +435,13 @@ Shiny.addCustomMessageHandler("toggle_elem", function (value) {
 // for use in shiny
 const enable_html_attribs = new Shiny.InputBinding();
 $.extend(enable_html_attribs, {
-    find: function(scope) {
+    find: function (scope) {
         return $(scope).find("span[data-browsertools-indexible='true']").parent();
     },
-    getValue: function(el) {
+    getValue: function (el) {
         let attributes = $(el.attributes);
         let out = {}, attr;
-        attributes.map( a => {
+        attributes.map(a => {
             attr = attributes[a];
             out[`${attr.name}`] = attr.value
         })
