@@ -1,231 +1,172 @@
 ////////////////////////////////////////////////////////////////////////////////
 // FILE: index.js
 // AUTHOR: David Ruvolo
-// CREATED: 2019-11-11
-// MODIFIED: 2020-08-04
-// PURPOSE: main js file for app
+// CREATED: 2020-11-07
+// MODIFIED: 2020-11-11
+// PURPOSE: entry point
 // DEPENDENCIES: NA
-// STATUS: working
-// COMMENTS: run yarn build to transpile
+// STATUS: in.progress
+// COMMENTS: NA
 ////////////////////////////////////////////////////////////////////////////////
 
-// define new class
-function browsertools(debug) {
-    this.debug = typeof debug === "undefined" ? false : debug;
-}
+// import
+import get_attribs from "./js/get_attribs";
+import browsertools from "./js/browsertools";
 
-// send_error
-// display error in the browser, R Server
-// @param func name of where the error occurred
-// @param error the error object
-browsertools.prototype.send_error = function (func, error) {
-    console.error(`🚨 Error in ${func}: ${error.name}\n${error.message}`)
-    if (this.debug) {
-        const err = {
-            func: func,
-            name: error.name,
-            message: error.message
-        }
-        Shiny.setInputValue("browsertools_debug", JSON.stringify(err))
-    }
-}
+// run on session started
+$(document).on("shiny:connected", function (e) {
 
-// inherited functions
-// exposed functions will be added via the shiny bind function
-browsertools.prototype.console = Object.create(console);
-browsertools.prototype.alert = Object.create(alert);
+    // create new browsertools object
+    var bt = new browsertools();
 
-// add css
-// @param elem element to select
-// @param css name of the css class to remove
-browsertools.prototype.add_css = function (elem, css) {
-    try {
-        document.querySelector(elem).classList.add(...css);
-    } catch (e) {
-        this.send_error("add_css", e)
-    }
-}
+    // handler: debug option
+    Shiny.addCustomMessageHandler("browsertools_debug", (d) => {
+        bt.debug = d.debug;
+    });
 
-// hide_elem
-// hide an element in the client
-// @param elem a element selector
-browsertools.prototype.hide_elem = function (elem) {
-    try {
-        document.querySelector(elem).setAttribute("hidden", "")
-    } catch (e) {
-        this.send_error("hide_elem", e)
-    }
-}
+    // handler: add_css
+    // @param elem a selector path
+    // @param css an array of css classes to add
+    Shiny.addCustomMessageHandler("add_css", (d) => {
+        bt.add_css(d.elem, d.css);
+    });
+    
+    // handler: alert
+    // @param message a message to display
+    Shiny.addCustomMessageHandler("alert", (d) => {
+        bt.alert(d.message)
+    });
+    
+    // handler: console_error
+    // @param d a message to display
+    Shiny.addCustomMessageHandler("console_error", (d) => {
+        bt.console.error(d);
+    });
+    
+    // handler: console_log
+    // @param d a message to display
+    Shiny.addCustomMessageHandler("console_log", (d) => {
+        bt.console.log(d);
+    });
+    
+    // handler: console_table
+    // @param d a data object to display
+    Shiny.addCustomMessageHandler("console_table", (d) => {
+        bt.console.table(d);
+    });
+    
+    // handler: console_warn
+    // @param d a message to display
+    Shiny.addCustomMessageHandler("console_warn", (d) => {
+        bt.console.warn(d)
+    });
+    
+    // handler: hide_elem
+    // @param elem a selector path
+    Shiny.addCustomMessageHandler("hide_elem", (d) => {
+        bt.hide_elem(d.elem);
+    });
+    
+    // handler: inner_html
+    // @param elem a selector path
+    // @param content content to insert
+    // @param append if TRUE, content will be append to current content
+    // @param delay if present, content will be inserted after a slight pause (ms)
+    Shiny.addCustomMessageHandler("inner_html", (d) => {
+        bt.inner_html(d.elem, d.content, d.append, d.delay);
+    });
 
-// set innerHTML
-// @param elem a selector path
-// @param content html content to render
-// @param append if TRUE, content will be appened to current content
-// @param delay time (ms) to delay before inserting content
-browsertools.prototype.inner_html = function (elem, content, append, delay) {
-    try {
-        const el = document.querySelector(elem);
-        const newContent = append ? el.innerHTML + content : content;
-        if (delay) {
-            setTimeout(function () {
-                document.querySelector(elem).innerHTML = newContent;
-            }, delay);
-        } else {
-            document.querySelector(elem).innerHTML = newContent;
-        }
-    } catch (e) {
-        this.send_error("inner_html", e);
-    }
-}
+    // handler: inner_text
+    // @param elem a selector path
+    // @param content content to insert
+    // @param append if TRUE, content will be append to current content
+    // @param delay if present, content will be inserted after a slight pause (ms)
+    Shiny.addCustomMessageHandler("inner_text", (d) => {
+        bt.inner_text(d.elem, d.content, d.append, d.delay);
+    });
 
-// set inner text
-// @param elem a selector path
-// @param content content to render
-// @param append if TRUE, content will be appened to current content
-// @param delay time (ms) to delay before inserting content
-browsertools.prototype.inner_text = function (elem, content, append, delay) {
-    try {
-        const el = document.querySelector(elem);
-        const newContent = append ? el.innerText + content : content;
-        if (delay) {
-            setTimeout(function () {
-                document.querySelector(elem).innerText = newContent;
-            }, delay);
-        } else {
-            document.querySelector(elem).innerText = newContent;
-        }
-    } catch (e) {
-        this.send_error("inner_text", e);
-    }
-}
+    // handler: insert_adjacent_html
+    // @param id an ID selector path
+    // @param content content to insert
+    // @param position location to insert content
+    Shiny.addCustomMessageHandler("insert_adjacent_html", (d) => {
+        bt.insert_adjacent_html(d.id, d, content, d.position);
+    });
 
+    // handler: print_elem
+    // @param elem a selector path
+    Shiny.addCustomMessageHandler("print_elem", (d) => {
+        bt.print_elem(d.elem);
+    });
+    
+    // handler: refresh_page
+    Shiny.addCustomMessageHandler("refresh_page", (d) => {
+        bt.refresh_page();
+    });
 
-// INSERT ADJACENT HTML
-// @param id: An ID used to select an element
-// @param content: an html string to insert
-// @param position: location where to insert (beforebegin, etc.)
-browsertools.prototype.insert_adjacent_html = function (id, content, position) {
-    try {
-        const parent = document.getElementById(id);
-        parent.insertAdjacentHTML(position, content);
-    } catch (e) {
-        send_error("insert_adjacent_html", e);
-    }
-}
+    // handler: remove_css
+    // @param elem a selector path
+    // @param css an array of css classes to remove
+    Shiny.addCustomMessageHandler("remove_css", (d) => {
+        bt.remove_css(d.elem, d.css);
+    });
+    
+    // handler: remove_element
+    // @param elem a selector path
+    Shiny.addCustomMessageHandler("remove_element", (d) => {
+        bt.remove_element(d.elem);
+    });
 
-// refresh page
-browsertools.prototype.refresh_page = function () {
-    history.go(0);
-}
+    // handler: remove_element_attribute
+    // @param elem a selector path
+    // @param attr a named attribute
+    Shiny.addCustomMessageHandler("remove_element_attribute", (d) => {
+        bt.remove_element_attribute(d.elem, d.attr);
+    });
 
+    // handler: set_document_title
+    // @param title a document title
+    // @param append if true, title will be appended to current title
+    Shiny.addCustomMessageHandler("set_document_title", (d) => {
+        bt.set_document_title(d.title, d.append);
+    });
+    
+    // handler: set_element_attribute
+    // @param elem a selector path
+    // @param attr a named attribute
+    // @param value new value to assign the target attribute
+    Shiny.addCustomMessageHandler("set_element_attribute", (d) => {
+        bt.set_element_attribute(d.elem, d.attr, d.value);
+    });
 
-// remove css
-// @param elem an element selector path
-// @param css a classname to remove
-browsertools.prototype.remove_css = function (elem, css) {
-    try {
-        document.querySelector(elem).classList.remove(...css);
-    } catch (e) {
-        this.send_error("remove_css", e);
-    }
-}
+    // handler: show_elem
+    // @param elem a selector path
+    Shiny.addCustomMessageHandler("show_elem", (d) => {
+        bt.show_elem(d.elem);
+    });
 
-// remove element
-// @param elem a selector path
-browsertools.prototype.remove_element = function (elem) {
-    try {
-        const el = document.querySelector(elem);
-        el.parentNode.removeChild(el);
-    } catch (e) {
-        this.send_error("remove_element", e);
-    }
-}
+    // handler: scroll_to
+    // @param x horizontal distance from top-left
+    // @param y vertical distance from top-left
+    // @param elem a selector path (optional)
+    Shiny.addCustomMessageHandler("scroll_to", (d) => { bt.scroll_to(d.x, d.y, d.elem) });
 
-// remove element attribute
-// @param elem a selector path
-// @param attr name of attribute to remove
-browsertools.prototype.remove_element_attribute = function (elem, attr) {
-    try {
-        document.querySelector(elem).removeAttribute(attr);
-    } catch (e) {
-        this.send_error("remove_element_attribute", e);
-    }
-}
+    // handler: toggle_css
+    // @param elem a selector path
+    // @param css an array of css classes to toggle
+    Shiny.addCustomMessageHandler("toggle_css", (d) => {
+        bt.toggle_css(d.elem, d.css);
+    });
 
-// set document title
-// @param title a string to add to the title
-// @param append if TRUE, the doc title will be appended
-browsertools.prototype.set_document_title = function (title, append) {
-    try {
-        if (append) {
-            document.title = document.title + title;
-        } else {
-            document.title = title;
-        }
-    } catch (e) {
-        this.send_error("set_document_title", e);
-    }
-}
+    // handler: toggle_elem
+    // @param elem a selector path
+    Shiny.addCustomMessageHandler("toggle_elem", (d) => {
+        bt.toggle_elem(d.elem);
+    });
 
-// set element attribute
-// @param elem a selector path
-// @param attr a name of an attribute
-// @param value new value
-browsertools.prototype.set_element_attribute = function (elem, attr, value) {
-    try {
-        document.querySelector(elem).setAttribute(attr, value);
-    } catch (e) {
-        this.send_error("set_element_attribute", e);
-    }
-}
+    // custom input bindings
+    Shiny.inputBindings.register(get_attribs);
 
-// show elem
-// @param elem a selector path
-browsertools.prototype.show_elem = function (elem) {
-    try {
-        const el = document.querySelector(elem);
-        el.removeAttribute("hidden");
-    } catch (e) {
-        this.send_error("show_elem", e);
-    }
-}
-
-// SCROLL TO
-// default usage will scroll to the top of the document
-// @param x amount to scroll along the x axis (default: 0)
-// @param y amount to scroll along the y axis (default: 0)
-// @param elem an element to scroll to (optional: will override x/y)
-browsertools.prototype.scroll_to = function (x, y, elem) {
-    try {
-        elem ? document.querySelector(elem).scrollIntoView() : window.scrollTo(x, y);
-    } catch (e) {
-        this.send_error("scroll_to", e);
-    }
-}
-
-// TOGGLE CSS CLASS
-// @param elem: an element to select (e.g., ID, class, tag, etc.)
-// @param css: a css class to toggle
-browsertools.prototype.toggle_css = function (elem, css) {
-    try {
-        document.querySelector(elem).classList.toggle(css);
-    } catch (e) {
-        this.send_error("toggle_css", e);
-    }
-}
-
-// TOGGLE ELEMENT
-// @param elem: an element to select (e.g., ID, class, tag, etc.)
-browsertools.prototype.toggle_elem = function (elem) {
-    try {
-        let el = document.querySelector(elem);
-        el.hasAttribute("hidden") ? show_elem(elem) : hide_elem(elem);
-    } catch (e) {
-        this.send_error("toggle_elem", e);
-    }
-}
+});
 
 
-var test = new browsertools();
-console.log(test)
-// test.add_css("#div", "example-class")
