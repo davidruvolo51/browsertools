@@ -88,8 +88,6 @@ devtools::check()
 devtools::load_all()
 
 
-# run dev app
+# run apps
 shiny::runApp(appDir = "./dev/dev-app/", port = 8000, launch.browser = FALSE)
-
-# run test app
-shiny::runApp(appDir = "./dev/test-app/", port = 9000, launch.browser = FALSE)
+shiny::runApp(appDir = "./dev/prod-app/", port = 9000, launch.browser = FALSE)

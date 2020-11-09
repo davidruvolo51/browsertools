@@ -2,7 +2,7 @@
 // FILE: index.js
 // AUTHOR: David Ruvolo
 // CREATED: 2019-11-11
-// MODIFIED: 2020-11-11
+// MODIFIED: 2020-11-09
 // PURPOSE: main js file for app
 // DEPENDENCIES: NA
 // STATUS: working
@@ -219,7 +219,12 @@ browsertools.prototype.scroll_to = function (x, y, elem) {
 // @param css: a css class to toggle
 browsertools.prototype.toggle_css = function (elem, css) {
     try {
-        document.querySelector(elem).classList.toggle(...css);
+        const el = document.querySelector(elem);
+        if (css.length > 1) {
+            css.map(c => el.classList.toggle(c));
+        } else {
+            el.classList.toggle(css);
+        }
     } catch (e) {
         this.send_error("toggle_css", e);
     }
@@ -230,7 +235,7 @@ browsertools.prototype.toggle_css = function (elem, css) {
 browsertools.prototype.toggle_elem = function (elem) {
     try {
         let el = document.querySelector(elem);
-        el.hasAttribute("hidden") ? show_elem(elem) : hide_elem(elem);
+        el.hasAttribute("hidden") ? this.show_elem(elem) : this.hide_elem(elem);
     } catch (e) {
         this.send_error("toggle_elem", e);
     }
