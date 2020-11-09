@@ -3,7 +3,7 @@
 #' Toggles a css state of an html element
 #'
 #' @param elem the id or class name of an html element
-#' @param css a string containing the class to remove from an html element
+#' @param css a string or character array containing css classes
 #'
 #' @examples
 #' if (interactive()) {

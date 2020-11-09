@@ -4,12 +4,10 @@
 \alias{console_log}
 \title{\code{console_log}}
 \usage{
-console_log(message, expand = FALSE)
+console_log(message)
 }
 \arguments{
 \item{message}{a message to display}
-
-\item{expand}{if TRUE arrays/objects will be auto expanded (default: FALSE)}
 }
 \value{
 Outputs an object to the browser's console
