@@ -2,7 +2,7 @@
 #' FILE: app.R
 #' AUTHOR: David Ruvolo
 #' CREATED: 2020-11-09
-#' MODIFIED: 2020-11-09
+#' MODIFIED: 2020-11-10
 #' PURPOSE: prod app for reviewing all features
 #' STATUS: in.progress
 #' PACKAGES: shiny; browsertools
@@ -121,6 +121,47 @@ ui <- tagList(
                         class = "shiny-bound-input action-button",
                         "Togge the Visibility"
                     )
+                ),
+                tags$div(
+                    tags$h3("Modifying Inner Content"),
+                    tags$button(
+                        id = "square-inner-text",
+                        class = "shiny-bound-input action-button",
+                        "Insert Raw Text"
+                    ),
+                    tags$button(
+                        id = "square-inner-html",
+                        class = "shiny-bound-input action-button",
+                        "Insert HTML"
+                    ),
+                    tags$button(
+                        id = "square-insert-html",
+                        class = "shiny-bound-input action-button",
+                        "Insert HTML After Square"
+                    ),
+                    tags$button(
+                        id = "square-print-html",
+                        class = "shiny-bound-input action-button",
+                        "Print square markup in R console"
+                    )
+                ),
+                tags$div(
+                    tags$h3("Modifying HTML Attributes"),
+                    tags$button(
+                        id = "square-add-attr",
+                        class = "shiny-bound-input action-button",
+                        "Add `data-value` attr"
+                    ),
+                    tags$button(
+                        id = "square-remove-attr",
+                        class = "shiny-bound-input action-button",
+                        "Remove `data-value` attr"
+                    ),
+                    tags$button(
+                        id = "square-print-attr",
+                        class = "shiny-bound-input action-button",
+                        "Print attributes to console"
+                    )
                 )
             )
         ),
@@ -128,11 +169,11 @@ ui <- tagList(
             id = "output-panel",
             class = "sub-container",
             `aria-label` = "output panel",
-            enable_attributes(),
             hidden(
                 tags$div(
                     id = "css-square",
-                    class = "square"
+                    class = "square",
+                    enable_attributes()
                 )
             ),
         )
@@ -143,7 +184,7 @@ ui <- tagList(
 #' server
 server <- function(input, output) {
 
-    # server config
+    # server on load
     debug()
     console_error("🚨 Square is hidden by default.")
 
@@ -177,13 +218,62 @@ server <- function(input, output) {
         toggle_elem(elem = "#css-square")
     })
 
-    observe({
-        d <- input$`output-panel`
-        dt <- data.frame(
-            attribs = names(d),
-            values = unlist(d, use.names = FALSE)
+    #'//////////////////////////////////////
+    #' html events
+    observeEvent(input$`square-inner-text`, {
+        inner_text(elem = "#css-square", content = "JavaScript is cool!")
+    })
+    observeEvent(input$`square-inner-html`, {
+        inner_html(
+            elem = "#css-square",
+            content = tags$strong("🎉 Suprise!")
         )
-        console_table(data = dt)
+    })
+    observeEvent(input$`square-insert-html`, {
+        insert_adjacent_html(
+            id = "css-square",
+            content = tags$p(
+                "Checkout out the",
+                tags$a(
+                    href = "https://github.com/davidruvolo51/browsertools",
+                    "browsertools"
+                ),
+                "GitHub Repo!"
+            )
+        )
+    })
+    observeEvent(input$`square-print-html`, {
+        print_elem(elem = "#css-square")
+    })
+
+    #'//////////////////////////////////////
+    #' Modifying Element Attributes
+    print_attribs <- function() {
+        observe({
+            d <- input$`css-square`
+            dt <- data.frame(
+                attribs = names(d),
+                values = unlist(d, use.names = FALSE)
+            )
+            console_table(data = dt)
+        })
+    }
+    observeEvent(input$`square-add-attr`, {
+        words <- c("👽 Cool martian", "🍱 Yummy bento!", "🤡 Funny clown")
+        set_element_attribute(
+            elem = "#css-square",
+            attr = "data-value",
+            value = sample(words, 1)
+        )
+        print_attribs()
+    })
+
+    observeEvent(input$`square-remove-attr`, {
+        remove_element_attribute(
+            elem = "#css-square",
+            attr = "data-value"
+        )
+        print_attribs()
     })
 }
 

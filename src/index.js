@@ -2,7 +2,7 @@
 // FILE: index.js
 // AUTHOR: David Ruvolo
 // CREATED: 2020-11-07
-// MODIFIED: 2020-11-11
+// MODIFIED: 2020-11-10
 // PURPOSE: entry point
 // DEPENDENCIES: NA
 // STATUS: in.progress
@@ -87,7 +87,7 @@ Shiny.addCustomMessageHandler("inner_text", (d) => {
 // @param content content to insert
 // @param position location to insert content
 Shiny.addCustomMessageHandler("insert_adjacent_html", (d) => {
-    bt.insert_adjacent_html(d.id, d, content, d.position);
+    bt.insert_adjacent_html(d.id, d.content, d.position);
 });
 
 // handler: print_elem
