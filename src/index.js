@@ -2,7 +2,7 @@
 // FILE: index.js
 // AUTHOR: David Ruvolo
 // CREATED: 2020-11-07
-// MODIFIED: 2020-11-10
+// MODIFIED: 2020-11-11
 // PURPOSE: entry point
 // DEPENDENCIES: NA
 // STATUS: in.progress
@@ -11,10 +11,10 @@
 
 // import
 import get_attribs from "./js/get_attribs";
-import browsertools from "./js/browsertools";
+import Browsertools from "./js/browsertools";
 
 // create new browsertools object
-var bt = new browsertools();
+var bt = new Browsertools();
 
 // handler: debug option
 Shiny.addCustomMessageHandler("browsertools_debug", (d) => {
@@ -26,12 +26,6 @@ Shiny.addCustomMessageHandler("browsertools_debug", (d) => {
 // @param css an array of css classes to add
 Shiny.addCustomMessageHandler("add_css", (d) => {
     bt.add_css(d.elem, d.css);
-});
-
-// handler: alert
-// @param message a message to display
-Shiny.addCustomMessageHandler("alert", (d) => {
-    bt.alert(d.message)
 });
 
 // handler: console_error
@@ -146,7 +140,9 @@ Shiny.addCustomMessageHandler("show_elem", (d) => {
 // @param x horizontal distance from top-left
 // @param y vertical distance from top-left
 // @param elem a selector path (optional)
-Shiny.addCustomMessageHandler("scroll_to", (d) => { bt.scroll_to(d.x, d.y, d.elem) });
+Shiny.addCustomMessageHandler("scroll_to", (d) => { 
+    bt.scroll_to(d.x, d.y, d.elem)
+});
 
 // handler: toggle_css
 // @param elem a selector path

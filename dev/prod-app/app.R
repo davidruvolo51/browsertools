@@ -28,9 +28,20 @@ ui <- tagList(
         ),
         tags$style(
             "html, body {
-                font-family: Helvetica;
+                font-family: Helvetica, Arial, sans-serif;
+                font-size: 11pt;
                 padding: 0;
                 margin: 0;
+                color: #353535;
+            }",
+            "p {
+                line-height: 1.5;
+                color: #3f454b;
+            }",
+            "button {
+                cursor: pointer;
+                padding: 4px;
+                margin: 4px 0;
             }",
             "main {
                 display: flex;
@@ -41,14 +52,14 @@ ui <- tagList(
                 margin: 0 auto;
             }",
             "#main-panel {
-                width: 70%;
+                width: 60%;
                 padding: 1em 3em;
             }",
             "#output-panel {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                width: 30%;
+                width: 40%;
                 min-width: 200px;
                 background-color: #f6f6f6;
                 padding: 3em;
@@ -68,6 +79,12 @@ ui <- tagList(
             }",
             ".blue-bkg {
                 background-color: #2d7ddd;
+            }",
+            ".display-scroll-section {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
             }"
         ),
         tags$title("Browsertools Production Environment App")
@@ -84,7 +101,7 @@ ui <- tagList(
                     "square. Doing so will set the background color to ",
                     "blue, increase the size of the square, and much more.",
                     "The square starts off hidden, so click 'Show the square'",
-                    " to get started. Have fun!"
+                    " button to get started. Have fun!"
                 ),
                 tags$div(
                     tags$h3("Modify CSS Properties"),
@@ -160,7 +177,29 @@ ui <- tagList(
                     tags$button(
                         id = "square-print-attr",
                         class = "shiny-bound-input action-button",
-                        "Print attributes to console"
+                        "Print Element Attributes"
+                    )
+                ),
+                tags$div(
+                    tags$h3("Modify Elements"),
+                    tags$button(
+                        id = "doc-random-title",
+                        class = "shiny-bound-input action-button",
+                        "Change Document Title"
+                    ),
+                    tags$button(
+                        id = "doc-refresh",
+                        class = "shiny-bound-input action-button",
+                        "Refresh Page"
+                    )
+                ),
+                tags$div(
+                    id = "scroll-example-container",
+                    tags$h3("Scroll Example"),
+                    tags$button(
+                        id = "scroll-button",
+                        class = "shiny-bound-input action-button",
+                        "Start Scroll Example"
                     )
                 )
             )
@@ -178,6 +217,21 @@ ui <- tagList(
             ),
         )
     ),
+    hidden(
+        tags$div(
+            id = "scroll-section",
+            tags$button(
+                id = "scroll-to-top",
+                class = "shiny-bound-input action-button",
+                "Scroll to the top of the page"
+            ),
+            tags$button(
+                id = "scroll-to-section",
+                class = "shiny-bound-input action-button",
+                "Scroll to the `Scroll Example` section"
+            ),
+        )
+    ),
     tags$script(src = "browsertools/browsertools.min.js")
 )
 
@@ -187,6 +241,15 @@ server <- function(input, output) {
     # server on load
     debug()
     console_error("🚨 Square is hidden by default.")
+    phrases <- c(
+        "👽 I'm a martian",
+        "🍱 Yum! A tasty bento box",
+        "🤡 Uh oh, a creepy clown",
+        "🎨 Let's paint!",
+        "🚨 Warning! Warning!",
+        "✏️ Some message",
+        "🍻 Cheers!"
+    )
 
     #' //////////////////////////////////////
     #' square css
@@ -248,24 +311,12 @@ server <- function(input, output) {
 
     #'//////////////////////////////////////
     #' Modifying Element Attributes
-    print_attribs <- function() {
-        observe({
-            d <- input$`css-square`
-            dt <- data.frame(
-                attribs = names(d),
-                values = unlist(d, use.names = FALSE)
-            )
-            console_table(data = dt)
-        })
-    }
     observeEvent(input$`square-add-attr`, {
-        words <- c("👽 Cool martian", "🍱 Yummy bento!", "🤡 Funny clown")
         set_element_attribute(
             elem = "#css-square",
             attr = "data-value",
-            value = sample(words, 1)
+            value = sample(phrases, 1)
         )
-        print_attribs()
     })
 
     observeEvent(input$`square-remove-attr`, {
@@ -273,7 +324,39 @@ server <- function(input, output) {
             elem = "#css-square",
             attr = "data-value"
         )
-        print_attribs()
+    })
+    observeEvent(input$`square-print-attr`, {
+        d <- input$`css-square`
+        dt <- data.frame(
+            attribs = names(d),
+            values = unlist(d, use.names = FALSE)
+        )
+        console_table(data = dt)
+    })
+
+    #'//////////////////////////////////////
+    #' other behaviors
+    observeEvent(input$`doc-random-title`, {
+        set_document_title(title = sample(phrases, 1))
+    })
+    observeEvent(input$`doc-refresh`, {
+        refresh_page()
+    })
+
+    #'//////////////////////////////////////
+    #' scroll example
+    observeEvent(input$`scroll-button`, {
+        show_elem(elem = "#scroll-section")
+        add_css(elem = "#scroll-section", css = "display-scroll-section")
+
+    })
+    observeEvent(input$`scroll-to-top`, {
+        scroll_to()
+        hide_elem(elem = "#scroll-section")
+        remove_css(elem = "#scroll-section", css = "display-scroll-section")
+    })
+    observeEvent(input$`scroll-to-section`, {
+        scroll_to(elem = "#scroll-example-container")
     })
 }
 
