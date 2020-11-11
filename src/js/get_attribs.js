@@ -14,6 +14,9 @@ $.extend(get_attribs, {
     find: function (scope) {
         return $(scope).find("span[data-browsertools-indexible='true']").parent();
     },
+    initialize: function (el) {
+        this.getValue(el);
+    },
     getValue: function (el) {
         let attributes = $(el.attributes);
         let out = {}, attr;
@@ -22,6 +25,23 @@ $.extend(get_attribs, {
             out[`${attr.name}`] = attr.value
         })
         return out;
+    },
+    subscribe: function (el, callback) {
+        const mutationCallback = function (mutationsList) {
+            for (const mutation of mutationsList) {
+                if (mutation.type === "attributes") {
+                    callback()
+                }
+            }
+        }
+
+        const observer = new MutationObserver(mutationCallback);
+        observer.observe($(el)[0], { attributes: true });
+
+    },
+    unsubscribe: function (el) {
+        $(el).off(".get_attribs");
+        this.subscribe.observer.disconnect();
     }
 });
 
