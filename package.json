@@ -1,6 +1,6 @@
 {
   "name": "browsertools",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "author": "dcruvolo",
   "license": "MIT",
   "description": "This package contains a series of functions for running JavaScript functions in shiny.",

@@ -17,9 +17,9 @@
 #'           ".blue-text {
 #'             color: blue;
 #'           }",
-#'          ".font-size-lg" {
+#'          ".font-size-lg {
 #'             font-size: 150%;
-#'          }
+#'          }"
 #'        )
 #'     ),
 #'     tags$main(

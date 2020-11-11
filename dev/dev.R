@@ -2,7 +2,7 @@
 #' FILE: dev.R
 #' AUTHOR: David Ruvolo
 #' CREATED: 2020-07-29
-#' MODIFIED: 2020-09-25
+#' MODIFIED: 2020-11-11
 #' PURPOSE: package management
 #' STATUS: ongoing
 #' PACKAGES: usethis; pkgbump
@@ -49,10 +49,10 @@ usethis::use_build_ignore(
         ".github",
         "config",
         "dev",
-        "inst/browsertools/src",
+        "src",
         ".babelrc",
         ".gitignore",
-        ".pkgbump.json",
+        "pkgbump.config.json",
         ".travis.yml",
         "browsertools.code-workspace",
         "package.json",
@@ -72,7 +72,7 @@ pkgbump::set_pkgbump(
     )
 )
 
-pkgbump::pkgbump(version = "0.1.8")
+pkgbump::pkgbump(version = "0.2.0")
 
 #' //////////////////////////////////////
 
