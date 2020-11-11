@@ -45,7 +45,7 @@ if (interactive()) {
 \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/table}
 }
 \seealso{
-\code{\link[=as_js_object]{as_js_object()}}, \code{\link[=console_log]{console_log()}}, \code{\link[=alert]{alert()}}
+\code{\link[=as_js_object]{as_js_object()}}, \code{\link[=console_log]{console_log()}}
 }
 \keyword{browsertools}
 \keyword{console}

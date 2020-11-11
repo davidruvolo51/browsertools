@@ -31,7 +31,7 @@
 #' @references
 #'   \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/log}
 #'
-#' @seealso [console_error()], [console_table()], [console_warn()], [alert()]
+#' @seealso [console_error()], [console_table()], [console_warn()]
 #' @keywords browsertools debugging console
 #' @return Outputs an object to the browser's console
 #'

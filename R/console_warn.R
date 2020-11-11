@@ -29,7 +29,7 @@
 #' @references
 #'      \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/warn}
 #'
-#' @seealso [console_error()], [console_log()], [console_table()], [alert()]
+#' @seealso [console_error()], [console_log()], [console_table()]
 #' @keywords browsertools console warn
 #' @return Outputs a warning message to the console
 #'
