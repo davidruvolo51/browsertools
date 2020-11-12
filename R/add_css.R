@@ -3,8 +3,7 @@
 #' Adds a css class(es) to an element using id or classname.
 #'
 #' @param elem the id or class name of an html element
-#' @param css a string containing the class(es) to add to
-#'            an html element
+#' @param css a string or character array containing css classes
 #'
 #' @return Adds a css class(es) to an element using id or classname.
 #'
@@ -17,7 +16,10 @@
 #'        tags$style(
 #'           ".blue-text {
 #'             color: blue;
-#'           }"
+#'           }",
+#'          ".font-size-lg {
+#'             font-size: 150%;
+#'          }"
 #'        )
 #'     ),
 #'     tags$main(
@@ -37,7 +39,7 @@
 #'      observeEvent(input$addCSS, {
 #'        browsertools::add_css(
 #'          elem = "#my-text-example",
-#'          css = "blue-text"
+#'          css = c("blue-text", "font-size-lg")
 #'        )
 #'      })
 #'   }

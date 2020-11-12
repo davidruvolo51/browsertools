@@ -11,10 +11,10 @@ This package contains a series of functions for running JavaScript functions in 
 
 ## Install
 
-You can install `browsertools` in R using the following command.
+You can install the latest release of `browsertools` in R using the following command.
 
 ```r
-devtools::install_github("davidruvolo51/browsertools")
+remotes::install_github("davidruvolo51/browsertools@*release")
 ```
 
 ## Use
@@ -33,36 +33,35 @@ The package offers the following functions.
 
 ### Shiny UI
 
-| function | arguments | description | 
-| :------- | :-------- | :---------- |
-| `use_browsertools` | --- | load `browsertools` dependencies into your shiny app (required).
-| `enable_attributes` | --- | allows you to access the HTML attributes of an element in the shiny server; Element must have an ID 
-| `hidden` | `...` | Hide element(s) by default
+| function            | arguments | description                                          |
+|---------------------|-----------|------------------------------------------------------|
+| `enable_attributes` | ---       | access HTML attributes of an element (`id` required) |
+| `hidden`            | `...`     | Hide element(s) by default                           |
+| `use_browsertools`  | ---       | load `browsertools` into your shiny app (required)   |
 
 ### Shiny Server
 
-| function  | arguments | description | 
-| :-------  | :-------- | :---------- |
-| `add_css` | `elem`, `css` | add a css class to an element
-| `alert` | `message` | displays an alert in the browser
-| `as_js_object` | `x` | a data.frame to convert to javascript object
-| `console_error` | `message` | send an error message to the console
-| `console_log` | `message`, `expand` | log values to the browser console
-| `console_table` | `data` | a json object to display in the console; use `as_js_object` function to convert your data before passing into the function
-| `console_warn` | `message` | send a warning message to the console
-| `debug` | --- | prints JavaScript errors in the R console
-| `hide_elem` | `elem` | hides an element
-| `insert_adjacent_html` | `id`, `html`, `position` | create a new child element(s) to a parent element
-| `inner_html` | `elem`, `string`, `delay` | change the inner html of an element
-| `inner_text` | `elem`, `string`, `delay` | change the inner text of an element
-| `print_elem` | `elem` | print an html element in the R console
-| `refresh_page` |  --- | trigger a page refresh (`history.go(0)`)
-| `remove_css` | `elem`, `css` | remove a css class from an element
-| `remove_element` | `elem` | remove an element from the DOM
-| `remove_element_attribute` | `elem`, `attr` | remove an attribute from an element
-| `set_document_title` | `title`, `append` | change the title of the document
-| `set_element_attribute` | `elem`, `attr`, `value` | update an attribute of an element
-| `scroll_to` | `x`, `y`, `elem` | scroll to a position in a page or element (default: `0, 0` = top of document)
-| `show_elem` | `elem` | show an element
-| `toggle_css` | `elem`, `css` | toggle a css class
-| `toggle_elem` | `elem` | toggle the state of an element (i.e., hide or show)
+| function                   | arguments                 | description                              |
+|----------------------------|---------------------------|------------------------------------------|
+| `add_css`                  | `elem`, `css`             | add css class(es)                        |
+| `as_js_object`             | `x`                       | convert an R object to javascript object |
+| `console_error`            | `message`                 | send an error message to the console     |
+| `console_log`              | `message`, `expand`       | log values to the browser console        |
+| `console_table`            | `data`                    | display R data in the console            |
+| `console_warn`             | `message`                 | send a warning message to the console    |
+| `debug`                    | ---                       | print JS errors in the R console         |
+| `hide_elem`                | `elem`                    | hides an element                         |
+| `inner_html`               | `elem`, `string`, `delay` | set the inner html of an element         |
+| `inner_text`               | `elem`, `string`, `delay` | set the inner text of an element         |
+| `insert_adjacent_html`     | `id`, `html`, `position`  | insert a new child element(s)            |
+| `print_elem`               | `elem`                    | print an html element in the R console   |
+| `refresh_page`             | ---                       | trigger a page refresh                   |
+| `remove_css`               | `elem`, `css`             | remove css class(es)                     |
+| `remove_element_attribute` | `elem`, `attr`            | remove an attribute from an element      |
+| `remove_element`           | `elem`                    | remove an element                        |
+| `scroll_to`                | `x`, `y`, `elem`          | scroll to a point or element             |
+| `set_document_title`       | `title`, `append`         | change the title of the document         |
+| `set_element_attribute`    | `elem`, `attr`, `value`   | update an attribute of an element        |
+| `show_elem`                | `elem`                    | show an element                          |
+| `toggle_css`               | `elem`, `css`             | toggle css class(es)                     |
+| `toggle_elem`              | `elem`                    | toggle the state of an element           |

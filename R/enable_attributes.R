@@ -49,6 +49,6 @@ enable_attributes <- function() {
     htmltools::tags$span(
         `data-browsertools-indexible` = "true",
         class = "browsertools-hidden browsertools-attributes",
-        `aria-hidden` = "true"
+        style = "display: none;"
     )
 }

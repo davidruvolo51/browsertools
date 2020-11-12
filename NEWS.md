@@ -1,3 +1,8 @@
+# browsertools 0.2.0
+
+* Refactored Browsertools methods
+* Added new test environment (`dev/prod-app`)
+
 # browsertools 0.1.8
 
 * Switched to Webpack as the application bundler

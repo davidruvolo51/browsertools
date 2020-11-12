@@ -4,12 +4,10 @@
 \alias{console_log}
 \title{\code{console_log}}
 \usage{
-console_log(message, expand = FALSE)
+console_log(message)
 }
 \arguments{
 \item{message}{a message to display}
-
-\item{expand}{if TRUE arrays/objects will be auto expanded (default: FALSE)}
 }
 \value{
 Outputs an object to the browser's console
@@ -46,7 +44,7 @@ if (interactive()) {
 \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/log}
 }
 \seealso{
-\code{\link[=console_error]{console_error()}}, \code{\link[=console_table]{console_table()}}, \code{\link[=console_warn]{console_warn()}}, \code{\link[=alert]{alert()}}
+\code{\link[=console_error]{console_error()}}, \code{\link[=console_table]{console_table()}}, \code{\link[=console_warn]{console_warn()}}
 }
 \keyword{browsertools}
 \keyword{console}

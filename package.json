@@ -1,6 +1,6 @@
 {
   "name": "browsertools",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "author": "dcruvolo",
   "license": "MIT",
   "description": "This package contains a series of functions for running JavaScript functions in shiny.",
@@ -10,6 +10,8 @@
     "js"
   ],
   "scripts": {
+    "shiny:dev": "Rscript -e \"shiny::runApp('dev/dev-app', port = 8000)\"",
+    "shiny:prod": "Rscript -e \"shiny::runApp('dev/prod-app', port = 9000)\"",
     "start": "webpack-dev-server --env dev",
     "build": "webpack --env prod"
   },

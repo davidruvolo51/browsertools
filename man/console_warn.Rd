@@ -43,7 +43,7 @@ if (interactive()) {
 }
 }
 \seealso{
-\code{\link[=console_error]{console_error()}}, \code{\link[=console_log]{console_log()}}, \code{\link[=console_table]{console_table()}}, \code{\link[=alert]{alert()}}
+\code{\link[=console_error]{console_error()}}, \code{\link[=console_log]{console_log()}}, \code{\link[=console_table]{console_table()}}
 }
 \keyword{browsertools}
 \keyword{console}

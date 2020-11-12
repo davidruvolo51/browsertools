@@ -31,7 +31,7 @@
 #' @references
 #'   \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/table}
 #'
-#' @seealso [as_js_object()], [console_log()], [alert()]
+#' @seealso [as_js_object()], [console_log()]
 #' @keywords browsertools debugging console
 #' @return Outputs an object to the browser's console
 #'

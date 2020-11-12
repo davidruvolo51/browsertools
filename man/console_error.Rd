@@ -42,7 +42,7 @@ if (interactive()) {
 \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/error}
 }
 \seealso{
-\code{\link[=console_warn]{console_warn()}}, \code{\link[=console_log]{console_log()}}, \code{\link[=console_table]{console_table()}}, \code{\link[=alert]{alert()}}
+\code{\link[=console_warn]{console_warn()}}, \code{\link[=console_log]{console_log()}}, \code{\link[=console_table]{console_table()}}
 }
 \keyword{browsertools}
 \keyword{console}

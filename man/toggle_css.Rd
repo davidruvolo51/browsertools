@@ -9,7 +9,7 @@ toggle_css(elem, css)
 \arguments{
 \item{elem}{the id or class name of an html element}
 
-\item{css}{a string containing the class to remove from an html element}
+\item{css}{a string or character array containing css classes}
 }
 \value{
 Toggles a css state of an html element

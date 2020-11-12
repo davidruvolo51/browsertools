@@ -15,7 +15,7 @@ library(shiny)
 # add resource path
 addResourcePath(
     "browsertools",
-    "~/Github/browsertools/inst/browsertools/public"
+    "~/Github/browsertools/inst/browsertools/public/"
 )
 
 # load package functions
@@ -73,7 +73,7 @@ ui <- tagList(
             tags$div(id = "square")
         )
     ),
-    tags$script(src = "browsertools/browsertools.min.js")
+    tags$script(src = "browsertools/public/browsertools.min.js")
 )
 
 

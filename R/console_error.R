@@ -28,7 +28,7 @@
 #' }
 #' @references
 #'   \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/error}
-#' @seealso [console_warn()], [console_log()], [console_table()], [alert()]
+#' @seealso [console_warn()], [console_log()], [console_table()]
 #' @keywords browsertools debugging console
 #' @return Sends an error message to the browser's console
 #' @export

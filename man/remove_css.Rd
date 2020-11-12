@@ -9,8 +9,7 @@ remove_css(elem, css)
 \arguments{
 \item{elem}{the id or class name of an html element}
 
-\item{css}{a string containing the class(es) to remove from
-an html element}
+\item{css}{a string or character array containing css classes}
 }
 \value{
 Removes a css class(es) to an element using id or classname.

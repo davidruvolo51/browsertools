@@ -5,7 +5,6 @@
 #' displaying issues.
 #'
 #' @param message a message to display
-#' @param expand if TRUE arrays/objects will be auto expanded (default: FALSE)
 #'
 #' @examples
 #' if (interactive()) {
@@ -32,24 +31,20 @@
 #' @references
 #'   \url{https://developer.mozilla.org/en-US/docs/Web/API/Console/log}
 #'
-#' @seealso [console_error()], [console_table()], [console_warn()], [alert()]
+#' @seealso [console_error()], [console_table()], [console_warn()]
 #' @keywords browsertools debugging console
 #' @return Outputs an object to the browser's console
 #'
 #' @export
-console_log <- function(message, expand = FALSE) {
+console_log <- function(message) {
 
     # validate
     if (is.null(message)) stop("argument 'message' is undefined")
-    if (!is.logical(expand)) stop("argument 'expand' must be a logical value")
 
     # send
     session <- shiny::getDefaultReactiveDomain()
     session$sendCustomMessage(
         type = "console_log",
-        message= list(
-            message = message,
-            expand = expand
-        )
+        message = message
     )
 }

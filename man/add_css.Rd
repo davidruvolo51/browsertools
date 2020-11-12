@@ -9,8 +9,7 @@ add_css(elem, css)
 \arguments{
 \item{elem}{the id or class name of an html element}
 
-\item{css}{a string containing the class(es) to add to
-an html element}
+\item{css}{a string or character array containing css classes}
 }
 \value{
 Adds a css class(es) to an element using id or classname.
@@ -27,7 +26,10 @@ if (interactive()) {
        tags$style(
           ".blue-text {
             color: blue;
-          }"
+          }",
+         ".font-size-lg {
+            font-size: 150\%;
+         }"
        )
     ),
     tags$main(
@@ -47,7 +49,7 @@ if (interactive()) {
      observeEvent(input$addCSS, {
        browsertools::add_css(
          elem = "#my-text-example",
-         css = "blue-text"
+         css = c("blue-text", "font-size-lg")
        )
      })
   }
